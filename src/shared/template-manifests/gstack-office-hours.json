@@ -1,0 +1,11 @@
+{
+  "id": "gstack-office-hours",
+  "name": "GStack Office Hours",
+  "shortDescription": "用六问法澄清想法、锁定最小切口并沉淀设计文档。",
+  "description": "提取自 gstack-main 的 office-hours 工作流模板，围绕 Demand Reality、Status Quo、Desperate Specificity、Narrowest Wedge、Observation & Surprise、Future-Fit 和 Builder Mode 展开。",
+  "icon": "workflow",
+  "category": "product",
+  "source": "builtin",
+  "starterPrompt": "请用一句话描述你想验证、梳理或推进的想法。",
+  "requirementDocName": "01-demand-reality.md"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "software-factory",
+  "name": "软件工厂",
+  "shortDescription": "从想法到需求、方案和 OpenSpec 交付。",
+  "description": "面向软件需求梳理、方案设计、OpenSpec 交付与测试规划的默认模板。",
+  "icon": "workflow",
+  "category": "product",
+  "source": "builtin",
+  "starterPrompt": "请用一句话描述你想做的软件，它要解决什么问题。",
+  "requirementDocName": "01-原始需求.md"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "solution-planner",
+  "name": "Solution Planner",
+  "version": "1.0.0",
+  "description": "Used for planning and implementation detail drafting.",
+  "source": "fixtures",
+  "applicableStages": ["plan", "draft", "review"],
+  "files": [
+    {
+      "path": "SKILL.md",
+      "content": "# Solution Planner\n\nProvide structured implementation details."
+    }
+  ]
+}

@@ -1,0 +1,153 @@
+{
+  "definition": {
+    "id": "gstack-office-hours",
+    "name": "GStack Office Hours",
+    "shortDescription": "用六问法澄清想法、锁定最小切口并沉淀设计文档。",
+    "description": "提取自 gstack-main 的 office-hours 工作流模板，围绕 Demand Reality、Status Quo、Desperate Specificity、Narrowest Wedge、Observation & Surprise、Future-Fit 和 Builder Mode 展开。",
+    "icon": "workflow",
+    "category": "product",
+    "source": "builtin",
+    "starterPrompt": "请用一句话描述你想验证、梳理或推进的想法。",
+    "requirementDocName": "01-demand-reality.md"
+  },
+  "platform": {
+    "flows": [
+      {
+        "id": "goh-flow-main",
+        "kind": "flow",
+        "name": "Office Hours 主流程",
+        "description": "从模糊想法出发，按六问法梳理需求现实、最小切口和下一步行动。",
+        "createdAt": "2026-04-12T00:00:00.000Z",
+        "updatedAt": "2026-04-12T00:00:00.000Z",
+        "nodes": [
+          { "id": "goh-start", "type": "start", "position": { "x": 80, "y": 140 }, "data": { "label": "开始" } },
+          { "id": "goh-demand-reality", "type": "agent", "position": { "x": 260, "y": 140 }, "data": { "label": "Demand Reality", "description": "确认是否存在真实需求证据。", "roleId": "goh-role-demand" } },
+          { "id": "goh-status-quo", "type": "agent", "position": { "x": 520, "y": 140 }, "data": { "label": "Status Quo", "description": "梳理用户当前替代方案和成本。", "roleId": "goh-role-status-quo" } },
+          { "id": "goh-desperate-specificity", "type": "agent", "position": { "x": 780, "y": 140 }, "data": { "label": "Desperate Specificity", "description": "锁定最痛的具体用户。", "roleId": "goh-role-specificity" } },
+          { "id": "goh-narrowest-wedge", "type": "agent", "position": { "x": 1040, "y": 140 }, "data": { "label": "Narrowest Wedge", "description": "找出最小可收费切口。", "roleId": "goh-role-wedge" } },
+          { "id": "goh-observation", "type": "agent", "position": { "x": 1300, "y": 140 }, "data": { "label": "Observation & Surprise", "description": "记录真实观察和与预期不一致的地方。", "roleId": "goh-role-observation" } },
+          { "id": "goh-future-fit", "type": "agent", "position": { "x": 1560, "y": 140 }, "data": { "label": "Future-Fit", "description": "判断三年后该产品会更必要还是更边缘。", "roleId": "goh-role-future-fit" } },
+          { "id": "goh-builder-plan", "type": "agent", "position": { "x": 1820, "y": 140 }, "data": { "label": "Builder Plan", "description": "输出周末可做出的最小实验和设计文档。", "roleId": "goh-role-builder-plan" } },
+          { "id": "goh-end", "type": "end", "position": { "x": 2060, "y": 140 }, "data": { "label": "完成" } }
+        ],
+        "edges": [
+          { "id": "goh-edge-start-demand", "source": "goh-start", "target": "goh-demand-reality", "branch": "default", "label": "下一步" },
+          { "id": "goh-edge-demand-quo", "source": "goh-demand-reality", "target": "goh-status-quo", "branch": "default", "label": "下一步" },
+          { "id": "goh-edge-quo-specificity", "source": "goh-status-quo", "target": "goh-desperate-specificity", "branch": "default", "label": "下一步" },
+          { "id": "goh-edge-specificity-wedge", "source": "goh-desperate-specificity", "target": "goh-narrowest-wedge", "branch": "default", "label": "下一步" },
+          { "id": "goh-edge-wedge-observation", "source": "goh-narrowest-wedge", "target": "goh-observation", "branch": "default", "label": "下一步" },
+          { "id": "goh-edge-observation-future-fit", "source": "goh-observation", "target": "goh-future-fit", "branch": "default", "label": "下一步" },
+          { "id": "goh-edge-future-fit-builder-plan", "source": "goh-future-fit", "target": "goh-builder-plan", "branch": "default", "label": "下一步" },
+          { "id": "goh-edge-builder-plan-end", "source": "goh-builder-plan", "target": "goh-end", "branch": "default", "label": "下一步" }
+        ]
+      }
+    ],
+    "subflows": [],
+    "roles": [
+      { "id": "goh-role-demand", "name": "需求证据审视者", "description": "确认用户需求是否真实存在。", "promptHint": "只接受真实行为证据，不接受模糊兴趣。", "allowedCapabilities": ["read_artifact", "write_artifact"], "outputSchema": "markdown-basic", "modelPolicy": { "mode": "fallback_to_active", "preferredProfileIds": [], "fallbackToActive": true, "note": "使用当前激活模型。" } },
+      { "id": "goh-role-status-quo", "name": "现状梳理者", "description": "梳理用户今天如何勉强解决问题。", "promptHint": "必须具体到现有工具、流程和代价。", "allowedCapabilities": ["read_artifact", "write_artifact"], "outputSchema": "markdown-basic", "modelPolicy": { "mode": "fallback_to_active", "preferredProfileIds": [], "fallbackToActive": true, "note": "使用当前激活模型。" } },
+      { "id": "goh-role-specificity", "name": "目标用户缩焦者", "description": "将讨论对象收缩到最痛的具体人。", "promptHint": "避免行业、团队、市场这类泛化称呼。", "allowedCapabilities": ["read_artifact", "write_artifact"], "outputSchema": "markdown-basic", "modelPolicy": { "mode": "fallback_to_active", "preferredProfileIds": [], "fallbackToActive": true, "note": "使用当前激活模型。" } },
+      { "id": "goh-role-wedge", "name": "最小切口规划者", "description": "找出用户本周就可能付费的最小版本。", "promptHint": "切口必须足够窄，不能回到平台幻觉。", "allowedCapabilities": ["read_artifact", "write_artifact"], "outputSchema": "markdown-basic", "modelPolicy": { "mode": "fallback_to_active", "preferredProfileIds": [], "fallbackToActive": true, "note": "使用当前激活模型。" } },
+      { "id": "goh-role-observation", "name": "观察记录员", "description": "提炼真实观察和意外之处。", "promptHint": "优先记录与原假设冲突的真实现象。", "allowedCapabilities": ["read_artifact", "write_artifact"], "outputSchema": "markdown-basic", "modelPolicy": { "mode": "fallback_to_active", "preferredProfileIds": [], "fallbackToActive": true, "note": "使用当前激活模型。" } },
+      { "id": "goh-role-future-fit", "name": "未来适配评估者", "description": "判断该方向在未来三年是增强还是弱化。", "promptHint": "必须给出变化趋势如何改变产品必要性。", "allowedCapabilities": ["read_artifact", "write_artifact"], "outputSchema": "markdown-basic", "modelPolicy": { "mode": "fallback_to_active", "preferredProfileIds": [], "fallbackToActive": true, "note": "使用当前激活模型。" } },
+      { "id": "goh-role-builder-plan", "name": "Builder 模式规划者", "description": "整理最快可验证的实验和设计文档。", "promptHint": "输出一个周末可执行的最小计划。", "allowedCapabilities": ["read_artifact", "write_artifact"], "outputSchema": "delivery-summary", "modelPolicy": { "mode": "prefer_list", "preferredProfileIds": [], "fallbackToActive": true, "requiredProviderCapabilities": ["structured-output"], "note": "优先选择结构化输出稳定的模型。" } },
+      { "id": "goh-role-review", "name": "审查总结员", "description": "审查整套 Office Hours 产物是否足够支撑行动。", "promptHint": "指出仍缺失的证据、假设和阻塞。", "allowedCapabilities": ["read_artifact", "write_artifact"], "outputSchema": "review-issues", "modelPolicy": { "mode": "prefer_list", "preferredProfileIds": [], "fallbackToActive": true, "requiredProviderCapabilities": ["structured-output"], "note": "优先选择结构化输出稳定的模型。" } }
+    ],
+    "taskTemplates": [
+      { "id": "goh-task-discover", "name": "Office Hours 发现", "objective": "确认真实需求证据并梳理现状。", "inputContract": {}, "outputContract": { "format": "markdown" }, "recommendedSkillIds": [], "requiredCapabilities": ["read_artifact", "write_artifact"] },
+      { "id": "goh-task-clarify", "name": "Office Hours 澄清", "objective": "锁定最痛的具体用户。", "inputContract": {}, "outputContract": { "format": "markdown" }, "recommendedSkillIds": [], "requiredCapabilities": ["read_artifact", "write_artifact"] },
+      { "id": "goh-task-plan", "name": "Office Hours 规划", "objective": "确定最小切口并记录关键观察。", "inputContract": {}, "outputContract": { "format": "markdown" }, "recommendedSkillIds": [], "requiredCapabilities": ["read_artifact", "write_artifact"] },
+      { "id": "goh-task-draft", "name": "Builder Plan 草案", "objective": "输出 Future-Fit 与 Builder Plan。", "inputContract": {}, "outputContract": { "format": "markdown" }, "recommendedSkillIds": [], "requiredCapabilities": ["read_artifact", "write_artifact"] },
+      { "id": "goh-task-review", "name": "Office Hours 审查", "objective": "检查证据、风险与下一步建议。", "inputContract": {}, "outputContract": { "format": "markdown" }, "recommendedSkillIds": [], "requiredCapabilities": ["read_artifact", "write_artifact"] },
+      { "id": "goh-task-finalize", "name": "Design Doc 整理", "objective": "输出最终设计文档和交付摘要。", "inputContract": {}, "outputContract": { "format": "markdown" }, "recommendedSkillIds": [], "requiredCapabilities": ["read_artifact", "write_artifact"] }
+    ],
+    "agentProfiles": [
+      { "id": "goh-agent-demand", "name": "需求证据执行配置", "roleProfileId": "goh-role-demand", "defaultSkillBundle": [], "capabilityPolicy": { "allowedCapabilities": ["read_artifact", "write_artifact"] }, "modelPolicy": { "mode": "fallback_to_active", "preferredProfileIds": [], "fallbackToActive": true, "note": "使用当前激活模型。" }, "dependencySpec": [] },
+      { "id": "goh-agent-specificity", "name": "缩焦执行配置", "roleProfileId": "goh-role-specificity", "defaultSkillBundle": [], "capabilityPolicy": { "allowedCapabilities": ["read_artifact", "write_artifact"] }, "modelPolicy": { "mode": "fallback_to_active", "preferredProfileIds": [], "fallbackToActive": true, "note": "使用当前激活模型。" }, "dependencySpec": [] },
+      { "id": "goh-agent-wedge", "name": "切口规划执行配置", "roleProfileId": "goh-role-wedge", "defaultSkillBundle": [], "capabilityPolicy": { "allowedCapabilities": ["read_artifact", "write_artifact"] }, "modelPolicy": { "mode": "fallback_to_active", "preferredProfileIds": [], "fallbackToActive": true, "note": "使用当前激活模型。" }, "dependencySpec": [] },
+      { "id": "goh-agent-builder", "name": "Builder 执行配置", "roleProfileId": "goh-role-builder-plan", "defaultSkillBundle": [], "capabilityPolicy": { "allowedCapabilities": ["read_artifact", "write_artifact"] }, "modelPolicy": { "mode": "prefer_list", "preferredProfileIds": [], "fallbackToActive": true, "requiredProviderCapabilities": ["structured-output"], "note": "优先选择结构化输出稳定的模型。" }, "dependencySpec": [] },
+      { "id": "goh-agent-review", "name": "审查执行配置", "roleProfileId": "goh-role-review", "defaultSkillBundle": [], "capabilityPolicy": { "allowedCapabilities": ["read_artifact", "write_artifact"] }, "modelPolicy": { "mode": "prefer_list", "preferredProfileIds": [], "fallbackToActive": true, "requiredProviderCapabilities": ["structured-output"], "note": "优先选择结构化输出稳定的模型。" }, "dependencySpec": [] }
+    ],
+    "connectors": [],
+    "tools": []
+  },
+  "runtime": {
+    "promptProfiles": [
+      { "id": "goh-demand-reality", "name": "Demand Reality", "description": "确认真实需求证据。", "systemPrompt": "你是需求证据审视者。请识别真实需求证据、不成立的伪需求信号和仍需验证的部分，输出 Markdown。", "outputMode": "markdown", "outputSchema": "markdown-basic" },
+      { "id": "goh-status-quo", "name": "Status Quo", "description": "梳理当前替代方案。", "systemPrompt": "你是现状梳理者。请明确用户现在如何解决问题、成本是什么、为什么这些成本重要，输出 Markdown。", "outputMode": "markdown", "outputSchema": "markdown-basic" },
+      { "id": "goh-desperate-specificity", "name": "Desperate Specificity", "description": "缩焦最痛的具体用户。", "systemPrompt": "你是目标用户缩焦者。请把目标用户收缩到具体角色、激励、风险和真实场景，输出 Markdown。", "outputMode": "markdown", "outputSchema": "markdown-basic" },
+      { "id": "goh-narrowest-wedge", "name": "Narrowest Wedge", "description": "找到最小可收费切口。", "systemPrompt": "你是最小切口规划者。请给出本周就能验证的最小切口、其价值点和为什么值得先做，输出 Markdown。", "outputMode": "markdown", "outputSchema": "markdown-basic" },
+      { "id": "goh-observation-surprise", "name": "Observation & Surprise", "description": "记录真实观察与意外点。", "systemPrompt": "你是观察记录员。请提炼真实观察、用户的反常行为、与预期冲突的事实，以及这些观察对方案的影响，输出 Markdown。", "outputMode": "markdown", "outputSchema": "markdown-basic" },
+      { "id": "goh-future-fit", "name": "Future-Fit", "description": "评估未来适配性。", "systemPrompt": "你是未来适配评估者。请判断未来三年环境变化会如何影响当前方向的必要性，输出 Markdown。", "outputMode": "markdown", "outputSchema": "markdown-basic" },
+      { "id": "goh-builder-plan", "name": "Builder Plan", "description": "输出 Builder 模式行动计划。", "systemPrompt": "你是 Builder 模式规划者。请把前面的结论整理成一个周末可执行的实验计划、设计文档和交付清单，输出 Markdown。", "outputMode": "markdown", "outputSchema": "delivery-summary" },
+      { "id": "goh-review", "name": "Office Hours Review", "description": "审查产物是否足够支撑行动。", "systemPrompt": "你是审查总结员。请列出仍然缺失的证据、阻塞、风险和下一步建议，输出结构化审查列表。", "outputMode": "markdown", "outputSchema": "review-issues" }
+    ],
+    "artifactSchemas": [
+      { "id": "markdown-basic", "title": "Markdown 基础文档", "kind": "markdown", "requiredHeadings": ["#"] },
+      { "id": "review-issues", "title": "审查问题列表", "kind": "review-issues" },
+      { "id": "delivery-summary", "title": "交付摘要", "kind": "markdown", "requiredHeadings": ["#", "##"] }
+    ],
+    "template": {
+      "id": "gstack-office-hours",
+      "name": "GStack Office Hours",
+      "description": "Office Hours 六问法与 Builder 模式模板。",
+      "defaultFlowId": "goh-flow-main",
+      "stageRoleIds": {
+        "discover": "goh-role-demand",
+        "clarify": "goh-role-specificity",
+        "plan": "goh-role-wedge",
+        "draft": "goh-role-builder-plan",
+        "review": "goh-role-review",
+        "finalize": "goh-role-builder-plan"
+      },
+      "stageExecutionProfiles": {
+        "discover": { "roleId": "goh-role-demand", "taskTemplateId": "goh-task-discover", "agentProfileId": "goh-agent-demand" },
+        "clarify": { "roleId": "goh-role-specificity", "taskTemplateId": "goh-task-clarify", "agentProfileId": "goh-agent-specificity" },
+        "plan": { "roleId": "goh-role-wedge", "taskTemplateId": "goh-task-plan", "agentProfileId": "goh-agent-wedge" },
+        "draft": { "roleId": "goh-role-builder-plan", "taskTemplateId": "goh-task-draft", "agentProfileId": "goh-agent-builder" },
+        "review": { "roleId": "goh-role-review", "taskTemplateId": "goh-task-review", "agentProfileId": "goh-agent-review" },
+        "finalize": { "roleId": "goh-role-builder-plan", "taskTemplateId": "goh-task-finalize", "agentProfileId": "goh-agent-builder" }
+      },
+      "stageDocuments": {
+        "discover": [
+          { "path": "01-office-hours/01-demand-reality.md", "title": "Demand Reality", "purpose": "确认真实需求证据和伪需求信号。", "promptProfileId": "goh-demand-reality", "validatorId": "markdown-basic" },
+          { "path": "01-office-hours/02-status-quo.md", "title": "Status Quo", "purpose": "梳理用户当前替代方案和成本。", "promptProfileId": "goh-status-quo", "validatorId": "markdown-basic" }
+        ],
+        "clarify": [
+          { "path": "01-office-hours/03-desperate-specificity.md", "title": "Desperate Specificity", "purpose": "缩焦最痛的具体用户。", "promptProfileId": "goh-desperate-specificity", "validatorId": "markdown-basic" }
+        ],
+        "plan": [
+          { "path": "01-office-hours/04-narrowest-wedge.md", "title": "Narrowest Wedge", "purpose": "找出本周即可验证的最小切口。", "promptProfileId": "goh-narrowest-wedge", "validatorId": "markdown-basic" },
+          { "path": "01-office-hours/05-observation-and-surprise.md", "title": "Observation & Surprise", "purpose": "记录真实观察和与预期冲突的事实。", "promptProfileId": "goh-observation-surprise", "validatorId": "markdown-basic" }
+        ],
+        "draft": [
+          { "path": "02-design/01-future-fit.md", "title": "Future-Fit", "purpose": "评估未来三年的方向适配性。", "promptProfileId": "goh-future-fit", "validatorId": "markdown-basic" },
+          { "path": "02-design/02-builder-plan.md", "title": "Builder Plan", "purpose": "输出最小实验、执行顺序和交付清单。", "promptProfileId": "goh-builder-plan", "validatorId": "delivery-summary" }
+        ],
+        "review": [
+          { "path": "02-design/03-office-hours-review.md", "title": "Office Hours Review", "purpose": "检查证据、假设和行动计划是否闭合。", "promptProfileId": "goh-review", "validatorId": "review-issues" }
+        ],
+        "finalize": [
+          { "path": "03-delivery/01-design-doc.md", "title": "Design Doc", "purpose": "生成最终设计文档和可执行摘要。", "promptProfileId": "goh-builder-plan", "validatorId": "delivery-summary" }
+        ]
+      },
+      "review": {
+        "bluePromptProfileId": "goh-builder-plan",
+        "redPromptProfileId": "goh-review",
+        "judgePromptProfileId": "goh-review",
+        "validatorId": "review-issues",
+        "executionProfiles": {
+          "blue": { "roleId": "goh-role-builder-plan", "taskTemplateId": "goh-task-draft", "agentProfileId": "goh-agent-builder" },
+          "red": { "roleId": "goh-role-review", "taskTemplateId": "goh-task-review", "agentProfileId": "goh-agent-review" },
+          "judge": { "roleId": "goh-role-review", "taskTemplateId": "goh-task-review", "agentProfileId": "goh-agent-review" }
+        }
+      },
+      "exportProfile": {
+        "markdown": true,
+        "text": true,
+        "pdf": true,
+        "openspec": false
+      }
+    }
+  }
+}

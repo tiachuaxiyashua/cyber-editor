@@ -1,0 +1,2534 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cyber Editor UI Rebuild Prototype</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="review-shell">
+    <aside class="review-panel">
+      <div class="review-kicker">Prototype Audit</div>
+      <h1>Cyber Editor 原型总导航</h1>
+      <p>这里不是产品运行时，而是审查入口。所有用户可触达页面、保存上下文、抽屉、弹窗、菜单和关键选项都应能从这里直接打开，方便逐个对齐修改。</p>
+
+      <div class="review-block">
+        <span class="review-label">页面</span>
+        <div class="review-chips">
+          <button type="button" class="control-chip active" data-screen-target="welcome">欢迎页</button>
+          <button type="button" class="control-chip" data-screen-target="workbench">主工作台</button>
+          <button type="button" class="control-chip" data-screen-target="thinking-chain">思路地图</button>
+          <button type="button" class="control-chip" data-screen-target="resource-center">资源中心</button>
+          <button type="button" class="control-chip" data-screen-target="rules-center">规则与沉淀中心</button>
+          <button type="button" class="control-chip" data-screen-target="settings">设置页</button>
+          <button type="button" class="control-chip" data-screen-target="orchestration" data-flow-context-target="project">编排页</button>
+        </div>
+      </div>
+
+      <div class="review-block">
+        <span class="review-label">编排进入方式</span>
+        <div class="review-chips">
+          <button type="button" class="control-chip active" data-flow-context="project" data-auto-project="open">工程内编排</button>
+          <button type="button" class="control-chip" data-flow-context="project" data-auto-project="draft">无工程入口（自动建工程）</button>
+        </div>
+        <div class="review-note">编排只有一个页面。无工程入口会先生成草稿工程上下文，再进入同一编排页，不再保留“仅保存 Flow”的独立页面。</div>
+      </div>
+
+      <div class="review-block">
+        <span class="review-label">资源类型</span>
+        <div class="review-chips">
+          <button type="button" class="control-chip" data-review-resource-type="template">外部模板</button>
+          <button type="button" class="control-chip" data-review-resource-type="skill">外部 Skill</button>
+          <button type="button" class="control-chip" data-review-resource-type="expansion">扩展位</button>
+        </div>
+        <div class="review-note">当前首层只开放模板与 Skill，外部文档、外部角色等继续保留扩展位。</div>
+      </div>
+
+      <div class="review-block">
+        <span class="review-label">规则与沉淀视图</span>
+        <div class="review-chips">
+          <button type="button" class="control-chip" data-review-rules-view="rules">规则</button>
+          <button type="button" class="control-chip" data-review-rules-view="distillation">个人沉淀</button>
+          <button type="button" class="control-chip" data-review-rules-view="graph">知识网络</button>
+        </div>
+      </div>
+
+      <div class="review-block">
+        <span class="review-label">规则层级</span>
+        <div class="review-chips">
+          <button type="button" class="control-chip" data-review-rules-scope="global">全局</button>
+          <button type="button" class="control-chip" data-review-rules-scope="project">工程内</button>
+          <button type="button" class="control-chip" data-review-rules-scope="node">节点级</button>
+        </div>
+        <div class="review-note">规则与沉淀页面需要同时覆盖三层规则、工程沉淀和大工程链接网络。</div>
+      </div>
+
+      <div class="review-block">
+        <span class="review-label">工作台文档</span>
+        <div class="review-chips">
+          <button type="button" class="control-chip" data-review-doc="baseline">需求基线</button>
+          <button type="button" class="control-chip" data-review-doc="scope">功能范围</button>
+          <button type="button" class="control-chip" data-review-doc="plan">实施计划</button>
+          <button type="button" class="control-chip" data-review-doc="review">审查记录</button>
+          <button type="button" class="control-chip" data-review-doc="mapping">导出映射</button>
+        </div>
+      </div>
+
+      <div class="review-block">
+        <span class="review-label">工作台会话</span>
+        <div class="review-chips">
+          <button type="button" class="control-chip" data-review-session="requirements">需求主会话</button>
+          <button type="button" class="control-chip" data-review-session="requirementsScope">功能范围会话</button>
+          <button type="button" class="control-chip" data-review-session="review">审查会话</button>
+          <button type="button" class="control-chip" data-review-session="delivery">交付会话</button>
+        </div>
+      </div>
+
+      <div class="review-block">
+        <span class="review-label">工作台左栏</span>
+        <div class="review-chips">
+          <button type="button" class="control-chip active" data-workbench-pane="files">文件树</button>
+          <button type="button" class="control-chip" data-workbench-pane="recent">最近</button>
+          <button type="button" class="control-chip" data-workbench-pane="search">搜索</button>
+        </div>
+      </div>
+
+      <div class="review-block">
+        <span class="review-label">设置选项</span>
+        <div class="review-chips">
+          <button type="button" class="control-chip" data-settings-view="provider">Provider</button>
+          <button type="button" class="control-chip" data-settings-view="editor">编辑器</button>
+          <button type="button" class="control-chip" data-settings-view="appearance">外观</button>
+          <button type="button" class="control-chip" data-settings-view="shortcut">快捷键</button>
+          <button type="button" class="control-chip" data-settings-view="advanced">高级</button>
+        </div>
+      </div>
+
+      <div class="review-block">
+        <span class="review-label">抽屉</span>
+        <div class="review-chips">
+          <button type="button" class="control-chip" data-open-drawer="task-drawer">任务抽屉</button>
+          <button type="button" class="control-chip" data-open-drawer="document-actions-drawer">文档更多动作</button>
+          <button type="button" class="control-chip" data-open-drawer="ai-context-drawer">AI 上下文</button>
+          <button type="button" class="control-chip" data-open-drawer="template-detail-drawer">模板详情</button>
+          <button type="button" class="control-chip" data-open-drawer="resource-scope-drawer">作用域</button>
+          <button type="button" class="control-chip" data-open-drawer="resource-health-drawer">资源健康</button>
+          <button type="button" class="control-chip" data-open-drawer="rule-hit-drawer">规则命中</button>
+          <button type="button" class="control-chip" data-open-drawer="knowledge-path-drawer">知识路径</button>
+          <button type="button" class="control-chip" data-open-drawer="settings-diagnostics-drawer">设置诊断</button>
+          <button type="button" class="control-chip" data-open-drawer="settings-help-drawer">帮助与日志</button>
+        </div>
+      </div>
+
+      <div class="review-block">
+        <span class="review-label">弹窗</span>
+        <div class="review-chips">
+          <button type="button" class="control-chip" data-open-modal="command-palette-modal">命令面板</button>
+          <button type="button" class="control-chip" data-open-modal="directory-picker-modal">目录选择</button>
+          <button type="button" class="control-chip" data-open-modal="template-transfer-modal">模板导入下载</button>
+          <button type="button" class="control-chip" data-open-modal="resource-transfer-modal">资源导入下载</button>
+          <button type="button" class="control-chip" data-open-modal="resource-delete-modal">资源删除确认</button>
+          <button type="button" class="control-chip" data-open-modal="settings-delete-modal">设置删除确认</button>
+          <button type="button" class="control-chip" data-open-modal="error-detail-modal">错误详情</button>
+          <button type="button" class="control-chip" data-open-modal="flow-transfer-modal">Flow 导入</button>
+          <button type="button" class="control-chip" data-open-modal="governance-transfer-modal">规则与沉淀导入导出</button>
+          <button type="button" class="control-chip" data-open-modal="distillation-promote-modal">沉淀提升</button>
+          <button type="button" class="control-chip" data-open-modal="conflict-detail-modal">冲突详情</button>
+          <button type="button" class="control-chip" data-screen-target="orchestration" data-open-flow-node-inspector="analysis">节点配置</button>
+          <button type="button" class="control-chip" data-open-modal="role-modal">创建角色</button>
+        </div>
+      </div>
+
+      <div class="review-block">
+        <span class="review-label">菜单与会话</span>
+        <div class="review-chips">
+          <button type="button" class="control-chip" data-open-layer="canvas-menu">画布菜单</button>
+          <button type="button" class="control-chip" data-open-layer="node-menu">节点菜单</button>
+          <button type="button" class="control-chip" data-review-flow-session="flow-main">主流程会话</button>
+          <button type="button" class="control-chip" data-review-flow-session="flow-review">审查子流程</button>
+          <button type="button" class="control-chip" data-review-flow-session="flow-output">输出会话</button>
+        </div>
+      </div>
+
+      <div class="review-block">
+        <span class="review-label">信息密度</span>
+        <div class="review-chips">
+          <button type="button" class="control-chip active" data-density="calm">标准</button>
+          <button type="button" class="control-chip" data-density="dense">高密度</button>
+        </div>
+      </div>
+    </aside>
+
+    <main class="prototype-stage" data-density-mode="calm">
+      <section class="screen screen-welcome active" data-screen="welcome">
+        <div class="welcome-frame">
+          <header class="welcome-topbar">
+            <div class="brand-row">
+              <div class="brand-mark">CE</div>
+              <div class="brand-copy">
+                <strong>Cyber Editor</strong>
+                <span>无活动工程</span>
+              </div>
+            </div>
+          </header>
+
+          <div class="welcome-body">
+            <nav class="activity-rail app-activity-rail">
+              <button type="button" class="activity-button active" data-screen-target="welcome" aria-label="欢迎页" title="欢迎页">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 7.2 8 3l4.8 4.2"></path><path d="M4.4 6.4V13h7.2V6.4"></path></svg>
+              </button>
+              <button type="button" class="activity-button" data-screen-target="workbench" data-requires-project="true" aria-label="主工作台" title="主工作台">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="3" width="10" height="10" rx="1.8"></rect><path d="M8 3v10"></path><path d="M3 8h10"></path></svg>
+              </button>
+              <button type="button" class="activity-button" data-screen-target="thinking-chain" data-requires-project="true" aria-label="思路地图" title="思路地图">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="4" cy="4.2" r="1.2"></circle><circle cx="8.2" cy="8" r="1.2"></circle><circle cx="12" cy="4.2" r="1.2"></circle><circle cx="12" cy="11.8" r="1.2"></circle><path d="M5.1 4.8 7.1 7.2"></path><path d="M9.1 7.2 11.1 4.8"></path><path d="M9.2 8.7 11 11"></path></svg>
+              </button>
+              <button type="button" class="activity-button" data-screen-target="orchestration" data-flow-context-target="project" data-requires-project="true" aria-label="编排页" title="编排页">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="4" cy="4" r="1.4"></circle><circle cx="12" cy="8" r="1.4"></circle><circle cx="4" cy="12" r="1.4"></circle><path d="M5.4 4.6 10.6 7.4"></path><path d="M5.4 11.4 10.6 8.6"></path></svg>
+              </button>
+              <div class="activity-rail-bottom activity-rail-bottom-static">
+                <button type="button" class="activity-button" data-screen-target="resource-center" aria-label="资源中心" title="资源中心">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 5.2 8 3l5 2.2-5 2.2z"></path><path d="M3 8 8 10.2 13 8"></path><path d="M3 10.8 8 13l5-2.2"></path></svg>
+                </button>
+                <button type="button" class="activity-button" data-screen-target="rules-center" data-rules-view-target="rules" data-rules-scope-target="global" aria-label="规则与沉淀中心" title="规则与沉淀中心">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="4" cy="4.5" r="1.3"></circle><circle cx="12" cy="4.5" r="1.3"></circle><circle cx="8" cy="11.5" r="1.3"></circle><path d="M5.2 5.2 7.1 10.3"></path><path d="M10.8 5.2 8.9 10.3"></path><path d="M5.3 4.5h5.4"></path></svg>
+                </button>
+                <button type="button" class="activity-button rail-end" data-screen-target="settings" aria-label="设置" title="设置">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4h8"></path><path d="M4 8h8"></path><path d="M4 12h8"></path><circle cx="6" cy="4" r="1.2"></circle><circle cx="10" cy="8" r="1.2"></circle><circle cx="7.5" cy="12" r="1.2"></circle></svg>
+                </button>
+              </div>
+            </nav>
+
+            <section class="welcome-main-column">
+              <section class="welcome-slogan-block welcome-slogan-block-editorial">
+                <h2 class="welcome-title-stack">
+                  <span class="welcome-title-brand">Cyber Editor</span>
+                  <span class="welcome-title-line welcome-title-line-key">从模糊到清晰</span>
+                  <span class="welcome-title-line welcome-title-line-support">从想法到结构化文档</span>
+                </h2>
+              </section>
+
+              <section class="welcome-sections-grid welcome-sections-grid-hubs">
+                <section class="welcome-simple-section welcome-hub-section">
+                  <div class="welcome-section-head welcome-section-head-stacked">
+                    <div>
+                      <div class="panel-kicker">最近工程</div>
+                      <strong>继续真实项目</strong>
+                    </div>
+                    <div class="welcome-section-actions">
+                      <button type="button" class="welcome-deep-action" data-screen-target="resource-center">新建工程</button>
+                      <button type="button" class="welcome-deep-action" data-screen-target="workbench" data-auto-project="open">打开工程</button>
+                    </div>
+                  </div>
+                  <div class="simple-list">
+                    <div class="simple-row">
+                      <div class="simple-row-main">
+                        <strong>AI 知识底座升级</strong>
+                        <span>规划阶段 · 最近编辑：需求基线.md</span>
+                      </div>
+                      <div class="simple-row-actions">
+                        <button type="button" class="text-link action-link" data-screen-target="workbench" data-auto-project="open">继续</button>
+                        <button type="button" class="text-link action-link subtle" data-welcome-manage="remove" data-welcome-entry-scope="project" data-welcome-entry-kicker="最近工程" data-welcome-entry-name="AI 知识底座升级" data-welcome-entry-copy="仅从欢迎页的最近工程列表移除，不删除项目目录。">从最近移除</button>
+                        <button type="button" class="text-link action-link danger" data-welcome-manage="delete" data-welcome-entry-scope="project" data-welcome-entry-kicker="最近工程" data-welcome-entry-name="AI 知识底座升级" data-welcome-entry-copy="将直接删除该项目目录及其相关最近记录，无法恢复。">删除</button>
+                      </div>
+                    </div>
+                    <div class="simple-row">
+                      <div class="simple-row-main">
+                        <strong>软件工厂模板重构</strong>
+                        <span>主工作台 · 最近进入：规划记录.md</span>
+                      </div>
+                      <div class="simple-row-actions">
+                        <button type="button" class="text-link action-link" data-screen-target="workbench" data-auto-project="open">继续</button>
+                        <button type="button" class="text-link action-link subtle" data-welcome-manage="remove" data-welcome-entry-scope="project" data-welcome-entry-kicker="最近工程" data-welcome-entry-name="软件工厂模板重构" data-welcome-entry-copy="仅从欢迎页的最近工程列表移除，不删除项目目录。">从最近移除</button>
+                        <button type="button" class="text-link action-link danger" data-welcome-manage="delete" data-welcome-entry-scope="project" data-welcome-entry-kicker="最近工程" data-welcome-entry-name="软件工厂模板重构" data-welcome-entry-copy="将直接删除该项目目录及其相关最近记录，无法恢复。">删除</button>
+                      </div>
+                    </div>
+                    <div class="simple-row">
+                      <div class="simple-row-main">
+                        <strong>平台需求闭环验证</strong>
+                        <span>审查阶段 · 最近编辑：review.md</span>
+                      </div>
+                      <div class="simple-row-actions">
+                        <button type="button" class="text-link action-link" data-screen-target="workbench" data-auto-project="open">继续</button>
+                        <button type="button" class="text-link action-link subtle" data-welcome-manage="remove" data-welcome-entry-scope="project" data-welcome-entry-kicker="最近工程" data-welcome-entry-name="平台需求闭环验证" data-welcome-entry-copy="仅从欢迎页的最近工程列表移除，不删除项目目录。">从最近移除</button>
+                        <button type="button" class="text-link action-link danger" data-welcome-manage="delete" data-welcome-entry-scope="project" data-welcome-entry-kicker="最近工程" data-welcome-entry-name="平台需求闭环验证" data-welcome-entry-copy="将直接删除该项目目录及其相关最近记录，无法恢复。">删除</button>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                <section class="welcome-simple-section welcome-hub-section">
+                  <div class="welcome-section-head welcome-section-head-stacked">
+                    <div>
+                      <div class="panel-kicker">模板与编排</div>
+                      <strong>从模板或草稿快速开始</strong>
+                    </div>
+                    <div class="welcome-section-actions">
+                      <button type="button" class="welcome-deep-action" data-screen-target="orchestration" data-flow-context-target="project" data-auto-project="draft">开始编排</button>
+                      <button type="button" class="welcome-deep-action" data-screen-target="resource-center">资源中心</button>
+                    </div>
+                  </div>
+                  <div class="simple-list">
+                    <div class="simple-row">
+                      <div class="simple-row-main">
+                        <strong>软件工厂 UI 整理草稿</strong>
+                        <span>规划阶段 · 最近编辑：主工作台与思路地图联动</span>
+                      </div>
+                      <div class="simple-row-actions">
+                        <button type="button" class="text-link action-link" data-screen-target="orchestration" data-flow-context-target="project" data-auto-project="draft">继续编辑</button>
+                        <button type="button" class="text-link action-link subtle" data-open-drawer="template-detail-drawer">详情</button>
+                        <button type="button" class="text-link action-link subtle" data-welcome-manage="remove" data-welcome-entry-scope="draft" data-welcome-entry-kicker="模板与编排" data-welcome-entry-name="软件工厂 UI 整理草稿" data-welcome-entry-copy="仅从欢迎页的模板与编排列表移除，不删除草稿 Flow 本体。">从最近移除</button>
+                        <button type="button" class="text-link action-link danger" data-welcome-manage="delete" data-welcome-entry-scope="draft" data-welcome-entry-kicker="模板与编排" data-welcome-entry-name="软件工厂 UI 整理草稿" data-welcome-entry-copy="将直接删除这份草稿 Flow 及其最近记录，无法恢复。">删除</button>
+                      </div>
+                    </div>
+                    <div class="simple-row">
+                      <div class="simple-row-main">
+                        <strong>规则中心回写草稿</strong>
+                        <span>审查阶段 · 最近编辑：命中栈与知识路径</span>
+                      </div>
+                      <div class="simple-row-actions">
+                        <button type="button" class="text-link action-link" data-screen-target="orchestration" data-flow-context-target="project" data-auto-project="draft">继续编辑</button>
+                        <button type="button" class="text-link action-link subtle" data-open-drawer="template-detail-drawer">详情</button>
+                        <button type="button" class="text-link action-link subtle" data-welcome-manage="remove" data-welcome-entry-scope="draft" data-welcome-entry-kicker="模板与编排" data-welcome-entry-name="规则中心回写草稿" data-welcome-entry-copy="仅从欢迎页的模板与编排列表移除，不删除草稿 Flow 本体。">从最近移除</button>
+                        <button type="button" class="text-link action-link danger" data-welcome-manage="delete" data-welcome-entry-scope="draft" data-welcome-entry-kicker="模板与编排" data-welcome-entry-name="规则中心回写草稿" data-welcome-entry-copy="将直接删除这份草稿 Flow 及其最近记录，无法恢复。">删除</button>
+                      </div>
+                    </div>
+                    <div class="simple-row">
+                      <div class="simple-row-main">
+                        <strong>软件工厂</strong>
+                        <span>默认阶段骨架 · 需求、设计、任务与审查全流程</span>
+                      </div>
+                      <div class="simple-row-actions">
+                        <button type="button" class="text-link action-link" data-screen-target="workbench" data-auto-project="create">使用模板</button>
+                        <button type="button" class="text-link action-link subtle" data-open-drawer="template-detail-drawer">详情</button>
+                        <button type="button" class="text-link action-link subtle" data-welcome-manage="remove" data-welcome-entry-scope="template" data-welcome-entry-kicker="模板与编排" data-welcome-entry-name="软件工厂" data-welcome-entry-copy="仅从欢迎页的模板与编排列表移除，资源中心中的模板文件仍保留。">从最近移除</button>
+                        <button type="button" class="text-link action-link danger" data-welcome-manage="delete" data-welcome-entry-scope="template" data-welcome-entry-kicker="模板与编排" data-welcome-entry-name="软件工厂" data-welcome-entry-copy="将直接从本地模板库删除该模板，并清除欢迎页入口。">删除</button>
+                      </div>
+                    </div>
+                    <div class="simple-row">
+                      <div class="simple-row-main">
+                        <strong>小说创作</strong>
+                        <span>人物弧线与章节节拍 · 长篇内容模板</span>
+                      </div>
+                      <div class="simple-row-actions">
+                        <button type="button" class="text-link action-link" data-screen-target="workbench" data-auto-project="create">使用模板</button>
+                        <button type="button" class="text-link action-link subtle" data-open-drawer="template-detail-drawer">详情</button>
+                        <button type="button" class="text-link action-link subtle" data-welcome-manage="remove" data-welcome-entry-scope="template" data-welcome-entry-kicker="模板与编排" data-welcome-entry-name="小说创作" data-welcome-entry-copy="仅从欢迎页的模板与编排列表移除，资源中心中的模板文件仍保留。">从最近移除</button>
+                        <button type="button" class="text-link action-link danger" data-welcome-manage="delete" data-welcome-entry-scope="template" data-welcome-entry-kicker="模板与编排" data-welcome-entry-name="小说创作" data-welcome-entry-copy="将直接从本地模板库删除该模板，并清除欢迎页入口。">删除</button>
+                      </div>
+                    </div>
+                    <div class="simple-row">
+                      <div class="simple-row-main">
+                        <strong>视频脚本</strong>
+                        <span>镜头拆解、口播结构与节奏控制模板</span>
+                      </div>
+                      <div class="simple-row-actions">
+                        <button type="button" class="text-link action-link" data-screen-target="workbench" data-auto-project="create">使用模板</button>
+                        <button type="button" class="text-link action-link subtle" data-open-drawer="template-detail-drawer">详情</button>
+                        <button type="button" class="text-link action-link subtle" data-welcome-manage="remove" data-welcome-entry-scope="template" data-welcome-entry-kicker="模板与编排" data-welcome-entry-name="视频脚本" data-welcome-entry-copy="仅从欢迎页的模板与编排列表移除，资源中心中的模板文件仍保留。">从最近移除</button>
+                        <button type="button" class="text-link action-link danger" data-welcome-manage="delete" data-welcome-entry-scope="template" data-welcome-entry-kicker="模板与编排" data-welcome-entry-name="视频脚本" data-welcome-entry-copy="将直接从本地模板库删除该模板，并清除欢迎页入口。">删除</button>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </section>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen screen-workbench" data-screen="workbench">
+        <div class="app-shell workbench-shell">
+          <header class="topbar">
+            <div class="brand-row">
+              <div class="brand-mark">CE</div>
+              <div class="brand-copy">
+                <strong>Cyber Editor</strong>
+              </div>
+            </div>
+            <div class="topbar-actions">
+              <button type="button" class="icon-button" data-open-drawer="task-drawer" aria-label="任务抽屉" title="任务抽屉">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 4h10"></path><path d="M3 8h10"></path><path d="M3 12h6"></path></svg>
+              </button>
+              <button type="button" class="icon-button" data-screen-target="rules-center" data-rules-view-target="rules" data-rules-scope-target="project" aria-label="规则与沉淀中心" title="规则与沉淀中心">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="4" cy="4.5" r="1.3"></circle><circle cx="12" cy="4.5" r="1.3"></circle><circle cx="8" cy="11.5" r="1.3"></circle><path d="M5.2 5.2 7.1 10.3"></path><path d="M10.8 5.2 8.9 10.3"></path><path d="M5.3 4.5h5.4"></path></svg>
+              </button>
+              <button type="button" class="icon-button" aria-label="分屏" title="分屏">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="3" width="11" height="10" rx="1.6"></rect><path d="M8 3v10"></path></svg>
+              </button>
+              <button type="button" class="icon-button" data-open-modal="command-palette-modal" aria-label="命令面板" title="命令面板">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.2 6.2 2.5 8l1.7 1.8"></path><path d="M11.8 6.2 13.5 8l-1.7 1.8"></path><path d="M6.2 11.5h3.6"></path></svg>
+              </button>
+              <button type="button" class="primary-action small">保存</button>
+            </div>
+          </header>
+
+          <div class="shell-body">
+            <nav class="activity-rail workbench-activity-rail app-activity-rail">
+              <button type="button" class="activity-button" data-screen-target="welcome" aria-label="欢迎页" title="欢迎页">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 7.2 8 3l4.8 4.2"></path><path d="M4.4 6.4V13h7.2V6.4"></path></svg>
+              </button>
+              <button type="button" class="activity-button active" data-screen-target="workbench" aria-label="主工作台" title="主工作台">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="3" width="10" height="10" rx="1.8"></rect><path d="M8 3v10"></path><path d="M3 8h10"></path></svg>
+              </button>
+              <button type="button" class="activity-button" data-screen-target="thinking-chain" aria-label="思路地图" title="思路地图">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="4" cy="4.2" r="1.2"></circle><circle cx="8.2" cy="8" r="1.2"></circle><circle cx="12" cy="4.2" r="1.2"></circle><circle cx="12" cy="11.8" r="1.2"></circle><path d="M5.1 4.8 7.1 7.2"></path><path d="M9.1 7.2 11.1 4.8"></path><path d="M9.2 8.7 11 11"></path></svg>
+              </button>
+              <button type="button" class="activity-button" data-screen-target="orchestration" data-flow-context-target="project" aria-label="编排页" title="编排页">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="4" cy="4" r="1.4"></circle><circle cx="12" cy="8" r="1.4"></circle><circle cx="4" cy="12" r="1.4"></circle><path d="M5.4 4.6 10.6 7.4"></path><path d="M5.4 11.4 10.6 8.6"></path></svg>
+              </button>
+              <div class="activity-rail-bottom workbench-rail-bottom">
+                <div class="rail-status-chip" title="当前阶段">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3 13 5.4v5.2L8 13l-5-2.4V5.4z"></path><path d="M8 3v10"></path></svg>
+                  <span class="rail-status-value" data-project-stage>需求</span>
+                </div>
+                <div class="rail-status-chip rail-status-chip-unsaved is-active" data-project-unsaved-chip title="未保存 1 处">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="4.6"></circle><path d="M8 5.2v3"></path><circle cx="8" cy="10.8" r="0.6" fill="currentColor" stroke="none"></circle></svg>
+                  <span class="rail-status-value" data-project-unsaved>1</span>
+                </div>
+                <button type="button" class="activity-button" data-open-drawer="task-drawer" aria-label="任务抽屉" title="任务抽屉">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 4h10"></path><path d="M3 8h10"></path><path d="M3 12h6"></path></svg>
+                </button>
+                <button type="button" class="activity-button" aria-label="分屏" title="分屏">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="3" width="11" height="10" rx="1.6"></rect><path d="M8 3v10"></path></svg>
+                </button>
+                <button type="button" class="activity-button" data-screen-target="resource-center" aria-label="资源中心" title="资源中心">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 5.2 8 3l5 2.2-5 2.2z"></path><path d="M3 8 8 10.2 13 8"></path><path d="M3 10.8 8 13l5-2.2"></path></svg>
+                </button>
+                <button type="button" class="activity-button" data-screen-target="rules-center" data-rules-view-target="rules" data-rules-scope-target="project" aria-label="规则与沉淀中心" title="规则与沉淀中心">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="4" cy="4.5" r="1.3"></circle><circle cx="12" cy="4.5" r="1.3"></circle><circle cx="8" cy="11.5" r="1.3"></circle><path d="M5.2 5.2 7.1 10.3"></path><path d="M10.8 5.2 8.9 10.3"></path><path d="M5.3 4.5h5.4"></path></svg>
+                </button>
+                <button type="button" class="activity-button rail-end" data-screen-target="settings" aria-label="设置" title="设置">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4h8"></path><path d="M4 8h8"></path><path d="M4 12h8"></path><circle cx="6" cy="4" r="1.2"></circle><circle cx="10" cy="8" r="1.2"></circle><circle cx="7.5" cy="12" r="1.2"></circle></svg>
+                </button>
+              </div>
+            </nav>
+
+            <aside class="explorer-panel workbench-explorer">
+              <div class="explorer-toolbar workbench-explorer-toolbar">
+                <div class="workbench-tool-grid" aria-label="文件树工具">
+                  <button type="button" class="icon-button subtle active" data-workbench-pane="files" aria-label="文件" title="文件">
+                    <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.8h5.4l2.6 2.6V13H4z"></path><path d="M9.4 2.8v2.6H12"></path></svg>
+                  </button>
+                  <button type="button" class="icon-button compact subtle" aria-label="新建目录" title="新建目录">
+                    <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.8 5h4l1.2 1.4h5.2v4.8H2.8z"></path><path d="M8 7.8v3.2"></path><path d="M6.4 9.4h3.2"></path></svg>
+                  </button>
+                  <button type="button" class="icon-button compact subtle" aria-label="导入" title="导入">
+                    <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v6.2"></path><path d="m5.4 6.8 2.6 2.6 2.6-2.6"></path><path d="M3 11.6h10"></path></svg>
+                  </button>
+                  <button type="button" class="icon-button compact subtle" aria-label="导出" title="导出">
+                    <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 13V6.8"></path><path d="m5.4 9.4 2.6-2.6 2.6 2.6"></path><path d="M3 3.2h10"></path></svg>
+                  </button>
+                  <button type="button" class="icon-button compact subtle" data-open-drawer="document-actions-drawer" aria-label="更多" title="更多">
+                    <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="4" cy="8" r="1"></circle><circle cx="8" cy="8" r="1"></circle><circle cx="12" cy="8" r="1"></circle></svg>
+                  </button>
+                </div>
+              </div>
+
+              <label class="search-row explorer-search-row">
+                <input type="text" id="workbench-pane-query" value="docs/" readonly>
+              </label>
+
+              <div class="tree-panel" id="workbench-pane-content">
+                <div class="tree-section-title">docs / 6</div>
+                <button type="button" class="tree-item active" data-doc="baseline">01-需求基线.md</button>
+                <button type="button" class="tree-item" data-doc="scope">02-功能范围.md</button>
+                <button type="button" class="tree-item" data-doc="plan">03-实施计划.md</button>
+                <button type="button" class="tree-item" data-doc="review">review.md</button>
+                <div class="tree-section-title">assets / 2</div>
+                <button type="button" class="tree-item" data-doc="mapping">export-map.md</button>
+                <button type="button" class="tree-item">schema.json</button>
+                <div class="tree-section-title">images / 1</div>
+                <button type="button" class="tree-item">ui-note.png</button>
+              </div>
+            </aside>
+
+            <main class="workspace-main workbench-main">
+              <div class="tab-strip workbench-tab-strip">
+                <button type="button" class="tab-chip active">需求基线.md</button>
+                <button type="button" class="tab-chip">功能范围.md</button>
+                <button type="button" class="tab-chip">实施计划.md</button>
+                <button type="button" class="tab-chip">+ 新标签</button>
+              </div>
+
+              <section class="document-frame workbench-document-frame">
+                <header class="document-toolbar">
+                  <div class="document-breadcrumbs">
+                    <span class="panel-kicker">docs / 01-需求基线.md</span>
+                    <span class="document-status-pill">自动保存已开启</span>
+                  </div>
+                </header>
+
+                <div class="document-grid workbench-document-grid">
+                  <article class="editor-surface workbench-editor-surface" id="editor-surface">
+                    <div class="editor-note-bar">
+                      <span class="mini-tag">Markdown</span>
+                      <span class="mini-tag">引用 4</span>
+                      <span class="mini-tag">表格工件 1</span>
+                    </div>
+                    <div class="editor-block editor-title"># 需求基线</div>
+                    <div class="editor-block editor-line long"></div>
+                    <div class="editor-block editor-line medium"></div>
+                    <div class="editor-block editor-line short"></div>
+                    <div class="editor-block editor-line long"></div>
+                    <div class="editor-block editor-line long"></div>
+                    <div class="editor-block editor-line medium"></div>
+                  </article>
+                </div>
+
+              </section>
+            </main>
+
+            <aside class="ai-panel workbench-ai-panel">
+              <div class="panel-head panel-head-compact workbench-ai-head">
+                <div>
+                  <div class="panel-kicker" id="ai-stage-chip">需求</div>
+                  <strong id="ai-session-title">需求主会话</strong>
+                  <p id="ai-session-subtitle">围绕 01-需求基线.md 自动切换上下文，而不是跳去单独会话页。</p>
+                </div>
+                <div class="panel-head-actions">
+                  <span class="mini-tag" id="workbench-active-session-chip">需求主会话</span>
+                  <button type="button" class="mini-ghost" data-open-drawer="ai-context-drawer">AI 上下文</button>
+                </div>
+              </div>
+              <div class="ai-summary-strip">
+                <div class="ai-summary-item">当前文档：<strong id="ai-document-chip">需求基线.md</strong></div>
+                <div class="ai-summary-item">当前工作面：<strong id="workbench-pane-chip">文件树</strong></div>
+              </div>
+              <div class="conversation" id="workbench-conversation">
+                <article class="message user">
+                  <span class="message-role">你</span>
+                  <p>先把 UI 方向收回到网页原型阶段，不再直接改产品。</p>
+                </article>
+                <article class="message ai">
+                  <span class="message-role">AI</span>
+                  <p>收到。先收敛主工作台与编排页的层级、点击路径和输入输出配置方式。</p>
+                </article>
+              </div>
+
+              <div class="composer-box workbench-composer">
+                <div class="composer-context-row">
+                  <span>引用上下文</span>
+                  <strong id="ai-composer-context">需求基线.md</strong>
+                </div>
+                <div class="composer-input">描述你希望 AI 继续推进的内容，例如“把需求边界压成 5 条验收标准”</div>
+                <div class="composer-row">
+                  <button type="button" class="ghost-action" data-open-modal="distillation-promote-modal">沉淀为条目</button>
+                  <button type="button" class="ghost-action" data-screen-target="rules-center" data-rules-view-target="rules" data-rules-scope-target="project">工程规则</button>
+                  <button type="button" class="primary-action small">发送</button>
+                </div>
+              </div>
+            </aside>
+
+            <div class="session-rail workbench-session-rail" data-session-layout="collapsed">
+              <button type="button" class="session-rail-toggle" data-toggle-session-rail aria-label="展开会话轨" title="展开会话轨">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m5.2 3.8 4 4.2-4 4.2"></path></svg>
+              </button>
+              <button type="button" class="session-group-button active" data-expand-session-group="project" data-session-members="requirements,requirementsScope" aria-label="工程会话组" title="工程会话组">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 3.2h8v9.6H4z"></path><path d="M6 5.6h4"></path><path d="M6 8h4"></path><path d="M6 10.4h2.6"></path></svg>
+                <span class="session-group-count">2</span>
+              </button>
+              <div class="session-group-stack" data-session-group="project">
+                <button type="button" class="session-button active" data-session="requirements" aria-label="需求基线会话" title="需求基线会话">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 3.2h8v9.6H4z"></path><path d="M6 5.6h4"></path><path d="M6 8h4"></path><path d="M6 10.4h2.6"></path></svg>
+                </button>
+                <button type="button" class="session-button" data-session="requirementsScope" aria-label="功能范围会话" title="功能范围会话">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 3.2h8v9.6H4z"></path><path d="M6 5.6h4"></path><path d="M6 8h4"></path><path d="M6 10.4h2.6"></path><path d="M10.2 10.4h1"></path></svg>
+                </button>
+              </div>
+              <button type="button" class="session-button" data-session="review" aria-label="审查会话" title="审查会话">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2.8 12 4.2v3.6c0 2.2-1.4 4.2-4 5.4-2.6-1.2-4-3.2-4-5.4V4.2z"></path><path d="m6.2 8 1.2 1.2 2.4-2.6"></path></svg>
+              </button>
+              <button type="button" class="session-button" data-session="delivery" aria-label="交付会话" title="交付会话">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 5.4 8 3l5 2.4v5.2L8 13l-5-2.4z"></path><path d="M8 3v10"></path><path d="M3 5.4 8 8l5-2.6"></path></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen screen-thinking-chain" data-screen="thinking-chain">
+        <div class="app-shell center-shell thinking-chain-shell">
+          <header class="topbar">
+            <div class="brand-row">
+              <div class="brand-mark">CE</div>
+              <div class="brand-copy">
+                <strong>Cyber Editor</strong>
+                <span>思路地图</span>
+              </div>
+            </div>
+          </header>
+
+          <div class="shell-body thinking-chain-shell-body">
+            <nav class="activity-rail app-activity-rail">
+              <button type="button" class="activity-button" data-screen-target="welcome" aria-label="欢迎页" title="欢迎页">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 7.2 8 3l4.8 4.2"></path><path d="M4.4 6.4V13h7.2V6.4"></path></svg>
+              </button>
+              <button type="button" class="activity-button" data-screen-target="workbench" data-requires-project="true" aria-label="主工作台" title="主工作台">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="3" width="10" height="10" rx="1.8"></rect><path d="M8 3v10"></path><path d="M3 8h10"></path></svg>
+              </button>
+              <button type="button" class="activity-button active" data-screen-target="thinking-chain" aria-label="思路地图" title="思路地图">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="4" cy="4.2" r="1.2"></circle><circle cx="8.2" cy="8" r="1.2"></circle><circle cx="12" cy="4.2" r="1.2"></circle><circle cx="12" cy="11.8" r="1.2"></circle><path d="M5.1 4.8 7.1 7.2"></path><path d="M9.1 7.2 11.1 4.8"></path><path d="M9.2 8.7 11 11"></path></svg>
+              </button>
+              <button type="button" class="activity-button" data-screen-target="orchestration" data-flow-context-target="project" data-requires-project="true" aria-label="编排页" title="编排页">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="4" cy="4" r="1.4"></circle><circle cx="12" cy="8" r="1.4"></circle><circle cx="4" cy="12" r="1.4"></circle><path d="M5.4 4.6 10.6 7.4"></path><path d="M5.4 11.4 10.6 8.6"></path></svg>
+              </button>
+              <div class="activity-rail-bottom workbench-rail-bottom">
+                <div class="rail-status-chip" title="当前阶段">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3 13 5.4v5.2L8 13l-5-2.4V5.4z"></path><path d="M8 3v10"></path></svg>
+                  <span class="rail-status-value" data-project-stage>需求</span>
+                </div>
+                <div class="rail-status-chip rail-status-chip-unsaved is-active" data-project-unsaved-chip title="未保存 1 处">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="4.6"></circle><path d="M8 5.2v3"></path><circle cx="8" cy="10.8" r="0.6" fill="currentColor" stroke="none"></circle></svg>
+                  <span class="rail-status-value" data-project-unsaved>1</span>
+                </div>
+                <button type="button" class="activity-button" data-open-drawer="task-drawer" aria-label="任务抽屉" title="任务抽屉">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 4h10"></path><path d="M3 8h10"></path><path d="M3 12h6"></path></svg>
+                </button>
+                <button type="button" class="activity-button" aria-label="分屏" title="分屏">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="3" width="11" height="10" rx="1.6"></rect><path d="M8 3v10"></path></svg>
+                </button>
+                <button type="button" class="activity-button" data-screen-target="resource-center" aria-label="资源中心" title="资源中心">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 5.2 8 3l5 2.2-5 2.2z"></path><path d="M3 8 8 10.2 13 8"></path><path d="M3 10.8 8 13l5-2.2"></path></svg>
+                </button>
+                <button type="button" class="activity-button" data-screen-target="rules-center" data-rules-view-target="graph" data-rules-scope-target="project" aria-label="规则与沉淀中心" title="规则与沉淀中心">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="4" cy="4.5" r="1.3"></circle><circle cx="12" cy="4.5" r="1.3"></circle><circle cx="8" cy="11.5" r="1.3"></circle><path d="M5.2 5.2 7.1 10.3"></path><path d="M10.8 5.2 8.9 10.3"></path><path d="M5.3 4.5h5.4"></path></svg>
+                </button>
+                <button type="button" class="activity-button rail-end" data-screen-target="settings" aria-label="设置" title="设置">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4h8"></path><path d="M4 8h8"></path><path d="M4 12h8"></path><circle cx="6" cy="4" r="1.1"></circle><circle cx="10" cy="8" r="1.1"></circle><circle cx="7.5" cy="12" r="1.1"></circle></svg>
+                </button>
+              </div>
+            </nav>
+
+            <div class="thinking-chain-layout">
+              <main class="thinking-chain-workspace">
+                <section class="thinking-chain-toolbar">
+                  <div class="thinking-toolbar-copy">
+                    <h3>需求主会话的思路沉淀</h3>
+                  </div>
+                  <div class="thinking-toolbar-side">
+                    <div class="thinking-toolbar-icons" aria-label="思路地图工具">
+                      <button type="button" class="icon-button thinking-toolbar-icon" data-thinking-drag aria-label="开启拖动" title="开启拖动">
+                        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2.8v10.4"></path><path d="M2.8 8h10.4"></path><path d="m8 2.8-1.8 1.8"></path><path d="m8 2.8 1.8 1.8"></path><path d="m8 13.2-1.8-1.8"></path><path d="m8 13.2 1.8-1.8"></path><path d="m2.8 8 1.8-1.8"></path><path d="m2.8 8 1.8 1.8"></path><path d="m13.2 8-1.8-1.8"></path><path d="m13.2 8-1.8 1.8"></path></svg>
+                      </button>
+                      <button type="button" class="icon-button thinking-toolbar-icon" data-thinking-zoom="in" aria-label="放大" title="放大">
+                        <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="3.2"></circle><path d="M7 5.2v3.6"></path><path d="M5.2 7h3.6"></path><path d="m10 10 3 3"></path></svg>
+                      </button>
+                      <button type="button" class="icon-button thinking-toolbar-icon" data-thinking-zoom="out" aria-label="缩小" title="缩小">
+                        <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="3.2"></circle><path d="M5.2 7h3.6"></path><path d="m10 10 3 3"></path></svg>
+                      </button>
+                      <button type="button" class="icon-button thinking-toolbar-icon" data-thinking-zoom="reset" aria-label="重新布局" title="重新布局">
+                        <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="3" width="3.2" height="3.2" rx="0.8"></rect><rect x="9.8" y="3" width="3.2" height="3.2" rx="0.8"></rect><rect x="3" y="9.8" width="3.2" height="3.2" rx="0.8"></rect><rect x="9.8" y="9.8" width="3.2" height="3.2" rx="0.8"></rect></svg>
+                      </button>
+                    </div>
+                  </div>
+                </section>
+
+                <section class="thinking-chain-board">
+                  <div class="thinking-chain-board-head">
+                    <span class="panel-kicker">缩放</span>
+                    <strong id="thinking-zoom-value">100%</strong>
+                  </div>
+                  <div class="thinking-chain-columns" id="thinking-chain-canvas">
+                    <div class="thinking-chain-column">
+                      <div class="thinking-column-kicker">核心想法</div>
+                      <button type="button" class="thinking-node-card" data-thinking-node="core">
+                        <span>核心命题</span>
+                        <strong>先把网页原型补成整套设计基线</strong>
+                        <p>停止在运行时里边改边猜，先统一可点击页面与关键入口。</p>
+                      </button>
+                    </div>
+                    <div class="thinking-chain-column">
+                      <div class="thinking-column-kicker">前提与约束</div>
+                      <button type="button" class="thinking-node-card active" data-thinking-node="premise-project">
+                        <span>工程上下文</span>
+                        <strong>欢迎页 / 主工作台只是起点</strong>
+                        <p>其他用户可触达页面也需要补齐，否则基线不完整。</p>
+                      </button>
+                      <button type="button" class="thinking-node-card" data-thinking-node="premise-rule">
+                        <span>约束</span>
+                        <strong>保持编辑器式壳层，不退回展示页</strong>
+                        <p>主对象始终是文档、画布或关系图，而不是说明卡片。</p>
+                      </button>
+                    </div>
+                    <div class="thinking-chain-column">
+                      <div class="thinking-column-kicker">采用方案</div>
+                      <button type="button" class="thinking-node-card" data-thinking-node="adopt-workbench">
+                        <span>工作台</span>
+                        <strong>补左栏模式、文档更多动作、AI 上下文入口</strong>
+                        <p>把新增能力收回到编辑器级层级，不破坏主体文档面。</p>
+                      </button>
+                      <button type="button" class="thinking-node-card" data-thinking-node="adopt-thinking">
+                        <span>系统页</span>
+                        <strong>新增思路地图页承接思路关系与文档落点</strong>
+                        <p>只负责展示与回跳，不直接编辑思路内容。</p>
+                      </button>
+                    </div>
+                    <div class="thinking-chain-column">
+                      <div class="thinking-column-kicker">探索分支</div>
+                      <button type="button" class="thinking-node-card" data-thinking-node="explore-search">
+                        <span>工作面</span>
+                        <strong>把搜索做成工作台左栏模式</strong>
+                        <p>不再额外制造独立 pseudo-page。</p>
+                      </button>
+                      <button type="button" class="thinking-node-card rejected" data-thinking-node="rejected-hero">
+                        <span>已废弃</span>
+                        <strong>继续用解释型 hero 覆盖首屏</strong>
+                        <p>会把高频动作推到折线以下，已否决。</p>
+                      </button>
+                    </div>
+                    <div class="thinking-chain-column">
+                      <div class="thinking-column-kicker">文档落点</div>
+                      <button type="button" class="thinking-node-card document" data-thinking-node="doc-plan">
+                        <span>文档</span>
+                        <strong>03-实施计划.md</strong>
+                        <p>记录“原型先行，再回写真实 UI”的实施顺序。</p>
+                      </button>
+                      <button type="button" class="thinking-node-card document" data-thinking-node="doc-review">
+                        <span>文档</span>
+                        <strong>review.md</strong>
+                        <p>沉淀信息架构缺口、反模式和需要回写的页面。</p>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="thinking-chain-board-note">滚轮缩放以鼠标为中心；拖动画布和节点只调整布局，不改语义。已废弃分支默认可隐藏，但不会从底层关系中删除。</div>
+                </section>
+              </main>
+
+              <aside class="thinking-chain-detail-pane">
+                <div class="panel-head panel-head-compact">
+                  <div>
+                    <div class="panel-kicker">当前选中节点</div>
+                    <strong id="thinking-detail-title">欢迎页 / 主工作台只是起点</strong>
+                    <p id="thinking-detail-summary">其他用户可触达页面也需要补齐，否则设计基线仍然不完整。</p>
+                  </div>
+                </div>
+                <div class="drawer-stats-grid thinking-detail-stats">
+                  <div class="detail-meta-card">
+                    <span>类型</span>
+                    <strong id="thinking-detail-type">前提</strong>
+                  </div>
+                  <div class="detail-meta-card">
+                    <span>阶段</span>
+                    <strong id="thinking-detail-stage">需求</strong>
+                  </div>
+                  <div class="detail-meta-card">
+                    <span>状态</span>
+                    <strong id="thinking-detail-status">已采用</strong>
+                  </div>
+                  <div class="detail-meta-card">
+                    <span>来源</span>
+                    <strong id="thinking-detail-source">需求主会话</strong>
+                  </div>
+                </div>
+                <div class="drawer-section">
+                  <span class="panel-kicker">决策内容</span>
+                  <div class="overlay-item static thinking-detail-rich-card">
+                    <strong>决策描述</strong>
+                    <span id="thinking-detail-description">这条前提把设计范围从“只补两个页面”扩大到“所有用户可触达页面一起对齐”。欢迎页和主工作台只是入口，资源中心、规则与沉淀中心、设置页、思路地图和编排页都必须回到同一套页面骨架与导航逻辑里。</span>
+                  </div>
+                </div>
+                <div class="drawer-section">
+                  <span class="panel-kicker">决策理由与思路</span>
+                  <div class="overlay-list compact-overlay-list">
+                    <div class="overlay-item static thinking-detail-rich-card">
+                      <strong id="thinking-detail-thought-title">思路描述</strong>
+                      <span id="thinking-detail-thought-text">思路不是给单页补按钮，而是先统一系统壳层：左侧边栏、中心主对象区、右侧辅助区和页面间回跳入口都要成组更新。只有这样，后续新增页面和新增入口才不会再制造新的例外。</span>
+                    </div>
+                    <div class="overlay-item static thinking-detail-rich-card">
+                      <strong id="thinking-detail-reason-title">为什么扩大范围</strong>
+                      <span id="thinking-detail-reason-text">如果只修欢迎页和主工作台，用户一旦进入资源中心、规则中心、设置页、思路地图或编排页，就会重新掉回旧布局与旧层级，导致基线再次断裂。</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="drawer-section">
+                  <span class="panel-kicker">引用证据全文与上下文</span>
+                  <div class="overlay-list" id="thinking-detail-evidence">
+                    <button type="button" class="overlay-item thinking-evidence-item" data-screen-target="resource-center">
+                      <em class="thinking-evidence-kicker">页面证据</em>
+                      <strong>资源中心</strong>
+                      <span>模板 / Skill 入口仍然会影响欢迎页与编排页路径。</span>
+                      <span class="thinking-evidence-context">资源中心不是独立装饰页，而是模板、外部 Skill 与未来扩展资源进入系统的统一入口。如果这页仍停留在旧布局，欢迎页里的“资源中心”、模板使用路径和编排入口就没有一致的承接关系。</span>
+                    </button>
+                    <button type="button" class="overlay-item thinking-evidence-item" data-screen-target="rules-center" data-rules-view-target="rules" data-rules-scope-target="project">
+                      <em class="thinking-evidence-kicker">深层回跳证据</em>
+                      <strong>规则与沉淀中心</strong>
+                      <span>命中栈和知识路径是工作台、思路地图与编排页的共同回跳入口。</span>
+                      <span class="thinking-evidence-context">规则与沉淀中心承担规则命中、个人沉淀和知识网络的承接职责，是多个页面共享的深层支撑页。如果这页不一起收敛，主工作台和编排页新增的规则入口会在深层路径上直接断开。</span>
+                    </button>
+                  </div>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen screen-resource-center" data-screen="resource-center">
+        <div class="app-shell center-shell resource-shell">
+          <header class="topbar">
+            <div class="brand-row">
+              <div class="brand-mark">CE</div>
+              <div class="brand-copy">
+                <strong>Cyber Editor</strong>
+                <span>资源中心</span>
+              </div>
+            </div>
+          </header>
+
+          <div class="shell-body center-shell-body">
+            <nav class="activity-rail app-activity-rail">
+              <button type="button" class="activity-button" data-screen-target="welcome" aria-label="欢迎页" title="欢迎页">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 7.2 8 3l4.8 4.2"></path><path d="M4.4 6.4V13h7.2V6.4"></path></svg>
+              </button>
+              <button type="button" class="activity-button" data-screen-target="workbench" data-requires-project="true" aria-label="主工作台" title="主工作台">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="3" width="10" height="10" rx="1.8"></rect><path d="M8 3v10"></path><path d="M3 8h10"></path></svg>
+              </button>
+              <button type="button" class="activity-button" data-screen-target="thinking-chain" data-requires-project="true" aria-label="思路地图" title="思路地图">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="4" cy="4.2" r="1.2"></circle><circle cx="8.2" cy="8" r="1.2"></circle><circle cx="12" cy="4.2" r="1.2"></circle><circle cx="12" cy="11.8" r="1.2"></circle><path d="M5.1 4.8 7.1 7.2"></path><path d="M9.1 7.2 11.1 4.8"></path><path d="M9.2 8.7 11 11"></path></svg>
+              </button>
+              <button type="button" class="activity-button" data-screen-target="orchestration" data-flow-context-target="project" data-requires-project="true" aria-label="编排页" title="编排页">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="4" cy="4" r="1.4"></circle><circle cx="12" cy="8" r="1.4"></circle><circle cx="4" cy="12" r="1.4"></circle><path d="M5.4 4.6 10.6 7.4"></path><path d="M5.4 11.4 10.6 8.6"></path></svg>
+              </button>
+              <div class="activity-rail-bottom activity-rail-bottom-static">
+                <button type="button" class="activity-button active" data-screen-target="resource-center" aria-label="资源中心" title="资源中心">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 5.2 8 3l5 2.2-5 2.2z"></path><path d="M3 8 8 10.2 13 8"></path><path d="M3 10.8 8 13l5-2.2"></path></svg>
+                </button>
+                <button type="button" class="activity-button" data-screen-target="rules-center" data-rules-view-target="rules" data-rules-scope-target="global" aria-label="规则与沉淀中心" title="规则与沉淀中心">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="4" cy="4.5" r="1.3"></circle><circle cx="12" cy="4.5" r="1.3"></circle><circle cx="8" cy="11.5" r="1.3"></circle><path d="M5.2 5.2 7.1 10.3"></path><path d="M10.8 5.2 8.9 10.3"></path><path d="M5.3 4.5h5.4"></path></svg>
+                </button>
+                <button type="button" class="activity-button rail-end" data-screen-target="settings" aria-label="设置" title="设置">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4h8"></path><path d="M4 8h8"></path><path d="M4 12h8"></path><circle cx="6" cy="4" r="1.1"></circle><circle cx="10" cy="8" r="1.1"></circle><circle cx="7.5" cy="12" r="1.1"></circle></svg>
+                </button>
+              </div>
+            </nav>
+
+            <main class="center-workspace">
+              <section class="center-toolbar resource-toolbar">
+                <div class="resource-toolbar-actions">
+                  <button type="button" class="ghost-action" data-screen-target="workbench" data-requires-project="true">返回工作台</button>
+                  <button type="button" class="ghost-action" id="resource-import-action" data-open-modal="resource-transfer-modal">导入</button>
+                  <button type="button" class="ghost-action" id="resource-download-action" data-open-modal="resource-transfer-modal">下载</button>
+                </div>
+              </section>
+
+              <div class="center-grid resource-center-grid">
+                <aside class="resource-type-pane">
+                  <div class="resource-type-group">
+                    <div>
+                      <div class="panel-kicker">首层类型</div>
+                      <strong>当前支持</strong>
+                    </div>
+                    <button type="button" class="resource-type-item active" data-resource-type="template">
+                      <strong>外部模板</strong>
+                      <span>开始编排、从模板创建工程、查看 Flow 与输出结构。</span>
+                    </button>
+                    <button type="button" class="resource-type-item" data-resource-type="skill">
+                      <strong>外部 Skill</strong>
+                      <span>安装能力、管理启用范围、补充审查动作与输出约束。</span>
+                    </button>
+                  </div>
+
+                  <div class="resource-type-group resource-type-group-muted">
+                    <div>
+                      <div class="panel-kicker">未来扩展</div>
+                    </div>
+                    <button type="button" class="resource-type-item disabled" data-resource-type="expansion">
+                      <strong>外部文档</strong>
+                      <span>未来用于接入文档包、知识快照和参考资料集。</span>
+                    </button>
+                    <button type="button" class="resource-type-item disabled" data-resource-type="expansion">
+                      <strong>外部角色</strong>
+                      <span>未来用于接入角色包、权限边界和角色设定。</span>
+                    </button>
+                  </div>
+                </aside>
+
+                <aside class="resource-list-pane">
+                  <div class="search-input resource-list-search" id="resource-search-input">软件工厂 / GStack / 小说创作 / 旅行攻略</div>
+                  <div class="list-pane-head">
+                    <div>
+                      <div class="panel-kicker" id="resource-list-kicker">当前类型</div>
+                      <strong id="resource-list-title">外部模板</strong>
+                    </div>
+                    <span class="pane-meta" id="resource-list-count">4 项</span>
+                  </div>
+                  <div class="resource-list" id="resource-list"></div>
+                </aside>
+
+                <section class="resource-detail-pane">
+                  <div class="detail-head">
+                    <div>
+                      <div class="panel-kicker" id="resource-detail-kicker">当前选中资源</div>
+                      <h3 id="resource-detail-title">软件工厂</h3>
+                      <p id="resource-detail-summary">把需求输入、规划、编排、输出映射和交付目录组织在同一条默认工作流里，用于快速启动一个结构完整的真实项目。</p>
+                    </div>
+                    <div class="detail-head-actions">
+                      <button type="button" class="ghost-action" id="resource-secondary-action" data-open-drawer="template-detail-drawer">查看详情</button>
+                      <button type="button" class="ghost-action" id="resource-path-action" data-screen-target="orchestration" data-flow-context-target="project" data-auto-project="draft">开始编排</button>
+                      <button type="button" class="primary-action small" id="resource-main-action" data-screen-target="workbench">从模板创建工程</button>
+                    </div>
+                  </div>
+
+                  <div class="detail-meta-grid">
+                    <div class="detail-meta-card">
+                      <span>来源</span>
+                      <strong id="resource-meta-origin">官方目录</strong>
+                    </div>
+                    <div class="detail-meta-card">
+                      <span>版本</span>
+                      <strong id="resource-meta-version">v0.9</strong>
+                    </div>
+                    <div class="detail-meta-card">
+                      <span>信任</span>
+                      <strong id="resource-meta-trust">已校验</strong>
+                    </div>
+                    <div class="detail-meta-card">
+                      <span>兼容</span>
+                      <strong id="resource-meta-compat">Windows / macOS</strong>
+                    </div>
+                  </div>
+
+                  <div class="detail-section-grid">
+                    <div class="detail-section-card">
+                      <span id="resource-section-1-label">默认 Flow</span>
+                      <strong id="resource-section-1-title">需求输入 → 规划 → 编排 → 导出映射</strong>
+                      <p id="resource-section-1-text">默认包含主流程、审查回环、输出映射和交付目录约束。</p>
+                    </div>
+                    <div class="detail-section-card">
+                      <span id="resource-section-2-label">输出结构</span>
+                      <strong id="resource-section-2-title">docs / assets / openspec / exports</strong>
+                      <p id="resource-section-2-text">输出包包含 Markdown、manifest、目录结构与后续导出映射。</p>
+                    </div>
+                    <div class="detail-section-card">
+                      <span id="resource-section-3-label">适合场景</span>
+                      <strong id="resource-section-3-title">软件需求、方案设计、交付打包</strong>
+                      <p id="resource-section-3-text">适合需要完整文档链路和可交付目录结构的工作流。</p>
+                    </div>
+                    <div class="detail-section-card">
+                      <span id="resource-section-4-label">建议搭配 Skill</span>
+                      <strong id="resource-section-4-title">Requirements Review / docs-writer</strong>
+                      <p id="resource-section-4-text">模板与 Skill 在同一个资源中心完成安装、查看与后续接入，不再分裂为两类主页面。</p>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </main>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen screen-rules-center" data-screen="rules-center">
+        <div class="app-shell center-shell rules-shell">
+          <header class="topbar">
+            <div class="brand-row">
+              <div class="brand-mark">CE</div>
+              <div class="brand-copy">
+                <strong>Cyber Editor</strong>
+                <span>规则与沉淀中心</span>
+              </div>
+            </div>
+          </header>
+
+          <div class="shell-body center-shell-body">
+            <nav class="activity-rail app-activity-rail">
+              <button type="button" class="activity-button" data-screen-target="welcome" aria-label="欢迎页" title="欢迎页">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 7.2 8 3l4.8 4.2"></path><path d="M4.4 6.4V13h7.2V6.4"></path></svg>
+              </button>
+              <button type="button" class="activity-button" data-screen-target="workbench" data-requires-project="true" aria-label="主工作台" title="主工作台">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="3" width="10" height="10" rx="1.8"></rect><path d="M8 3v10"></path><path d="M3 8h10"></path></svg>
+              </button>
+              <button type="button" class="activity-button" data-screen-target="thinking-chain" data-requires-project="true" aria-label="思路地图" title="思路地图">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="4" cy="4.2" r="1.2"></circle><circle cx="8.2" cy="8" r="1.2"></circle><circle cx="12" cy="4.2" r="1.2"></circle><circle cx="12" cy="11.8" r="1.2"></circle><path d="M5.1 4.8 7.1 7.2"></path><path d="M9.1 7.2 11.1 4.8"></path><path d="M9.2 8.7 11 11"></path></svg>
+              </button>
+              <button type="button" class="activity-button" data-screen-target="orchestration" data-flow-context-target="project" data-requires-project="true" aria-label="编排页" title="编排页">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="4" cy="4" r="1.4"></circle><circle cx="12" cy="8" r="1.4"></circle><circle cx="4" cy="12" r="1.4"></circle><path d="M5.4 4.6 10.6 7.4"></path><path d="M5.4 11.4 10.6 8.6"></path></svg>
+              </button>
+              <div class="activity-rail-bottom activity-rail-bottom-static">
+                <button type="button" class="activity-button" data-screen-target="resource-center" aria-label="资源中心" title="资源中心">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 5.2 8 3l5 2.2-5 2.2z"></path><path d="M3 8 8 10.2 13 8"></path><path d="M3 10.8 8 13l5-2.2"></path></svg>
+                </button>
+                <button type="button" class="activity-button active" data-screen-target="rules-center" aria-label="规则与沉淀中心" title="规则与沉淀中心">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="4" cy="4.5" r="1.3"></circle><circle cx="12" cy="4.5" r="1.3"></circle><circle cx="8" cy="11.5" r="1.3"></circle><path d="M5.2 5.2 7.1 10.3"></path><path d="M10.8 5.2 8.9 10.3"></path><path d="M5.3 4.5h5.4"></path></svg>
+                </button>
+                <button type="button" class="activity-button rail-end" data-screen-target="settings" aria-label="设置" title="设置">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4h8"></path><path d="M4 8h8"></path><path d="M4 12h8"></path><circle cx="6" cy="4" r="1.1"></circle><circle cx="10" cy="8" r="1.1"></circle><circle cx="7.5" cy="12" r="1.1"></circle></svg>
+                </button>
+              </div>
+            </nav>
+
+            <main class="center-workspace">
+              <section class="center-toolbar rules-toolbar">
+                <div class="center-filter-row">
+                  <button type="button" class="tab-chip active" data-rules-view="rules">规则</button>
+                  <button type="button" class="tab-chip" data-rules-view="distillation">个人沉淀</button>
+                  <button type="button" class="tab-chip" data-rules-view="graph">知识网络</button>
+                </div>
+                <div class="rules-toolbar-actions">
+                  <button type="button" class="ghost-action" data-screen-target="workbench" data-requires-project="true">返回工作台</button>
+                  <button type="button" class="ghost-action" id="rules-import-action" data-open-modal="governance-transfer-modal">导入 / 导出</button>
+                  <button type="button" class="ghost-action" id="rules-toolbar-main-action" data-open-modal="distillation-promote-modal">新建沉淀</button>
+                </div>
+              </section>
+
+              <div class="center-grid resource-center-grid rules-center-grid">
+                <aside class="resource-type-pane rules-scope-pane">
+                  <div class="resource-type-group">
+                    <div>
+                      <div class="panel-kicker" id="rules-list-kicker">当前层级</div>
+                      <strong id="rules-list-title">工程规则</strong>
+                    </div>
+                    <button type="button" class="resource-type-item active" data-rules-scope="global">
+                      <strong id="rules-scope-global-title">全局规则</strong>
+                      <span id="rules-scope-global-note">独立于工程，对所有项目和会话生效。</span>
+                    </button>
+                    <button type="button" class="resource-type-item" data-rules-scope="project">
+                      <strong id="rules-scope-project-title">工程内规则</strong>
+                      <span id="rules-scope-project-note">跟随当前工程保存，约束项目边界、输出与知识底座。</span>
+                    </button>
+                    <button type="button" class="resource-type-item" data-rules-scope="node">
+                      <strong id="rules-scope-node-title">节点规则</strong>
+                      <span id="rules-scope-node-note">只绑定某个流程节点，覆盖更上层同维度约束。</span>
+                    </button>
+                  </div>
+
+                </aside>
+
+                <aside class="resource-list-pane">
+                  <div class="search-input resource-list-search" id="rules-search-input">全局守卫 / 工程约束 / 节点规则 / 个人沉淀 / 知识网络</div>
+                  <div class="list-pane-head">
+                    <div>
+                      <div class="panel-kicker">规则列表</div>
+                      <strong>当前条目</strong>
+                    </div>
+                    <span class="pane-meta" id="rules-list-count">2 条</span>
+                  </div>
+                  <div class="resource-list" id="rules-list"></div>
+                </aside>
+
+                <section class="resource-detail-pane">
+                  <div class="detail-head">
+                    <div>
+                      <div class="panel-kicker" id="rules-detail-kicker">当前条目</div>
+                      <h3 id="rules-detail-title">AI 知识底座升级交付契约</h3>
+                      <p id="rules-detail-summary">把该工程的输出结构、引用要求、RAG 来源边界和交付目录约束统一收进工程规则，不再散落在文档正文里。</p>
+                    </div>
+                    <div class="detail-head-actions">
+                      <button type="button" class="ghost-action" id="rules-secondary-action" data-open-drawer="rule-hit-drawer">查看命中栈</button>
+                      <button type="button" class="ghost-action" id="rules-path-action" data-open-drawer="knowledge-path-drawer">知识路径</button>
+                      <button type="button" class="primary-action small" id="rules-main-action" data-open-modal="governance-transfer-modal">导入 / 新建</button>
+                    </div>
+                  </div>
+
+                  <div class="detail-meta-grid">
+                    <div class="detail-meta-card">
+                      <span id="rules-meta-1-label">作用域</span>
+                      <strong id="rules-meta-1-value">工程内</strong>
+                    </div>
+                    <div class="detail-meta-card">
+                      <span id="rules-meta-2-label">命中方式</span>
+                      <strong id="rules-meta-2-value">编排 / 工作台 / AI 会话</strong>
+                    </div>
+                    <div class="detail-meta-card">
+                      <span id="rules-meta-3-label">落盘位置</span>
+                      <strong id="rules-meta-3-value">项目规则库</strong>
+                    </div>
+                    <div class="detail-meta-card">
+                      <span id="rules-meta-4-label">关联对象</span>
+                      <strong id="rules-meta-4-value">文档 / Flow / 沉淀</strong>
+                    </div>
+                  </div>
+
+                  <div class="detail-section-grid">
+                    <div class="detail-section-card">
+                      <span id="rules-section-1-label">来源</span>
+                      <strong id="rules-section-1-title">来自当前工程的交付边界整理</strong>
+                      <p id="rules-section-1-text">把目录命名、输出格式、引用和清单结构从文档正文抽出来，统一变成可命中的规则对象。</p>
+                    </div>
+                    <div class="detail-section-card">
+                      <span id="rules-section-2-label">覆盖</span>
+                      <strong id="rules-section-2-title">作用于主工作台、编排页和导出阶段</strong>
+                      <p id="rules-section-2-text">同一工程下的文档工作、AI 会话和编排输出都会继承这组规则。</p>
+                    </div>
+                    <div class="detail-section-card">
+                      <span id="rules-section-3-label">冲突</span>
+                      <strong id="rules-section-3-title">节点规则只覆盖同维度约束</strong>
+                      <p id="rules-section-3-text">节点可以额外限制输出格式，但不会无提示地抹掉全局安全和引用守卫。</p>
+                    </div>
+                    <div class="detail-section-card">
+                      <span id="rules-section-4-label">下一步</span>
+                      <strong id="rules-section-4-title">可以补挂 Skill 与知识网络路径</strong>
+                      <p id="rules-section-4-text">规则对象不是终点，还需要与 Skill、沉淀和图谱节点建立可解释的链接。</p>
+                    </div>
+                  </div>
+
+                  <section class="rules-preview-panel">
+                    <div class="rules-preview-copy">
+                      <div class="panel-kicker" id="rules-preview-kicker">作用路径</div>
+                      <strong id="rules-preview-title">工程规则 → 当前文档 → AI 会话 → 输出目录</strong>
+                      <p id="rules-preview-text">这里不是运行图，而是向用户解释“为什么这条规则会命中、证据从哪里来、可以提升成什么”。</p>
+                    </div>
+                    <div class="rules-preview-map">
+                      <span class="rules-preview-node" id="rules-preview-node-1">工程规则</span>
+                      <span class="rules-preview-node" id="rules-preview-node-2">当前文档</span>
+                      <span class="rules-preview-node rules-preview-node-active" id="rules-preview-node-3">AI 会话</span>
+                      <span class="rules-preview-node" id="rules-preview-node-4">输出目录</span>
+                    </div>
+                  </section>
+                </section>
+              </div>
+            </main>
+          </div>
+        </div>
+      </section>
+
+<section class="screen screen-settings" data-screen="settings">
+        <div class="app-shell settings-shell">
+          <header class="topbar">
+            <div class="brand-row">
+              <div class="brand-mark">CE</div>
+              <div class="brand-copy">
+                <strong>Cyber Editor</strong>
+                <span>设置与模型配置</span>
+              </div>
+            </div>
+          </header>
+
+          <div class="shell-body settings-shell-body">
+            <nav class="activity-rail app-activity-rail">
+              <button type="button" class="activity-button" data-screen-target="welcome" aria-label="欢迎页" title="欢迎页">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 7.2 8 3l4.8 4.2"></path><path d="M4.4 6.4V13h7.2V6.4"></path></svg>
+              </button>
+              <button type="button" class="activity-button" data-screen-target="workbench" data-requires-project="true" aria-label="主工作台" title="主工作台">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="3" width="10" height="10" rx="1.8"></rect><path d="M8 3v10"></path><path d="M3 8h10"></path></svg>
+              </button>
+              <button type="button" class="activity-button" data-screen-target="thinking-chain" data-requires-project="true" aria-label="思路地图" title="思路地图">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="4" cy="4.2" r="1.2"></circle><circle cx="8.2" cy="8" r="1.2"></circle><circle cx="12" cy="4.2" r="1.2"></circle><circle cx="12" cy="11.8" r="1.2"></circle><path d="M5.1 4.8 7.1 7.2"></path><path d="M9.1 7.2 11.1 4.8"></path><path d="M9.2 8.7 11 11"></path></svg>
+              </button>
+              <button type="button" class="activity-button" data-screen-target="orchestration" data-flow-context-target="project" data-requires-project="true" aria-label="编排页" title="编排页">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="4" cy="4" r="1.4"></circle><circle cx="12" cy="8" r="1.4"></circle><circle cx="4" cy="12" r="1.4"></circle><path d="M5.4 4.6 10.6 7.4"></path><path d="M5.4 11.4 10.6 8.6"></path></svg>
+              </button>
+              <div class="activity-rail-bottom activity-rail-bottom-static">
+                <button type="button" class="activity-button" data-screen-target="resource-center" aria-label="资源中心" title="资源中心">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 5.2 8 3l5 2.2-5 2.2z"></path><path d="M3 8 8 10.2 13 8"></path><path d="M3 10.8 8 13l5-2.2"></path></svg>
+                </button>
+                <button type="button" class="activity-button" data-screen-target="rules-center" data-rules-view-target="rules" data-rules-scope-target="global" aria-label="规则与沉淀中心" title="规则与沉淀中心">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="4" cy="4.5" r="1.3"></circle><circle cx="12" cy="4.5" r="1.3"></circle><circle cx="8" cy="11.5" r="1.3"></circle><path d="M5.2 5.2 7.1 10.3"></path><path d="M10.8 5.2 8.9 10.3"></path><path d="M5.3 4.5h5.4"></path></svg>
+                </button>
+                <button type="button" class="activity-button rail-end active" data-screen-target="settings" aria-label="设置" title="设置">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4h8"></path><path d="M4 8h8"></path><path d="M4 12h8"></path><circle cx="6" cy="4" r="1.1"></circle><circle cx="10" cy="8" r="1.1"></circle><circle cx="7.5" cy="12" r="1.1"></circle></svg>
+                </button>
+              </div>
+            </nav>
+
+            <div class="settings-grid">
+              <aside class="settings-menu">
+                <button type="button" class="settings-nav-item active" data-settings-view="provider">Provider Profiles</button>
+                <button type="button" class="settings-nav-item" data-settings-view="editor">编辑器</button>
+                <button type="button" class="settings-nav-item" data-settings-view="appearance">外观与布局</button>
+                <button type="button" class="settings-nav-item" data-settings-view="shortcut">快捷键</button>
+                <button type="button" class="settings-nav-item" data-settings-view="advanced">高级</button>
+              </aside>
+
+              <main class="settings-content">
+                <section class="settings-section">
+                  <div class="detail-head">
+                    <div>
+                      <div class="panel-kicker" id="settings-kicker">当前菜单</div>
+                      <h3 id="settings-title">Provider Profiles</h3>
+                      <p id="settings-summary">管理模型来源、基础地址、默认模型、API Key 和连接测试。</p>
+                    </div>
+                    <div class="detail-head-actions">
+                      <button type="button" class="ghost-action" data-screen-target="rules-center" data-rules-view-target="rules" data-rules-scope-target="global">全局规则</button>
+                      <button type="button" class="ghost-action" id="settings-secondary-action" data-open-drawer="settings-diagnostics-drawer">模型诊断</button>
+                      <button type="button" class="primary-action small" id="settings-primary-action">新增配置</button>
+                    </div>
+                  </div>
+
+                  <div class="settings-subnav" id="settings-subnav"></div>
+
+                  <div class="settings-body-layout" id="settings-body-layout">
+                    <aside class="settings-provider-list hidden" id="settings-provider-list"></aside>
+                    <div class="settings-provider-pane" id="settings-provider-pane">
+                      <div class="settings-card-grid" id="settings-card-grid">
+                        <div class="settings-card">
+                          <span>配置名称</span>
+                          <strong>Ollama · qwen3</strong>
+                          <p>本地模型，适合结构化文档与审查任务。</p>
+                        </div>
+                      </div>
+
+                      <div class="settings-form-panel" id="settings-form-panel">
+                        <div class="settings-form-row">
+                          <div class="project-form-field">
+                            <span>Base URL</span>
+                            <strong>http://127.0.0.1:11434</strong>
+                          </div>
+                          <div class="project-form-field">
+                            <span>Model</span>
+                            <strong>qwen3:8b</strong>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="settings-footnote-grid" id="settings-footnote-grid">
+                        <div class="detail-section-card">
+                          <span>快捷键提示</span>
+                          <strong>Windows: Ctrl+K / macOS: Cmd+K</strong>
+                          <p>设置页要明确展示平台差异，避免把快捷键文案写死。</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </main>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen screen-orchestration" data-screen="orchestration">
+        <div class="app-shell orchestration-shell">
+          <div class="shell-body flow-body">
+            <nav class="activity-rail app-activity-rail">
+              <button type="button" class="activity-button" data-screen-target="welcome" aria-label="欢迎页" title="欢迎页">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 7.2 8 3l4.8 4.2"></path><path d="M4.4 6.4V13h7.2V6.4"></path></svg>
+              </button>
+              <button type="button" class="activity-button" data-screen-target="workbench" data-requires-project="true" aria-label="主工作台" title="主工作台">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="3" width="10" height="10" rx="1.8"></rect><path d="M8 3v10"></path><path d="M3 8h10"></path></svg>
+              </button>
+              <button type="button" class="activity-button" data-screen-target="thinking-chain" data-requires-project="true" aria-label="思路地图" title="思路地图">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="4" cy="4.2" r="1.2"></circle><circle cx="8.2" cy="8" r="1.2"></circle><circle cx="12" cy="4.2" r="1.2"></circle><circle cx="12" cy="11.8" r="1.2"></circle><path d="M5.1 4.8 7.1 7.2"></path><path d="M9.1 7.2 11.1 4.8"></path><path d="M9.2 8.7 11 11"></path></svg>
+              </button>
+              <button type="button" class="activity-button active" data-screen-target="orchestration" data-flow-context-target="project" data-requires-project="true" aria-label="编排页" title="编排页">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="4" cy="4" r="1.4"></circle><circle cx="12" cy="8" r="1.4"></circle><circle cx="4" cy="12" r="1.4"></circle><path d="M5.4 4.6 10.6 7.4"></path><path d="M5.4 11.4 10.6 8.6"></path></svg>
+              </button>
+              <div class="activity-rail-bottom workbench-rail-bottom">
+                <div class="rail-status-chip" title="当前阶段">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3 13 5.4v5.2L8 13l-5-2.4V5.4z"></path><path d="M8 3v10"></path></svg>
+                  <span class="rail-status-value" data-project-stage>需求</span>
+                </div>
+                <div class="rail-status-chip rail-status-chip-unsaved is-active" data-project-unsaved-chip title="未保存 1 处">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="4.6"></circle><path d="M8 5.2v3"></path><circle cx="8" cy="10.8" r="0.6" fill="currentColor" stroke="none"></circle></svg>
+                  <span class="rail-status-value" data-project-unsaved>1</span>
+                </div>
+                <button type="button" class="activity-button" data-open-drawer="task-drawer" aria-label="任务抽屉" title="任务抽屉">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 4h10"></path><path d="M3 8h10"></path><path d="M3 12h6"></path></svg>
+                </button>
+                <button type="button" class="activity-button" aria-label="分屏" title="分屏">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="3" width="11" height="10" rx="1.6"></rect><path d="M8 3v10"></path></svg>
+                </button>
+                <button type="button" class="activity-button" data-screen-target="resource-center" aria-label="资源中心" title="资源中心">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 5.2 8 3l5 2.2-5 2.2z"></path><path d="M3 8 8 10.2 13 8"></path><path d="M3 10.8 8 13l5-2.2"></path></svg>
+                </button>
+                <button type="button" class="activity-button" data-screen-target="rules-center" data-rules-view-target="rules" data-rules-scope-target="node" aria-label="规则与沉淀中心" title="规则与沉淀中心">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="4" cy="4.5" r="1.3"></circle><circle cx="12" cy="4.5" r="1.3"></circle><circle cx="8" cy="11.5" r="1.3"></circle><path d="M5.2 5.2 7.1 10.3"></path><path d="M10.8 5.2 8.9 10.3"></path><path d="M5.3 4.5h5.4"></path></svg>
+                </button>
+                <button type="button" class="activity-button rail-end" data-screen-target="settings" aria-label="设置" title="设置">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4h8"></path><path d="M4 8h8"></path><path d="M4 12h8"></path><circle cx="6" cy="4" r="1.2"></circle><circle cx="10" cy="8" r="1.2"></circle><circle cx="7.5" cy="12" r="1.2"></circle></svg>
+                </button>
+              </div>
+            </nav>
+
+            <aside class="flow-module-panel" aria-label="模块选择区">
+              <div class="flow-module-panel-head">
+                <div class="panel-kicker">模块选择区</div>
+                <strong>标准节点与子流程</strong>
+                <p>拖入画布即可生成节点，编辑与删除入口直接贴在模块图标上。</p>
+              </div>
+
+              <div class="flow-module-actions">
+                <button type="button" class="icon-button compact flow-module-action" data-open-modal="flow-transfer-modal" aria-label="导入子流程" title="导入子流程">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v7"></path><path d="m5.2 7.2 2.8 2.8 2.8-2.8"></path><path d="M3.2 12.6h9.6"></path></svg>
+                </button>
+                <button type="button" class="icon-button compact flow-module-action" aria-label="创建子流程" title="创建子流程">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v10"></path><path d="M3 8h10"></path></svg>
+                </button>
+                <button type="button" class="icon-button compact flow-module-action" aria-label="导出子流程" title="导出子流程">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 13V6"></path><path d="m5.2 8.8 2.8-2.8 2.8 2.8"></path><path d="M3.2 3.4h9.6"></path></svg>
+                </button>
+              </div>
+
+              <label class="flow-module-search" for="flow-module-search-input">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="3.6"></circle><path d="m10 10 2.6 2.6"></path></svg>
+                <input id="flow-module-search-input" type="search" data-flow-module-search placeholder="搜索节点 / 子流程">
+              </label>
+
+              <div class="flow-module-groups" id="flow-module-library">
+                <section class="flow-module-group" data-flow-module-group="standard">
+                  <div class="flow-module-group-head">
+                    <span>标准节点</span>
+                    <em>可拖拽</em>
+                  </div>
+                  <div class="flow-module-grid">
+                    <div
+                      class="flow-module-tile"
+                      role="button"
+                      tabindex="0"
+                      draggable="true"
+                      data-flow-module-id="module-agent"
+                      data-flow-module-type="agent"
+                      data-flow-module-kind="standard"
+                      data-flow-module-title="角色节点"
+                      data-flow-module-kicker="标准节点"
+                      data-flow-module-copy="绑定角色、任务模板、Skill 与 Agent 执行包。"
+                    >
+                      <div class="flow-module-tile-top">
+                        <span class="flow-module-icon">
+                          <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="4.4" r="2.1"></circle><path d="M4.2 12.6c0-2 1.7-3.6 3.8-3.6s3.8 1.6 3.8 3.6"></path></svg>
+                        </span>
+                        <div class="flow-module-mini-actions">
+                          <button type="button" class="flow-module-mini" data-flow-module-edit="module-agent" aria-label="编辑角色节点" title="编辑角色节点">
+                            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m11.8 3.4.8.8a1.2 1.2 0 0 1 0 1.7L6.2 12.3l-2.7.6.6-2.7 6.4-6.4a1.2 1.2 0 0 1 1.7 0Z"></path></svg>
+                          </button>
+                          <button type="button" class="flow-module-mini danger" data-flow-module-delete="module-agent" aria-label="删除角色节点模块" title="删除角色节点模块">
+                            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.2 4.6h7.6"></path><path d="M6.1 4.6V3.4h3.8v1.2"></path><path d="m5.1 4.6.6 7h4.6l.6-7"></path></svg>
+                          </button>
+                        </div>
+                      </div>
+                      <strong>角色节点</strong>
+                      <span>Role / Task / Agent</span>
+                    </div>
+
+                    <div
+                      class="flow-module-tile"
+                      role="button"
+                      tabindex="0"
+                      draggable="true"
+                      data-flow-module-id="module-tool"
+                      data-flow-module-type="tool"
+                      data-flow-module-kind="standard"
+                      data-flow-module-title="工具节点"
+                      data-flow-module-kicker="标准节点"
+                      data-flow-module-copy="绑定连接器、脚本工具和外部能力调用。"
+                    >
+                      <div class="flow-module-tile-top">
+                        <span class="flow-module-icon">
+                          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m5.2 5.2 1.8-1.8 4.2 4.2-1.8 1.8z"></path><path d="m3.4 9.7 2.2 2.2"></path><path d="m9.4 3.4 3.2 3.2"></path></svg>
+                        </span>
+                        <div class="flow-module-mini-actions">
+                          <button type="button" class="flow-module-mini" data-flow-module-edit="module-tool" aria-label="编辑工具节点" title="编辑工具节点">
+                            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m11.8 3.4.8.8a1.2 1.2 0 0 1 0 1.7L6.2 12.3l-2.7.6.6-2.7 6.4-6.4a1.2 1.2 0 0 1 1.7 0Z"></path></svg>
+                          </button>
+                          <button type="button" class="flow-module-mini danger" data-flow-module-delete="module-tool" aria-label="删除工具节点模块" title="删除工具节点模块">
+                            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.2 4.6h7.6"></path><path d="M6.1 4.6V3.4h3.8v1.2"></path><path d="m5.1 4.6.6 7h4.6l.6-7"></path></svg>
+                          </button>
+                        </div>
+                      </div>
+                      <strong>工具节点</strong>
+                      <span>Tool / Connector</span>
+                    </div>
+
+                    <div
+                      class="flow-module-tile"
+                      role="button"
+                      tabindex="0"
+                      draggable="true"
+                      data-flow-module-id="module-condition"
+                      data-flow-module-type="condition"
+                      data-flow-module-kind="standard"
+                      data-flow-module-title="条件节点"
+                      data-flow-module-kicker="标准节点"
+                      data-flow-module-copy="显式维护 true / false 分支与条件表达式。"
+                    >
+                      <div class="flow-module-tile-top">
+                        <span class="flow-module-icon">
+                          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.4 4.8h6.8"></path><path d="M3.4 8h9.2"></path><path d="M3.4 11.2h5.4"></path></svg>
+                        </span>
+                        <div class="flow-module-mini-actions">
+                          <button type="button" class="flow-module-mini" data-flow-module-edit="module-condition" aria-label="编辑条件节点" title="编辑条件节点">
+                            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m11.8 3.4.8.8a1.2 1.2 0 0 1 0 1.7L6.2 12.3l-2.7.6.6-2.7 6.4-6.4a1.2 1.2 0 0 1 1.7 0Z"></path></svg>
+                          </button>
+                          <button type="button" class="flow-module-mini danger" data-flow-module-delete="module-condition" aria-label="删除条件节点模块" title="删除条件节点模块">
+                            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.2 4.6h7.6"></path><path d="M6.1 4.6V3.4h3.8v1.2"></path><path d="m5.1 4.6.6 7h4.6l.6-7"></path></svg>
+                          </button>
+                        </div>
+                      </div>
+                      <strong>条件节点</strong>
+                      <span>True / False</span>
+                    </div>
+
+                    <div
+                      class="flow-module-tile"
+                      role="button"
+                      tabindex="0"
+                      draggable="true"
+                      data-flow-module-id="module-loop"
+                      data-flow-module-type="loop"
+                      data-flow-module-kind="standard"
+                      data-flow-module-title="循环节点"
+                      data-flow-module-kicker="标准节点"
+                      data-flow-module-copy="定义循环条件、退出条件与超时边界。"
+                    >
+                      <div class="flow-module-tile-top">
+                        <span class="flow-module-icon">
+                          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M12.2 6.2A4.6 4.6 0 1 0 12 10.6"></path><path d="M11 3.8h2.8v2.8"></path></svg>
+                        </span>
+                        <div class="flow-module-mini-actions">
+                          <button type="button" class="flow-module-mini" data-flow-module-edit="module-loop" aria-label="编辑循环节点" title="编辑循环节点">
+                            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m11.8 3.4.8.8a1.2 1.2 0 0 1 0 1.7L6.2 12.3l-2.7.6.6-2.7 6.4-6.4a1.2 1.2 0 0 1 1.7 0Z"></path></svg>
+                          </button>
+                          <button type="button" class="flow-module-mini danger" data-flow-module-delete="module-loop" aria-label="删除循环节点模块" title="删除循环节点模块">
+                            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.2 4.6h7.6"></path><path d="M6.1 4.6V3.4h3.8v1.2"></path><path d="m5.1 4.6.6 7h4.6l.6-7"></path></svg>
+                          </button>
+                        </div>
+                      </div>
+                      <strong>循环节点</strong>
+                      <span>Loop / Exit</span>
+                    </div>
+
+                    <div
+                      class="flow-module-tile"
+                      role="button"
+                      tabindex="0"
+                      draggable="true"
+                      data-flow-module-id="module-parallel"
+                      data-flow-module-type="parallel"
+                      data-flow-module-kind="standard"
+                      data-flow-module-title="并行分支"
+                      data-flow-module-kicker="标准节点"
+                      data-flow-module-copy="拆分并行分支并定义汇合与失败策略。"
+                    >
+                      <div class="flow-module-tile-top">
+                        <span class="flow-module-icon">
+                          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.2 4.2v7.6"></path><path d="M8 4.2v7.6"></path><path d="M11.8 4.2v7.6"></path><path d="M3 6.2h10"></path><path d="M3 9.8h10"></path></svg>
+                        </span>
+                        <div class="flow-module-mini-actions">
+                          <button type="button" class="flow-module-mini" data-flow-module-edit="module-parallel" aria-label="编辑并行分支" title="编辑并行分支">
+                            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m11.8 3.4.8.8a1.2 1.2 0 0 1 0 1.7L6.2 12.3l-2.7.6.6-2.7 6.4-6.4a1.2 1.2 0 0 1 1.7 0Z"></path></svg>
+                          </button>
+                          <button type="button" class="flow-module-mini danger" data-flow-module-delete="module-parallel" aria-label="删除并行分支模块" title="删除并行分支模块">
+                            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.2 4.6h7.6"></path><path d="M6.1 4.6V3.4h3.8v1.2"></path><path d="m5.1 4.6.6 7h4.6l.6-7"></path></svg>
+                          </button>
+                        </div>
+                      </div>
+                      <strong>并行分支</strong>
+                      <span>Split / Join</span>
+                    </div>
+
+                    <div
+                      class="flow-module-tile"
+                      role="button"
+                      tabindex="0"
+                      draggable="true"
+                      data-flow-module-id="module-approval"
+                      data-flow-module-type="approval"
+                      data-flow-module-kind="standard"
+                      data-flow-module-title="人工确认"
+                      data-flow-module-kicker="标准节点"
+                      data-flow-module-copy="把审批、阻断与人工确认显式放进流程。"
+                    >
+                      <div class="flow-module-tile-top">
+                        <span class="flow-module-icon">
+                          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5.2 8.2 7 10l3.8-4"></path><rect x="3.2" y="2.8" width="9.6" height="10.4" rx="1.8"></rect></svg>
+                        </span>
+                        <div class="flow-module-mini-actions">
+                          <button type="button" class="flow-module-mini" data-flow-module-edit="module-approval" aria-label="编辑人工确认节点" title="编辑人工确认节点">
+                            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m11.8 3.4.8.8a1.2 1.2 0 0 1 0 1.7L6.2 12.3l-2.7.6.6-2.7 6.4-6.4a1.2 1.2 0 0 1 1.7 0Z"></path></svg>
+                          </button>
+                          <button type="button" class="flow-module-mini danger" data-flow-module-delete="module-approval" aria-label="删除人工确认节点模块" title="删除人工确认节点模块">
+                            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.2 4.6h7.6"></path><path d="M6.1 4.6V3.4h3.8v1.2"></path><path d="m5.1 4.6.6 7h4.6l.6-7"></path></svg>
+                          </button>
+                        </div>
+                      </div>
+                      <strong>人工确认</strong>
+                      <span>Approval Gate</span>
+                    </div>
+                  </div>
+                </section>
+
+                <section class="flow-module-group" data-flow-module-group="subflows">
+                  <div class="flow-module-group-head">
+                    <span>子流程</span>
+                    <em>创建 / 导入</em>
+                  </div>
+                  <div class="flow-module-grid">
+                    <div
+                      class="flow-module-tile flow-module-tile-subflow"
+                      role="button"
+                      tabindex="0"
+                      draggable="true"
+                      data-flow-module-id="subflow-review"
+                      data-flow-module-type="subflow"
+                      data-flow-module-kind="subflow"
+                      data-flow-module-title="审查子流程"
+                      data-flow-module-kicker="子流程"
+                      data-flow-module-copy="进入红蓝审查、问题收敛与裁决输出。"
+                    >
+                      <div class="flow-module-tile-top">
+                        <span class="flow-module-icon">
+                          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.4 5.2h9.2"></path><path d="M5.2 8h5.6"></path><path d="M6.4 10.8h3.2"></path><rect x="2.8" y="2.8" width="10.4" height="10.4" rx="1.8"></rect></svg>
+                        </span>
+                        <div class="flow-module-mini-actions">
+                          <button type="button" class="flow-module-mini" data-flow-module-edit="subflow-review" aria-label="编辑审查子流程" title="编辑审查子流程">
+                            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m11.8 3.4.8.8a1.2 1.2 0 0 1 0 1.7L6.2 12.3l-2.7.6.6-2.7 6.4-6.4a1.2 1.2 0 0 1 1.7 0Z"></path></svg>
+                          </button>
+                          <button type="button" class="flow-module-mini danger" data-flow-module-delete="subflow-review" aria-label="删除审查子流程" title="删除审查子流程">
+                            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.2 4.6h7.6"></path><path d="M6.1 4.6V3.4h3.8v1.2"></path><path d="m5.1 4.6.6 7h4.6l.6-7"></path></svg>
+                          </button>
+                        </div>
+                      </div>
+                      <strong>审查子流程</strong>
+                      <span>红蓝审查与裁决</span>
+                    </div>
+
+                    <div
+                      class="flow-module-tile flow-module-tile-subflow"
+                      role="button"
+                      tabindex="0"
+                      draggable="true"
+                      data-flow-module-id="subflow-export"
+                      data-flow-module-type="subflow"
+                      data-flow-module-kind="subflow"
+                      data-flow-module-title="导出映射"
+                      data-flow-module-kicker="子流程"
+                      data-flow-module-copy="把输出契约映射到目录、命名与导出清单。"
+                    >
+                      <div class="flow-module-tile-top">
+                        <span class="flow-module-icon">
+                          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 12.8V5.6"></path><path d="m5.2 8.4 2.8-2.8 2.8 2.8"></path><path d="M3.4 3.2h9.2v9.6H3.4z"></path></svg>
+                        </span>
+                        <div class="flow-module-mini-actions">
+                          <button type="button" class="flow-module-mini" data-flow-module-edit="subflow-export" aria-label="编辑导出映射子流程" title="编辑导出映射子流程">
+                            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m11.8 3.4.8.8a1.2 1.2 0 0 1 0 1.7L6.2 12.3l-2.7.6.6-2.7 6.4-6.4a1.2 1.2 0 0 1 1.7 0Z"></path></svg>
+                          </button>
+                          <button type="button" class="flow-module-mini danger" data-flow-module-delete="subflow-export" aria-label="删除导出映射子流程" title="删除导出映射子流程">
+                            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.2 4.6h7.6"></path><path d="M6.1 4.6V3.4h3.8v1.2"></path><path d="m5.1 4.6.6 7h4.6l.6-7"></path></svg>
+                          </button>
+                        </div>
+                      </div>
+                      <strong>导出映射</strong>
+                      <span>目录 / 命名 / 清单</span>
+                    </div>
+
+                    <div
+                      class="flow-module-tile flow-module-tile-subflow"
+                      role="button"
+                      tabindex="0"
+                      draggable="true"
+                      data-flow-module-id="subflow-upgrade"
+                      data-flow-module-type="subflow"
+                      data-flow-module-kind="subflow"
+                      data-flow-module-title="升级子流程"
+                      data-flow-module-kicker="子流程"
+                      data-flow-module-copy="负责依赖迁移、候选脚本晋升与版本升级。"
+                    >
+                      <div class="flow-module-tile-top">
+                        <span class="flow-module-icon">
+                          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 12.8V3.2"></path><path d="m5 6.2 3-3 3 3"></path><path d="M4 12.8h8"></path></svg>
+                        </span>
+                        <div class="flow-module-mini-actions">
+                          <button type="button" class="flow-module-mini" data-flow-module-edit="subflow-upgrade" aria-label="编辑升级子流程" title="编辑升级子流程">
+                            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m11.8 3.4.8.8a1.2 1.2 0 0 1 0 1.7L6.2 12.3l-2.7.6.6-2.7 6.4-6.4a1.2 1.2 0 0 1 1.7 0Z"></path></svg>
+                          </button>
+                          <button type="button" class="flow-module-mini danger" data-flow-module-delete="subflow-upgrade" aria-label="删除升级子流程" title="删除升级子流程">
+                            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.2 4.6h7.6"></path><path d="M6.1 4.6V3.4h3.8v1.2"></path><path d="m5.1 4.6.6 7h4.6l.6-7"></path></svg>
+                          </button>
+                        </div>
+                      </div>
+                      <strong>升级子流程</strong>
+                      <span>迁移 / 晋升 / 更新</span>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </aside>
+
+            <main class="flow-main">
+              <section class="canvas-frame flow-canvas-frame" id="flow-canvas-frame">
+                <div class="canvas-top-tools">
+                  <div class="flow-canvas-toolbar-copy">
+                    <h3>流编排</h3>
+                  </div>
+                  <div class="flow-canvas-toolbar-actions">
+                    <div class="tool-group">
+                      <button type="button" class="icon-button compact flow-canvas-tool active" aria-label="选择" title="选择">
+                        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 3.2 5.2 5.2-2.7.7-.7 2.7z"></path></svg>
+                      </button>
+                      <button type="button" class="icon-button compact flow-canvas-tool" aria-label="添加节点" title="添加节点">
+                        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v10"></path><path d="M3 8h10"></path></svg>
+                      </button>
+                      <button type="button" class="icon-button compact flow-canvas-tool" aria-label="连线" title="连线">
+                        <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="4" cy="4.2" r="1.2"></circle><circle cx="12" cy="8" r="1.2"></circle><circle cx="4" cy="11.8" r="1.2"></circle><path d="M5.2 4.8 10.7 7.3"></path><path d="M5.2 11.2 10.7 8.7"></path></svg>
+                      </button>
+                      <button type="button" class="icon-button compact flow-canvas-tool" aria-label="缩放" title="缩放">
+                        <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="3.6"></circle><path d="m10 10 2.6 2.6"></path><path d="M7 5.4v3.2"></path><path d="M5.4 7h3.2"></path></svg>
+                      </button>
+                      <button type="button" class="icon-button compact flow-canvas-tool" data-open-layer="canvas-menu" aria-label="画布菜单" title="画布菜单">
+                        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.4 4.8h9.2"></path><path d="M3.4 8h9.2"></path><path d="M3.4 11.2h5.4"></path></svg>
+                      </button>
+                      <button type="button" class="icon-button compact flow-canvas-tool" data-open-layer="node-menu" aria-label="节点菜单" title="节点菜单">
+                        <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="4" cy="4.4" r="1.2"></circle><circle cx="8.2" cy="8" r="1.2"></circle><circle cx="12" cy="11.6" r="1.2"></circle><path d="M5.1 5.1 7.1 7.1"></path><path d="M9.1 8.9 11 10.8"></path></svg>
+                      </button>
+                      <button type="button" class="icon-button compact flow-canvas-tool" aria-label="适配视图" title="适配视图">
+                        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.4 6.2V3.4h2.8"></path><path d="M9.8 3.4h2.8v2.8"></path><path d="M12.6 9.8v2.8H9.8"></path><path d="M6.2 12.6H3.4V9.8"></path></svg>
+                      </button>
+                      <button type="button" class="icon-button compact flow-canvas-tool" aria-label="重新布局" title="重新布局">
+                        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4h3.6v3.6H4z"></path><path d="M8.4 8.4H12v3.6H8.4z"></path><path d="M7.6 7.6h.8"></path><path d="M8 4.8v2.4"></path><path d="M8.8 8H11"></path></svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="lane-label lane-1">输入</div>
+                <div class="lane-label lane-2">分析</div>
+                <div class="lane-label lane-3">审查</div>
+                <div class="lane-label lane-4">导出</div>
+
+                <div class="connector connector-a"></div>
+                <div class="connector connector-b"></div>
+                <div class="connector connector-c"></div>
+
+                <button type="button" class="flow-node flow-node-start" data-node="start">
+                  <span class="node-kicker">开始</span>
+                  <strong>需求输入</strong>
+                  <p>选择输入文档目录、输入工件类型和接收方式。</p>
+                </button>
+
+                <button type="button" class="flow-node flow-node-role flow-node-current" data-node="analysis">
+                  <span class="node-kicker">角色节点</span>
+                  <strong>需求分析员</strong>
+                  <p>绑定角色、Skill、输入要求、输出工件格式和运行提示。</p>
+                </button>
+
+                <button type="button" class="flow-node flow-node-subflow" data-node="review">
+                  <span class="node-kicker">子流程</span>
+                  <strong>审查子流程</strong>
+                  <p>进入更深层的评审节点、问题收敛和结论输出。</p>
+                </button>
+
+                <button type="button" class="flow-node flow-node-output" data-node="delivery">
+                  <span class="node-kicker">输出节点</span>
+                  <strong>交付包导出</strong>
+                  <p>配置导出目录、文件结构、manifest 和导出格式。</p>
+                </button>
+              </section>
+            </main>
+
+            <aside class="ai-panel orchestration-ai-panel">
+              <div class="flow-chat-view" id="flow-chat-view">
+                <div class="conversation" id="flow-conversation">
+                  <article class="message ai">
+                    <span class="message-role">AI</span>
+                    <p>建议先把“需求分析员”的输入要求和输出工件格式补完整，再继续加下游节点。</p>
+                  </article>
+                </div>
+
+                <div class="composer-box">
+                  <div class="composer-input">例如：“把需求分析员节点输出改成 PRD 草稿 + 风险清单，并要求 Markdown 表格格式。”</div>
+                  <div class="composer-row">
+                    <button type="button" class="ghost-action" data-screen-target="rules-center" data-rules-view-target="rules" data-rules-scope-target="node">节点规则</button>
+                    <span>已附带：<strong id="flow-composer-context">主流程</strong></span>
+                    <button type="button" class="primary-action small">发送</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flow-node-inspector-view hidden" id="flow-node-inspector-view">
+                <div class="flow-node-inspector-head">
+                  <div>
+                    <div class="panel-kicker" id="flow-node-inspector-kicker">节点配置</div>
+                    <strong id="flow-node-inspector-title">需求分析员</strong>
+                    <p id="flow-node-inspector-summary">聚合工作流语义、运行控制、治理审计和后续升级的核心配置。</p>
+                  </div>
+                  <button type="button" class="icon-button compact flow-node-inspector-close" data-close-flow-node-inspector aria-label="关闭节点配置" title="关闭节点配置">
+                    <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4.2 4.2 7.6 7.6"></path><path d="m11.8 4.2-7.6 7.6"></path></svg>
+                  </button>
+                </div>
+
+                <div class="flow-node-inspector-meta">
+                  <div class="context-card compact">
+                    <span>节点类型</span>
+                    <strong id="flow-node-inspector-type">角色节点</strong>
+                  </div>
+                  <div class="context-card compact">
+                    <span>当前绑定</span>
+                    <strong id="flow-node-inspector-binding">需求分析员 / requirement-analyst</strong>
+                  </div>
+                </div>
+
+                <div class="flow-node-layer-stack">
+                  <section class="flow-node-layer-card">
+                    <div class="flow-node-layer-head">
+                      <span>工作流层</span>
+                      <strong>节点、边与执行关系</strong>
+                    </div>
+                    <p id="flow-node-layer-workflow">定义节点输入输出、分支、并行、循环、子流程与任务/Agent 绑定。</p>
+                  </section>
+
+                  <section class="flow-node-layer-card">
+                    <div class="flow-node-layer-head">
+                      <span>运行控制层</span>
+                      <strong>暂停、恢复与重试</strong>
+                    </div>
+                    <p id="flow-node-layer-runtime">配置 checkpoint、安全暂停边界、失败重试、人工确认和局部重跑入口。</p>
+                  </section>
+
+                  <section class="flow-node-layer-card">
+                    <div class="flow-node-layer-head">
+                      <span>治理审计层</span>
+                      <strong>权限、安全与证据</strong>
+                    </div>
+                    <p id="flow-node-layer-governance">记录权限边界、依赖校验、审批链、运行证据和模型/Skill 命中信息。</p>
+                  </section>
+
+                  <section class="flow-node-layer-card">
+                    <div class="flow-node-layer-head">
+                      <span>演进升级层</span>
+                      <strong>版本迁移与资产晋升</strong>
+                    </div>
+                    <p id="flow-node-layer-evolution">维护 role / skill / task / workflow 的迁移、候选脚本晋升和依赖更新策略。</p>
+                  </section>
+                </div>
+
+                <div class="flow-node-inspector-actions">
+                  <button type="button" class="ghost-action" data-screen-target="rules-center" data-rules-view-target="rules" data-rules-scope-target="node">节点规则</button>
+                  <button type="button" class="ghost-action" data-open-drawer="rule-hit-drawer">规则命中栈</button>
+                  <button type="button" class="primary-action small">保存节点配置</button>
+                </div>
+              </div>
+            </aside>
+
+            <div class="session-rail workbench-session-rail orchestration-session-rail" data-session-layout="expanded">
+              <div class="session-group-stack orchestration-session-stack">
+                <button type="button" class="session-button active" data-flow-session="flow-main" aria-label="Main flow session" title="Main flow session">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 4.2h9.6"></path><path d="M3.2 8h9.6"></path><path d="M3.2 11.8h6.4"></path></svg>
+                </button>
+                <button type="button" class="session-button" data-flow-session="flow-review" aria-label="Review flow session" title="Review flow session">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2.8 12 4.2v3.6c0 2.2-1.4 4.2-4 5.4-2.6-1.2-4-3.2-4-5.4V4.2z"></path><path d="m6.2 8 1.2 1.2 2.4-2.6"></path></svg>
+                </button>
+                <button type="button" class="session-button" data-flow-session="flow-output" aria-label="Output flow session" title="Output flow session">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 5.4 8 3l5 2.4v5.2L8 13l-5-2.4z"></path><path d="M8 3v10"></path><path d="M3 5.4 8 8l5-2.6"></path></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <div class="modal-scrim hidden" id="prototype-scrim"></div>
+
+        <section class="config-modal command-palette-modal hidden" id="command-palette-modal">
+      <div class="modal-head">
+        <div>
+          <div class="panel-kicker">Command Palette</div>
+          <h4>命令面板</h4>
+        </div>
+        <button type="button" class="mini-ghost" data-close-layer="command-palette-modal">关闭</button>
+      </div>
+      <div class="command-search">输入动作、页面、文档或资源名称</div>
+      <div class="overlay-list command-list">
+        <button type="button" class="overlay-item" data-screen-target="workbench">
+          <strong>打开主工作台</strong>
+          <span>回到当前项目和文档工作面</span>
+        </button>
+        <button type="button" class="overlay-item" data-screen-target="orchestration" data-flow-context-target="project">
+          <strong>打开编排页</strong>
+          <span>进入当前 Flow 画布和节点配置路径</span>
+        </button>
+        <button type="button" class="overlay-item" data-screen-target="thinking-chain">
+          <strong>打开思路地图</strong>
+          <span>查看当前会话的思路结构、探索方向与文档落点</span>
+        </button>
+        <button type="button" class="overlay-item" data-screen-target="resource-center">
+          <strong>打开资源中心</strong>
+          <span>查看技能、模板、角色包和下载入口</span>
+        </button>
+        <button type="button" class="overlay-item" data-screen-target="rules-center" data-rules-view-target="rules" data-rules-scope-target="project">
+          <strong>打开规则与沉淀中心</strong>
+          <span>查看全局规则、工程规则、节点规则、个人沉淀和知识网络。</span>
+        </button>
+        <button type="button" class="overlay-item" data-open-drawer="task-drawer">
+          <strong>打开任务抽屉</strong>
+          <span>查看阶段任务、阻塞、输出契约和下一步</span>
+        </button>
+      </div>
+    </section>
+
+        <aside class="surface-drawer hidden" id="task-drawer">
+      <div class="drawer-head">
+        <div>
+          <div class="panel-kicker">Stage / Task Drawer</div>
+          <h4>阶段与任务抽屉</h4>
+        </div>
+        <button type="button" class="mini-ghost" data-close-layer="task-drawer">关闭</button>
+      </div>
+      <div class="drawer-section">
+        <span class="panel-kicker">当前阶段</span>
+        <div class="drawer-highlight-card">
+          <strong>需求</strong>
+          <p>目标是收敛边界、验收标准和开放问题，并把结构化文档补完整。</p>
+        </div>
+      </div>
+      <div class="drawer-section">
+        <span class="panel-kicker">阶段任务</span>
+        <div class="overlay-list">
+          <div class="overlay-item static">
+            <strong>收敛欢迎页与工作台信息架构</strong>
+            <span>状态：已完成</span>
+          </div>
+          <div class="overlay-item static">
+            <strong>补完所有原型页和系统层</strong>
+            <span>状态：进行中</span>
+          </div>
+          <div class="overlay-item static">
+            <strong>回写 Electron 运行时</strong>
+            <span>状态：待开始</span>
+          </div>
+        </div>
+      </div>
+      <div class="drawer-section">
+        <span class="panel-kicker">阻塞与输出</span>
+        <div class="drawer-stats-grid">
+          <div class="detail-meta-card">
+            <span>Guard</span>
+            <strong>输出契约 2 项待补</strong>
+          </div>
+          <div class="detail-meta-card">
+            <span>风险</span>
+            <strong>画布菜单与节点菜单仍待落地到运行时</strong>
+          </div>
+        </div>
+      </div>
+      <div class="drawer-actions">
+        <button type="button" class="ghost-action" data-screen-target="orchestration" data-flow-context-target="project">查看编排页</button>
+        <button type="button" class="primary-action small">标记本阶段完成</button>
+      </div>
+    </aside>
+
+        <aside class="surface-drawer hidden" id="document-actions-drawer">
+      <div class="drawer-head">
+        <div>
+          <div class="panel-kicker">Document Actions</div>
+          <h4>文档更多动作</h4>
+        </div>
+        <button type="button" class="mini-ghost" data-close-layer="document-actions-drawer">关闭</button>
+      </div>
+      <div class="overlay-list">
+        <button type="button" class="overlay-item">
+          <strong>文档保护与快照</strong>
+          <span>查看最近快照、待合并写回和手动回滚入口。</span>
+        </button>
+        <button type="button" class="overlay-item">
+          <strong>插入工件链接</strong>
+          <span>把流程图、表格或导出映射写成稳定 Markdown 引用。</span>
+        </button>
+        <button type="button" class="overlay-item">
+          <strong>插入工件嵌入</strong>
+          <span>在正文内嵌流程图、表格工件或图像预览。</span>
+        </button>
+        <button type="button" class="overlay-item">
+          <strong>检查外部变更</strong>
+          <span>手动检测文件是否被外部编辑器、Git 或导入流程改写。</span>
+        </button>
+        <button type="button" class="overlay-item">
+          <strong>在新窗口打开</strong>
+          <span>把当前文档拉到独立窗口，保留工作台上下文。</span>
+        </button>
+      </div>
+      <div class="drawer-stats-grid">
+        <div class="detail-meta-card">
+          <span>当前文档</span>
+          <strong>01-需求基线.md</strong>
+        </div>
+        <div class="detail-meta-card">
+          <span>自动保存</span>
+          <strong>已开启</strong>
+        </div>
+      </div>
+      <div class="drawer-actions">
+        <button type="button" class="ghost-action" data-open-drawer="ai-context-drawer">查看 AI 上下文</button>
+        <button type="button" class="primary-action small">保持当前层级</button>
+      </div>
+    </aside>
+
+        <aside class="surface-drawer hidden" id="ai-context-drawer">
+      <div class="drawer-head">
+        <div>
+          <div class="panel-kicker">AI Context</div>
+          <h4>当前 AI 上下文</h4>
+        </div>
+        <button type="button" class="mini-ghost" data-close-layer="ai-context-drawer">关闭</button>
+      </div>
+      <div class="drawer-section">
+        <span class="panel-kicker">命中文档</span>
+        <div class="overlay-list">
+          <div class="overlay-item static">
+            <strong>01-需求基线.md</strong>
+            <span>主文档 · 当前编辑对象</span>
+          </div>
+          <div class="overlay-item static">
+            <strong>软件工厂主流程</strong>
+            <span>反向引用 · 作为上下游流程背景</span>
+          </div>
+          <div class="overlay-item static">
+            <strong>review.md</strong>
+            <span>审查记录 · 作为当前审查约束</span>
+          </div>
+        </div>
+      </div>
+      <div class="drawer-section">
+        <span class="panel-kicker">命中技能</span>
+        <div class="drawer-stats-grid">
+          <div class="detail-meta-card">
+            <span>主 Skill</span>
+            <strong>Requirements · Review</strong>
+          </div>
+          <div class="detail-meta-card">
+            <span>作用域</span>
+            <strong>项目 / 当前会话</strong>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+        <aside class="surface-drawer hidden" id="template-detail-drawer">
+      <div class="drawer-head">
+        <div>
+          <div class="panel-kicker">Template Detail</div>
+          <h4>模板扩展详情</h4>
+        </div>
+        <button type="button" class="mini-ghost" data-close-layer="template-detail-drawer">关闭</button>
+      </div>
+      <div class="drawer-section">
+        <span class="panel-kicker">目录结构</span>
+        <div class="overlay-list">
+          <div class="overlay-item static">
+            <strong>docs /</strong>
+            <span>需求、设计、评审与交付文档。</span>
+          </div>
+          <div class="overlay-item static">
+            <strong>assets /</strong>
+            <span>导出映射、模板工件与清单</span>
+          </div>
+          <div class="overlay-item static">
+            <strong>exports /</strong>
+            <span>交付包、manifest 与压缩产物</span>
+          </div>
+        </div>
+      </div>
+      <div class="drawer-section">
+        <span class="panel-kicker">角色与能力</span>
+        <div class="overlay-list">
+          <div class="overlay-item static">
+            <strong>需求分析员</strong>
+            <span>负责输入清洗、需求拆解和 PRD 草稿</span>
+          </div>
+          <div class="overlay-item static">
+            <strong>审查官</strong>
+            <span>负责问题收敛、冲突提示和证据化输出</span>
+          </div>
+          <div class="overlay-item static">
+            <strong>交付编排官</strong>
+            <span>负责目录映射、manifest 与最终导出</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+        <section class="config-modal hidden" id="directory-picker-modal">
+      <div class="modal-head">
+        <div>
+          <div class="panel-kicker">Directory Picker</div>
+          <h4>目录选择器</h4>
+        </div>
+        <button type="button" class="mini-ghost" data-close-layer="directory-picker-modal">关闭</button>
+      </div>
+      <div class="modal-grid">
+        <div class="modal-card">
+          <span>当前目录</span>
+          <strong>E:\projects\ai-knowledge-foundation</strong>
+          <p>建议为新工程创建独立文件夹，避免和已有仓库混用。</p>
+        </div>
+        <div class="modal-card">
+          <span>目录策略</span>
+          <strong>创建新文件夹 / 使用已有目录</strong>
+          <p>深层动作不与“创建工程”争夺首屏注意力，只在这里配置。</p>
+        </div>
+        <div class="modal-card wide">
+          <span>最近使用目录</span>
+          <strong>E:\projects\workspace · E:\deliveries · D:\drafts</strong>
+          <p>这里可以直接点选最近目录，也可以浏览系统目录树。</p>
+        </div>
+      </div>
+    </section>
+
+        <section class="config-modal hidden" id="template-transfer-modal">
+      <div class="modal-head">
+        <div>
+          <div class="panel-kicker">Import / Download</div>
+          <h4>模板导入与下载</h4>
+        </div>
+        <button type="button" class="mini-ghost" data-close-layer="template-transfer-modal">关闭</button>
+      </div>
+      <div class="modal-grid">
+        <div class="modal-card">
+          <span>从目录导入</span>
+          <strong>模板目录 / 技能包 / 角色包</strong>
+          <p>适合本地团队模板、私有技能和可复用角色集。</p>
+        </div>
+        <div class="modal-card">
+          <span>从网络下载</span>
+          <strong>官方模板库 / 第三方资源</strong>
+          <p>下载动作属于深层入口，必须在确认来源和版本后再安装。</p>
+        </div>
+        <div class="modal-card wide">
+          <span>来源校验</span>
+          <strong>发布者 / 版本 / 权限范围 / 兼容平台</strong>
+          <p>导入或下载前先在这里展示风险和依赖，不让资源在首层直接进入工程。</p>
+        </div>
+      </div>
+    </section>
+
+        <section class="config-modal hidden" id="resource-transfer-modal">
+      <div class="modal-head">
+        <div>
+          <div class="panel-kicker">Resource Import</div>
+          <h4>资源导入与下载</h4>
+        </div>
+        <button type="button" class="mini-ghost" data-close-layer="resource-transfer-modal">关闭</button>
+      </div>
+      <div class="modal-grid">
+        <div class="modal-card">
+          <span>资源类型</span>
+          <strong>技能 / 模板 / 角色包 / 连接器</strong>
+          <p>导入时先选资源类型，再做来源和作用域配置。</p>
+        </div>
+        <div class="modal-card">
+          <span>安装策略</span>
+          <strong>全局 / 当前工程 / 当前会话</strong>
+          <p>高级用户能控制作用域，小白默认只看到安全的推荐路径。</p>
+        </div>
+        <div class="modal-card wide">
+          <span>兼容检查</span>
+          <strong>Provider 标签 / 平台 / 所需权限 / 依赖资源</strong>
+          <p>安装前先展示健康状况和风险提示，避免下载后才发现不可用。</p>
+        </div>
+      </div>
+    </section>
+
+        <aside class="surface-drawer hidden" id="resource-scope-drawer">
+      <div class="drawer-head">
+        <div>
+          <div class="panel-kicker">Scope Setting</div>
+          <h4>作用域设置</h4>
+        </div>
+        <button type="button" class="mini-ghost" data-close-layer="resource-scope-drawer">关闭</button>
+      </div>
+      <div class="overlay-list">
+        <div class="overlay-item static">
+          <strong>全局启用</strong>
+          <span>对所有工程和会话可见，适合基础能力与公共模板。</span>
+        </div>
+        <div class="overlay-item static">
+          <strong>仅当前工程</strong>
+          <span>适合项目私有角色、流程模板和交付技能。</span>
+        </div>
+        <div class="overlay-item static">
+          <strong>仅当前会话</strong>
+          <span>适合试用能力或一次性审查任务。</span>
+        </div>
+      </div>
+    </aside>
+
+        <aside class="surface-drawer hidden" id="resource-health-drawer">
+      <div class="drawer-head">
+        <div>
+          <div class="panel-kicker">Health Check</div>
+          <h4>资源健康检查</h4>
+        </div>
+        <button type="button" class="mini-ghost" data-close-layer="resource-health-drawer">关闭</button>
+      </div>
+      <div class="drawer-section">
+        <div class="drawer-stats-grid">
+          <div class="detail-meta-card">
+            <span>来源</span>
+            <strong>可信</strong>
+          </div>
+          <div class="detail-meta-card">
+            <span>模型兼容</span>
+            <strong>GPT / Ollama</strong>
+          </div>
+          <div class="detail-meta-card">
+            <span>最近诊断</span>
+            <strong>已通过</strong>
+          </div>
+          <div class="detail-meta-card">
+            <span>权限边界</span>
+            <strong>未越界</strong>
+          </div>
+        </div>
+      </div>
+      <div class="drawer-section">
+        <div class="overlay-list">
+          <div class="overlay-item static">
+            <strong>依赖存在</strong>
+            <span>已找到 review 模板、结构化提示和修复规则。</span>
+          </div>
+          <div class="overlay-item static">
+            <strong>最近报警</strong>
+            <span>无阻塞错误，最近 7 次调用全部成功。</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <aside class="surface-drawer hidden" id="rule-hit-drawer">
+      <div class="drawer-head">
+        <div>
+          <div class="panel-kicker">Rule Hit Stack</div>
+          <h4>规则命中栈</h4>
+        </div>
+        <button type="button" class="mini-ghost" data-close-layer="rule-hit-drawer">关闭</button>
+      </div>
+      <div class="drawer-stats-grid">
+        <div class="detail-meta-card">
+          <span>当前命中</span>
+          <strong>工程规则 2 条</strong>
+        </div>
+        <div class="detail-meta-card">
+          <span>覆盖来源</span>
+          <strong>节点规则 1 条</strong>
+        </div>
+        <div class="detail-meta-card">
+          <span>未命中</span>
+          <strong>全局规则 1 条</strong>
+        </div>
+        <div class="detail-meta-card">
+          <span>解释状态</span>
+          <strong>可追溯</strong>
+        </div>
+      </div>
+      <div class="overlay-list">
+        <div class="overlay-item static">
+          <strong>1. 全局规则：引用与证据守卫</strong>
+          <span>命中成功，但未被覆盖。继续作为所有输出的安全底线。</span>
+        </div>
+        <div class="overlay-item static">
+          <strong>2. 工程规则：AI 知识底座升级交付契约</strong>
+          <span>命中文档、会话和导出目录，补充当前工程的输出结构与来源边界。</span>
+        </div>
+        <div class="overlay-item static">
+          <strong>3. 节点规则：需求分析员输出要求</strong>
+          <span>覆盖工程级的同维度输出格式，但不会抹掉全局安全和引用守卫。</span>
+        </div>
+      </div>
+      <div class="drawer-actions">
+        <button type="button" class="ghost-action" data-open-modal="conflict-detail-modal">查看冲突详情</button>
+        <button type="button" class="primary-action small" data-screen-target="rules-center" data-rules-view-target="rules" data-rules-scope-target="node">打开节点规则</button>
+      </div>
+    </aside>
+
+    <aside class="surface-drawer hidden" id="knowledge-path-drawer">
+      <div class="drawer-head">
+        <div>
+          <div class="panel-kicker">Knowledge Path</div>
+          <h4>知识路径与 RAG 解释</h4>
+        </div>
+        <button type="button" class="mini-ghost" data-close-layer="knowledge-path-drawer">关闭</button>
+      </div>
+      <div class="overlay-list">
+        <div class="overlay-item static">
+          <strong>问题 → 证据</strong>
+          <span>从“输出目录必须稳定”回溯到 review.md、导出映射和最近一次运行记录。</span>
+        </div>
+        <div class="overlay-item static">
+          <strong>证据 → 规则</strong>
+          <span>把重复出现的问题提升为工程规则，再决定是否上升为全局规则或 Skill。</span>
+        </div>
+        <div class="overlay-item static">
+          <strong>规则 → 节点 / 文档 / Skill</strong>
+          <span>大工程下不只连文档，还要把 Flow、规则、Skill、沉淀条目和运行记录一起编进网络。</span>
+        </div>
+      </div>
+      <div class="drawer-stats-grid">
+        <div class="detail-meta-card">
+          <span>图谱范围</span>
+          <strong>文档 / Flow / Rule / Skill / 沉淀</strong>
+        </div>
+        <div class="detail-meta-card">
+          <span>最近重建</span>
+          <strong>2026-04-13 16:20</strong>
+        </div>
+      </div>
+      <div class="drawer-actions">
+        <button type="button" class="ghost-action" data-screen-target="rules-center" data-rules-view-target="graph" data-rules-scope-target="project">打开知识网络</button>
+        <button type="button" class="primary-action small" data-open-modal="governance-transfer-modal">导出网络快照</button>
+      </div>
+    </aside>
+
+        <section class="config-modal hidden" id="resource-delete-modal">
+      <div class="modal-head">
+        <div>
+          <div class="panel-kicker">Confirm Delete</div>
+          <h4>删除资源确认</h4>
+        </div>
+        <button type="button" class="mini-ghost" data-close-layer="resource-delete-modal">关闭</button>
+      </div>
+      <div class="modal-grid">
+        <div class="modal-card wide">
+          <span>即将删除</span>
+          <strong>Requirements · Review</strong>
+          <p>删除后，依赖该 Skill 的项目和会话会失去能力绑定。建议先禁用，再决定是否删除。</p>
+        </div>
+      </div>
+      <div class="drawer-actions">
+        <button type="button" class="ghost-action" data-close-layer="resource-delete-modal">取消</button>
+        <button type="button" class="primary-action small">确认删除</button>
+      </div>
+    </section>
+
+        <aside class="surface-drawer hidden" id="settings-diagnostics-drawer">
+      <div class="drawer-head">
+        <div>
+          <div class="panel-kicker">Model Diagnostics</div>
+          <h4>模型诊断</h4>
+        </div>
+        <button type="button" class="mini-ghost" data-close-layer="settings-diagnostics-drawer">关闭</button>
+      </div>
+      <div class="drawer-stats-grid">
+        <div class="detail-meta-card">
+          <span>连接</span>
+          <strong>120ms</strong>
+        </div>
+        <div class="detail-meta-card">
+          <span>响应</span>
+          <strong>成功</strong>
+        </div>
+        <div class="detail-meta-card">
+          <span>结构化输出</span>
+          <strong>支持</strong>
+        </div>
+        <div class="detail-meta-card">
+          <span>长上下文</span>
+          <strong>已启用</strong>
+        </div>
+      </div>
+      <div class="overlay-list">
+        <div class="overlay-item static">
+          <strong>最近一次测试</strong>
+          <span>模型返回正常，JSON 修复规则命中 0 次。</span>
+        </div>
+        <div class="overlay-item static">
+          <strong>推荐动作</strong>
+          <span>保持 qwen3:8b 作为审查模型，并单独设置高成本模型用于长文推理。</span>
+        </div>
+      </div>
+      <div class="drawer-actions">
+        <button type="button" class="ghost-action" data-open-modal="error-detail-modal">查看错误详情</button>
+        <button type="button" class="primary-action small">重新诊断</button>
+      </div>
+    </aside>
+
+        <aside class="surface-drawer hidden" id="settings-help-drawer">
+      <div class="drawer-head">
+        <div>
+          <div class="panel-kicker">Help / Logs</div>
+          <h4>帮助与日志</h4>
+        </div>
+        <button type="button" class="mini-ghost" data-close-layer="settings-help-drawer">关闭</button>
+      </div>
+      <div class="overlay-list">
+        <div class="overlay-item static">
+          <strong>帮助中心</strong>
+          <span>快捷键、Provider 配置、导入安装和输出目录说明</span>
+        </div>
+        <div class="overlay-item static">
+          <strong>诊断日志</strong>
+          <span>模型连接、安装历史、资源启用记录和错误详情</span>
+        </div>
+        <div class="overlay-item static">
+          <strong>安全与证据</strong>
+          <span>记录资源来源、授权范围和运行时审计线索</span>
+        </div>
+      </div>
+    </aside>
+
+    <section class="config-modal hidden" id="settings-delete-modal">
+      <div class="modal-head">
+        <div>
+          <div class="panel-kicker">Confirm Delete</div>
+          <h4>删除模型配置</h4>
+        </div>
+        <button type="button" class="mini-ghost" data-close-layer="settings-delete-modal">关闭</button>
+      </div>
+      <div class="modal-grid">
+        <div class="modal-card wide">
+          <span>配置名称</span>
+          <strong>Ollama · qwen3</strong>
+          <p>删除后，依赖该配置的对话和资源将无法继续使用当前 Provider。若只是暂停，建议改为禁用。</p>
+        </div>
+      </div>
+      <div class="drawer-actions">
+        <button type="button" class="ghost-action" data-close-layer="settings-delete-modal">取消</button>
+        <button type="button" class="primary-action small">确认删除</button>
+      </div>
+    </section>
+
+    <section class="config-modal hidden" id="welcome-manage-modal">
+      <div class="modal-head">
+        <div>
+          <div class="panel-kicker" id="welcome-manage-kicker">最近工程</div>
+          <h4 id="welcome-manage-title">确认从最近移除</h4>
+        </div>
+        <button type="button" class="mini-ghost" data-close-layer="welcome-manage-modal">关闭</button>
+      </div>
+      <div class="modal-grid">
+        <div class="modal-card wide">
+          <span id="welcome-manage-entry-type">项目名称</span>
+          <strong id="welcome-manage-entry-name">AI 知识底座升级</strong>
+          <p id="welcome-manage-copy">仅从欢迎页的最近工程列表移除，不删除项目目录。</p>
+        </div>
+      </div>
+      <div class="drawer-actions">
+        <button type="button" class="ghost-action" data-close-layer="welcome-manage-modal">取消</button>
+        <button type="button" class="primary-action small" id="welcome-manage-primary" data-close-layer="welcome-manage-modal">确认从最近移除</button>
+      </div>
+    </section>
+
+        <section class="config-modal hidden" id="error-detail-modal">
+      <div class="modal-head">
+        <div>
+          <div class="panel-kicker">Error Detail</div>
+          <h4>错误详情</h4>
+        </div>
+        <button type="button" class="mini-ghost" data-close-layer="error-detail-modal">关闭</button>
+      </div>
+      <div class="modal-grid">
+        <div class="modal-card">
+          <span>错误来源</span>
+          <strong>Ollama / qwen3:8b</strong>
+          <p>最近一次失败出现在结构化输出修复阶段，原始响应包含未闭合 JSON。</p>
+        </div>
+        <div class="modal-card">
+          <span>发生时间</span>
+          <strong>2026-04-12 23:44</strong>
+          <p>已被自动重试 1 次，第二次成功，因此当前状态仍显示连接正常。</p>
+        </div>
+        <div class="modal-card wide">
+          <span>建议处理</span>
+          <strong>缩短输出长度 / 降低同时任务数 / 启用结构化修复策略</strong>
+          <p>这里应该同时给出重试按钮、错误日志链接和相关会话/资源的回溯入口。</p>
+        </div>
+      </div>
+    </section>
+
+        <section class="config-modal hidden" id="flow-transfer-modal">
+      <div class="modal-head">
+        <div>
+          <div class="panel-kicker">Flow Import</div>
+          <h4>导入已有流程</h4>
+        </div>
+        <button type="button" class="mini-ghost" data-close-layer="flow-transfer-modal">关闭</button>
+      </div>
+      <div class="modal-grid">
+        <div class="modal-card">
+          <span>来源</span>
+          <strong>本地模板 / 工程内 Flow / 网络下载</strong>
+          <p>从历史草稿、已保存模板或官方资源库中选择流程。</p>
+        </div>
+        <div class="modal-card">
+          <span>导入模式</span>
+          <strong>覆盖当前草稿 / 合并为子流程</strong>
+          <p>保留当前上下文时，推荐合并为子流程，不直接覆盖。</p>
+        </div>
+        <div class="modal-card wide">
+          <span>冲突提示</span>
+          <strong>节点命名、角色绑定、输出目录和模板版本可能冲突</strong>
+          <p>原型里把冲突检查单独拉出来，避免导入后再让用户猜哪里不一致。</p>
+        </div>
+      </div>
+      <div class="drawer-actions">
+        <button type="button" class="ghost-action" data-open-modal="conflict-detail-modal">查看冲突样例</button>
+        <button type="button" class="primary-action small">开始导入</button>
+      </div>
+    </section>
+
+    <section class="config-modal hidden" id="governance-transfer-modal">
+      <div class="modal-head">
+        <div>
+          <div class="panel-kicker">Governance Transfer</div>
+          <h4>规则、沉淀与图谱快照</h4>
+        </div>
+        <button type="button" class="mini-ghost" data-close-layer="governance-transfer-modal">关闭</button>
+      </div>
+      <div class="modal-tabs">
+        <span class="mini-tag active">规则</span>
+        <span class="mini-tag">沉淀</span>
+        <span class="mini-tag">图谱快照</span>
+      </div>
+      <div class="modal-grid">
+        <div class="modal-card">
+          <span>导入来源</span>
+          <strong>本地文件 / 旧工程 / 规则包目录</strong>
+          <p>允许把独立保存的规则、个人沉淀或图谱快照重新接回当前工作区。</p>
+        </div>
+        <div class="modal-card">
+          <span>导出对象</span>
+          <strong>全局规则 / 工程规则 / 节点规则 / 沉淀条目</strong>
+          <p>当前页面支持把条目单独导出成本地文件，不要求先打包整个工程。</p>
+        </div>
+        <div class="modal-card wide">
+          <span>兼容约束</span>
+          <strong>作用域、依赖 Skill、引用路径和命中优先级都需要一起导出</strong>
+          <p>导出不能只丢正文内容，必须保留作用域信息、依赖对象和回溯证据，否则另一个环境无法正确重建命中语义。</p>
+        </div>
+      </div>
+      <div class="drawer-actions">
+        <button type="button" class="ghost-action" data-close-layer="governance-transfer-modal">取消</button>
+        <button type="button" class="primary-action small">开始导入 / 导出</button>
+      </div>
+    </section>
+
+    <section class="config-modal hidden" id="distillation-promote-modal">
+      <div class="modal-head">
+        <div>
+          <div class="panel-kicker">Promote Distillation</div>
+          <h4>沉淀提升与回写</h4>
+        </div>
+        <button type="button" class="mini-ghost" data-close-layer="distillation-promote-modal">关闭</button>
+      </div>
+      <div class="modal-grid">
+        <div class="modal-card">
+          <span>当前条目</span>
+          <strong>Flow 与工程解绑调整</strong>
+          <p>来自本次 UI 调整过程中的问题与解决方案，已经整理成工程沉淀条目。</p>
+        </div>
+        <div class="modal-card">
+          <span>提升目标</span>
+          <strong>规则 / Skill / 工程知识文档</strong>
+          <p>不是所有沉淀都升成规则；可复用流程升 Skill，边界与约束升规则，解释性内容落文档。</p>
+        </div>
+        <div class="modal-card wide">
+          <span>回写位置</span>
+          <strong>全局规则库、当前工程规则库、节点规则或工程内知识库</strong>
+          <p>提升时必须明确作用域与保存位置，避免把临时经验错误地提升为全局强约束。</p>
+        </div>
+      </div>
+      <div class="drawer-actions">
+        <button type="button" class="ghost-action" data-screen-target="rules-center" data-rules-view-target="distillation" data-rules-scope-target="project">回到沉淀中心</button>
+        <button type="button" class="primary-action small">确认提升</button>
+      </div>
+    </section>
+
+        <section class="config-modal hidden" id="conflict-detail-modal">
+      <div class="modal-head">
+        <div>
+          <div class="panel-kicker">Conflict Detail</div>
+          <h4>导入冲突详情</h4>
+        </div>
+        <button type="button" class="mini-ghost" data-close-layer="conflict-detail-modal">关闭</button>
+      </div>
+      <div class="modal-grid">
+        <div class="modal-card">
+          <span>节点命名冲突</span>
+          <strong>“交付包导出”已存在于当前主流程</strong>
+          <p>建议重命名为“交付包导出-模板版”或作为子流程挂入。</p>
+        </div>
+        <div class="modal-card">
+          <span>输出目录冲突</span>
+          <strong>exports/manifest 与当前项目映射重叠</strong>
+          <p>需要决定是覆盖、合并目录还是写入新的命名空间。</p>
+        </div>
+        <div class="modal-card wide">
+          <span>角色绑定冲突</span>
+          <strong>导入模板引用了缺失的“交付编排官-v2”角色包</strong>
+          <p>可以临时映射到现有角色、一起导入角色包，或在导入后重新绑定。</p>
+        </div>
+      </div>
+    </section>
+
+        <section class="config-modal role-modal hidden" id="role-modal">
+      <div class="modal-head">
+        <div>
+          <div class="panel-kicker">创建角色</div>
+          <h4>新角色：交付编排官</h4>
+        </div>
+        <button type="button" class="mini-ghost" data-close-layer="role-modal">关闭</button>
+      </div>
+
+      <div class="modal-grid">
+        <div class="modal-card">
+          <span>角色定位</span>
+          <strong>统一审查输出质量与目录结构</strong>
+          <p>角色目标、边界和职责拆分放在独立角色弹层里，不堆回节点卡片本体。</p>
+        </div>
+        <div class="modal-card">
+          <span>默认 Skill</span>
+          <strong>review / export / consistency</strong>
+          <p>可绑定默认 Skill 包、连接器权限和工具调用策略。</p>
+        </div>
+        <div class="modal-card wide">
+          <span>交付要求</span>
+          <strong>输出 Markdown、manifest、目录映射、命名规范、失败回退策略</strong>
+          <p>角色创建后可被多个节点复用，而不是每个节点重复配置同样的规则。</p>
+        </div>
+      </div>
+    </section>
+
+        <section class="context-menu-popover hidden" id="canvas-menu">
+      <div class="context-menu-head">
+        <span class="panel-kicker">Canvas Menu</span>
+        <button type="button" class="mini-ghost" data-close-layer="canvas-menu">关闭</button>
+      </div>
+      <div class="overlay-list compact-overlay-list">
+        <button type="button" class="overlay-item">
+          <strong>添加角色节点</strong>
+          <span>进入节点配置弹窗再完成角色绑定</span>
+        </button>
+        <button type="button" class="overlay-item">
+          <strong>添加子流程卡片</strong>
+          <span>从当前流程直接拆出子流程入口</span>
+        </button>
+        <button type="button" class="overlay-item">
+          <strong>粘贴最近结果</strong>
+          <span>复用上一段流程和连线布局</span>
+        </button>
+      </div>
+    </section>
+
+        <section class="context-menu-popover hidden" id="node-menu">
+      <div class="context-menu-head">
+        <span class="panel-kicker">Node Menu</span>
+        <button type="button" class="mini-ghost" data-close-layer="node-menu">关闭</button>
+      </div>
+      <div class="overlay-list compact-overlay-list">
+        <button type="button" class="overlay-item" data-open-flow-node-inspector="current">
+          <strong>配置节点</strong>
+          <span>编辑角色、Skill、工件和输出要求</span>
+        </button>
+        <button type="button" class="overlay-item" data-screen-target="rules-center" data-rules-view-target="rules" data-rules-scope-target="node">
+          <strong>管理节点规则</strong>
+          <span>查看节点覆盖的规则、冲突提示和命中顺序。</span>
+        </button>
+        <button type="button" class="overlay-item">
+          <strong>进入子流程</strong>
+          <span>从当前卡片直接钻入下一级流程</span>
+        </button>
+        <button type="button" class="overlay-item">
+          <strong>复制节点</strong>
+          <span>保留输入输出契约和角色绑定</span>
+        </button>
+        <button type="button" class="overlay-item">
+          <strong>删除节点</strong>
+          <span>删除前显示受影响连线和下游节点</span>
+        </button>
+      </div>
+    </section>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

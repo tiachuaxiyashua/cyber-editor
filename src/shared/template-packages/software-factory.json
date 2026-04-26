@@ -1,0 +1,780 @@
+{
+  "definition": {
+    "id": "software-factory",
+    "name": "软件工厂",
+    "shortDescription": "从想法到需求、方案和 OpenSpec 交付。",
+    "description": "面向软件需求梳理、方案设计、OpenSpec 交付与测试规划的默认模板。",
+    "icon": "workflow",
+    "category": "product",
+    "source": "builtin",
+    "starterPrompt": "请用一句话描述你想做的软件，它要解决什么问题。",
+    "requirementDocName": "01-原始需求.md"
+  },
+  "platform": {
+    "flows": [
+      {
+        "id": "sf-flow-main",
+        "kind": "flow",
+        "name": "软件工厂主流程",
+        "description": "从原始需求到 OpenSpec 的默认流程。",
+        "createdAt": "2026-04-07T00:00:00.000Z",
+        "updatedAt": "2026-04-07T00:00:00.000Z",
+        "nodes": [
+          {
+            "id": "sf-main-start",
+            "type": "start",
+            "position": {
+              "x": 80,
+              "y": 120
+            },
+            "data": {
+              "label": "开始"
+            }
+          },
+          {
+            "id": "sf-main-discover",
+            "type": "agent",
+            "position": {
+              "x": 280,
+              "y": 120
+            },
+            "data": {
+              "label": "需求梳理",
+              "description": "从一句话目标出发，补齐基础上下文。",
+              "roleId": "sf-role-discover"
+            }
+          },
+          {
+            "id": "sf-main-plan",
+            "type": "agent",
+            "position": {
+              "x": 520,
+              "y": 120
+            },
+            "data": {
+              "label": "方案规划",
+              "description": "细化功能树、功能清单和方案文档。",
+              "roleId": "sf-role-plan"
+            }
+          },
+          {
+            "id": "sf-main-review",
+            "type": "subflow",
+            "position": {
+              "x": 760,
+              "y": 120
+            },
+            "data": {
+              "label": "红蓝审查",
+              "description": "运行红蓝军与裁判子流程。",
+              "subflowId": "sf-subflow-review"
+            }
+          },
+          {
+            "id": "sf-main-openspec",
+            "type": "artifact",
+            "position": {
+              "x": 980,
+              "y": 120
+            },
+            "data": {
+              "label": "OpenSpec 交付",
+              "description": "整理 proposal / design / tasks / specs。",
+              "artifactPath": "03-openspec/"
+            }
+          },
+          {
+            "id": "sf-main-end",
+            "type": "end",
+            "position": {
+              "x": 1180,
+              "y": 120
+            },
+            "data": {
+              "label": "完成"
+            }
+          }
+        ],
+        "edges": [
+          {
+            "id": "sf-edge-start-discover",
+            "source": "sf-main-start",
+            "target": "sf-main-discover",
+            "branch": "default",
+            "label": "下一步"
+          },
+          {
+            "id": "sf-edge-discover-plan",
+            "source": "sf-main-discover",
+            "target": "sf-main-plan",
+            "branch": "default",
+            "label": "下一步"
+          },
+          {
+            "id": "sf-edge-plan-review",
+            "source": "sf-main-plan",
+            "target": "sf-main-review",
+            "branch": "default",
+            "label": "下一步"
+          },
+          {
+            "id": "sf-edge-review-openspec",
+            "source": "sf-main-review",
+            "target": "sf-main-openspec",
+            "branch": "default",
+            "label": "下一步"
+          },
+          {
+            "id": "sf-edge-openspec-end",
+            "source": "sf-main-openspec",
+            "target": "sf-main-end",
+            "branch": "default",
+            "label": "下一步"
+          }
+        ]
+      }
+    ],
+    "subflows": [
+      {
+        "id": "sf-subflow-review",
+        "kind": "subflow",
+        "name": "红蓝对抗审查",
+        "description": "蓝军补强、红军攻击、裁判汇总的默认审查子流程。",
+        "createdAt": "2026-04-07T00:00:00.000Z",
+        "updatedAt": "2026-04-07T00:00:00.000Z",
+        "nodes": [
+          {
+            "id": "sf-review-start",
+            "type": "start",
+            "position": {
+              "x": 80,
+              "y": 140
+            },
+            "data": {
+              "label": "开始"
+            }
+          },
+          {
+            "id": "sf-review-blue",
+            "type": "agent",
+            "position": {
+              "x": 260,
+              "y": 140
+            },
+            "data": {
+              "label": "蓝军",
+              "description": "补强结构、清晰度和落地性。",
+              "roleId": "sf-role-blue"
+            }
+          },
+          {
+            "id": "sf-review-red",
+            "type": "agent",
+            "position": {
+              "x": 500,
+              "y": 140
+            },
+            "data": {
+              "label": "红军",
+              "description": "识别风险、漏洞和遗漏。",
+              "roleId": "sf-role-red"
+            }
+          },
+          {
+            "id": "sf-review-judge",
+            "type": "agent",
+            "position": {
+              "x": 740,
+              "y": 140
+            },
+            "data": {
+              "label": "裁判",
+              "description": "汇总双方意见并给出结论。",
+              "roleId": "sf-role-judge"
+            }
+          },
+          {
+            "id": "sf-review-end",
+            "type": "end",
+            "position": {
+              "x": 940,
+              "y": 140
+            },
+            "data": {
+              "label": "结束"
+            }
+          }
+        ],
+        "edges": [
+          {
+            "id": "sf-review-edge-start-blue",
+            "source": "sf-review-start",
+            "target": "sf-review-blue",
+            "branch": "default",
+            "label": "下一步"
+          },
+          {
+            "id": "sf-review-edge-blue-red",
+            "source": "sf-review-blue",
+            "target": "sf-review-red",
+            "branch": "default",
+            "label": "下一步"
+          },
+          {
+            "id": "sf-review-edge-red-judge",
+            "source": "sf-review-red",
+            "target": "sf-review-judge",
+            "branch": "default",
+            "label": "下一步"
+          },
+          {
+            "id": "sf-review-edge-judge-end",
+            "source": "sf-review-judge",
+            "target": "sf-review-end",
+            "branch": "default",
+            "label": "下一步"
+          }
+        ]
+      }
+    ],
+    "roles": [
+      {
+        "id": "sf-role-discover",
+        "name": "需求梳理员",
+        "description": "负责从一句话需求展开目标、限制与基础信息。",
+        "promptHint": "先问关键缺失信息，再整理为结构化需求。",
+        "allowedCapabilities": [
+          "read_artifact",
+          "write_artifact",
+          "browse_web"
+        ],
+        "outputSchema": "markdown-basic",
+        "modelPolicy": {
+          "mode": "fallback_to_active",
+          "preferredProfileIds": [],
+          "fallbackToActive": true,
+          "note": "优先使用当前激活模型配置。"
+        }
+      },
+      {
+        "id": "sf-role-plan",
+        "name": "方案规划员",
+        "description": "负责细化功能树、实现顺序与基础设施。",
+        "promptHint": "把需求拆成功能层级、基础设施和交付顺序。",
+        "allowedCapabilities": [
+          "read_artifact",
+          "write_artifact",
+          "browse_web"
+        ],
+        "outputSchema": "markdown-basic",
+        "modelPolicy": {
+          "mode": "fallback_to_active",
+          "preferredProfileIds": [],
+          "fallbackToActive": true,
+          "note": "优先使用当前激活模型配置。"
+        }
+      },
+      {
+        "id": "sf-role-red",
+        "name": "红军审查员",
+        "description": "负责攻击漏洞、边界条件与遗漏。",
+        "promptHint": "从风险、遗漏、反例角度审查当前输出。",
+        "allowedCapabilities": [
+          "read_artifact"
+        ],
+        "outputSchema": "review-issues",
+        "modelPolicy": {
+          "mode": "prefer_list",
+          "preferredProfileIds": [],
+          "fallbackToActive": true,
+          "requiredProviderCapabilities": [
+            "structured-output"
+          ],
+          "note": "优先选择结构化输出能力稳定的模型。"
+        }
+      },
+      {
+        "id": "sf-role-blue",
+        "name": "蓝军优化员",
+        "description": "负责补强结构、表达和可落地性。",
+        "promptHint": "在不偏离目标的前提下补强当前输出。",
+        "allowedCapabilities": [
+          "read_artifact"
+        ],
+        "outputSchema": "review-issues",
+        "modelPolicy": {
+          "mode": "fallback_to_active",
+          "preferredProfileIds": [],
+          "fallbackToActive": true,
+          "note": "使用当前激活模型配置。"
+        }
+      },
+      {
+        "id": "sf-role-judge",
+        "name": "裁判汇总员",
+        "description": "负责收敛红蓝意见，形成最终建议。",
+        "promptHint": "汇总冲突意见，给出采纳与驳回理由。",
+        "allowedCapabilities": [
+          "read_artifact",
+          "write_artifact"
+        ],
+        "outputSchema": "markdown-basic",
+        "modelPolicy": {
+          "mode": "prefer_list",
+          "preferredProfileIds": [],
+          "fallbackToActive": true,
+          "requiredProviderCapabilities": [
+            "structured-output"
+          ],
+          "note": "优先选择结构化输出能力稳定的模型。"
+        }
+      },
+      {
+        "id": "sf-role-openspec",
+        "name": "OpenSpec 输出员",
+        "description": "负责将已确认文档整理为 OpenSpec 交付。",
+        "promptHint": "按 proposal/design/tasks/spec 输出结构整理。",
+        "allowedCapabilities": [
+          "read_artifact",
+          "write_artifact",
+          "export_delivery"
+        ],
+        "outputSchema": "openspec-handoff",
+        "modelPolicy": {
+          "mode": "prefer_list",
+          "preferredProfileIds": [],
+          "fallbackToActive": true,
+          "requiredProviderCapabilities": [
+            "structured-output"
+          ],
+          "note": "优先使用结构化输出能力稳定的模型。"
+        }
+      }
+    ],
+    "taskTemplates": [
+      { "id": "sf-task-discover", "name": "需求发现", "objective": "整理目标、用户和限制信息。", "inputContract": {}, "outputContract": { "format": "markdown" }, "recommendedSkillIds": [], "requiredCapabilities": ["read_artifact", "write_artifact", "browse_web"] },
+      { "id": "sf-task-clarify", "name": "需求澄清", "objective": "补全约束、平台与体验要求。", "inputContract": {}, "outputContract": { "format": "markdown" }, "recommendedSkillIds": [], "requiredCapabilities": ["read_artifact", "write_artifact"] },
+      { "id": "sf-task-plan", "name": "方案规划", "objective": "拆成功能树、功能清单和技术方案。", "inputContract": {}, "outputContract": { "format": "markdown" }, "recommendedSkillIds": [], "requiredCapabilities": ["read_artifact", "write_artifact", "browse_web"] },
+      { "id": "sf-task-draft", "name": "实现草案", "objective": "输出实现方案、流程图和测试方案。", "inputContract": {}, "outputContract": { "format": "markdown" }, "recommendedSkillIds": [], "requiredCapabilities": ["read_artifact", "write_artifact"] },
+      { "id": "sf-task-review-stage", "name": "审查结论", "objective": "沉淀审查阶段最终结论。", "inputContract": {}, "outputContract": { "format": "markdown" }, "recommendedSkillIds": [], "requiredCapabilities": ["read_artifact", "write_artifact"] },
+      { "id": "sf-task-finalize", "name": "OpenSpec 整理", "objective": "整理最终交付与 OpenSpec 入口。", "inputContract": {}, "outputContract": { "format": "markdown" }, "recommendedSkillIds": [], "requiredCapabilities": ["read_artifact", "write_artifact", "export_delivery"] },
+      { "id": "sf-task-review-blue", "name": "蓝军审查", "objective": "补强结构、表达和可落地性。", "inputContract": {}, "outputContract": { "format": "markdown" }, "recommendedSkillIds": [], "requiredCapabilities": ["read_artifact"] },
+      { "id": "sf-task-review-red", "name": "红军审查", "objective": "识别风险、遗漏和反例。", "inputContract": {}, "outputContract": { "format": "markdown" }, "recommendedSkillIds": [], "requiredCapabilities": ["read_artifact"] },
+      { "id": "sf-task-review-judge", "name": "裁判汇总", "objective": "收敛蓝军和红军意见。", "inputContract": {}, "outputContract": { "format": "markdown" }, "recommendedSkillIds": [], "requiredCapabilities": ["read_artifact", "write_artifact"] }
+    ],
+    "agentProfiles": [
+      { "id": "sf-agent-discover", "name": "需求发现执行配置", "roleProfileId": "sf-role-discover", "defaultSkillBundle": [], "capabilityPolicy": { "allowedCapabilities": ["read_artifact", "write_artifact", "browse_web"] }, "modelPolicy": { "mode": "fallback_to_active", "preferredProfileIds": [], "fallbackToActive": true, "note": "优先使用当前激活模型配置。" }, "dependencySpec": [] },
+      { "id": "sf-agent-plan", "name": "方案规划执行配置", "roleProfileId": "sf-role-plan", "defaultSkillBundle": [], "capabilityPolicy": { "allowedCapabilities": ["read_artifact", "write_artifact", "browse_web"] }, "modelPolicy": { "mode": "fallback_to_active", "preferredProfileIds": [], "fallbackToActive": true, "note": "优先使用当前激活模型配置。" }, "dependencySpec": [] },
+      { "id": "sf-agent-review-blue", "name": "蓝军执行配置", "roleProfileId": "sf-role-blue", "defaultSkillBundle": [], "capabilityPolicy": { "allowedCapabilities": ["read_artifact"] }, "modelPolicy": { "mode": "fallback_to_active", "preferredProfileIds": [], "fallbackToActive": true, "note": "使用当前激活模型配置。" }, "dependencySpec": [] },
+      { "id": "sf-agent-review-red", "name": "红军执行配置", "roleProfileId": "sf-role-red", "defaultSkillBundle": [], "capabilityPolicy": { "allowedCapabilities": ["read_artifact"] }, "modelPolicy": { "mode": "prefer_list", "preferredProfileIds": [], "fallbackToActive": true, "requiredProviderCapabilities": ["structured-output"], "note": "优先选择结构化输出能力稳定的模型。" }, "dependencySpec": [] },
+      { "id": "sf-agent-review-judge", "name": "裁判执行配置", "roleProfileId": "sf-role-judge", "defaultSkillBundle": [], "capabilityPolicy": { "allowedCapabilities": ["read_artifact", "write_artifact"] }, "modelPolicy": { "mode": "prefer_list", "preferredProfileIds": [], "fallbackToActive": true, "requiredProviderCapabilities": ["structured-output"], "note": "优先选择结构化输出能力稳定的模型。" }, "dependencySpec": [] },
+      { "id": "sf-agent-openspec", "name": "OpenSpec 输出执行配置", "roleProfileId": "sf-role-openspec", "defaultSkillBundle": [], "capabilityPolicy": { "allowedCapabilities": ["read_artifact", "write_artifact", "export_delivery"] }, "modelPolicy": { "mode": "prefer_list", "preferredProfileIds": [], "fallbackToActive": true, "requiredProviderCapabilities": ["structured-output"], "note": "优先选择结构化输出能力稳定的模型。" }, "dependencySpec": [] }
+    ],
+    "connectors": [],
+    "tools": []
+  },
+  "runtime": {
+    "promptProfiles": [
+      {
+        "id": "software-factory-discover",
+        "name": "发现阶段提示",
+        "description": "把一句话需求扩成原始需求文档。",
+        "systemPrompt": "你是需求梳理员。\n请直接输出结构化 Markdown，不要输出额外解释、道歉、提问回问或元评论。\n必须使用以下标题并保持原样：\n# 原始需求\n## 目标用户\n## 核心问题\n## 核心价值\n## 显性限制\n## 待确认问题\n每个二级标题下至少写 2-4 条具体要点，且要点必须具体。\n“## 目标用户”必须写清至少两类用户或角色及其使用场景。\n“## 核心问题”必须写清当前流程中的具体痛点、低效点、断裂点或返工风险。\n“## 核心价值”必须写清明确收益，并补入成功标准、验收标准或衡量方式。\n“## 显性限制”必须写清阶段边界、必须满足的限制和明确不做的范围。\n“## 待确认问题”必须列出后续需要确认的关键问题，并尽量用问句表达。\n文档中必须出现至少 1 个带反引号的工件名、文件路径或目录路径，例如 `01-requirements/02-需求澄清.md`、`02-solution/`、`03-openspec/exports/`。\n文档中必须出现至少 1 个量化指标、时限、阈值或比例，用于说明验收口径或成功标准。\n文档中必须明确下一步澄清动作、下游输入基线、验收方式、输出合同或导出边界，避免只写抽象目标。\n当用户信息不足时，不要停在空泛总结；要基于现有目标做合理草拟，补足使用场景、约束、成功标准、风险、下一步澄清动作、输入/输出合同和待确认项。\n不要重复用户原话作为整段内容，不要输出占位符、TODO、TBD、待补充之类字样。\n整篇内容需要足够具体，长度应明显超过最小验收长度。",
+        "outputMode": "markdown",
+        "outputSchema": "requirements-discovery"
+      },
+      {
+        "id": "software-factory-clarify",
+        "name": "澄清阶段提示",
+        "description": "补全平台、限制、体验和隐性基础设施需求。",
+        "systemPrompt": "你是需求澄清专家。\n请直接输出结构化 Markdown，不要输出额外解释、回问或元评论。\n必须使用以下标题并保持原样：\n# 需求澄清\n## 使用方式\n## 输入与输出\n## 关键约束\n## 风险与边界\n## 待确认问题\n每个二级标题下至少写 2-4 条具体要点，且要点必须具体。\n“## 使用方式”必须写清用户如何进入、切换、生成、编辑、保存、恢复或导出，而不是只写目标。\n“## 输入与输出”必须写清输入物、输出物、格式、目录结构、工件类型和至少一个目录/路径示例。\n“## 关键约束”必须写清不可违反的限制，如平台、权限、安全、性能、模型、本地边界和质量门槛。\n“## 风险与边界”必须写清失败场景、异常路径、恢复方式和明确不覆盖的范围。\n“## 待确认问题”必须列出仍需确认的关键问题。\n文档中必须出现至少 1 个带反引号的文件、目录、工件或合同示例，例如 `input/`、`output/`、`03-openspec/exports/`、`md + txt + pdf + openspec`。\n文档中必须明确这些澄清信息将如何作为下一阶段的输入、基线或交付前置条件，并写出至少 1 条验收或检查动作。\n当信息不完整时，优先补齐操作方式、输入输出格式、目录结构、边界条件、失败场景、恢复动作、依赖、下一阶段输入和待确认问题，而不是停留在泛化描述。\n不要输出占位符、TODO、TBD、待补充之类字样。\n整篇内容需要足够具体，长度应明显超过最小验收长度。",
+        "outputMode": "markdown",
+        "outputSchema": "requirements-clarify"
+      },
+      {
+        "id": "software-factory-plan-feature-tree",
+        "name": "功能树提示",
+        "description": "生成功能树和功能层级。",
+        "systemPrompt": "你是功能树规划代理。请从用户视角和开发视角拆解功能树，包含基础设施、异常路径和前置能力，输出 Markdown。",
+        "outputMode": "markdown",
+        "outputSchema": "feature-tree"
+      },
+      {
+        "id": "software-factory-plan-feature-list",
+        "name": "功能清单提示",
+        "description": "生成原子功能清单。",
+        "systemPrompt": "你是功能清单规划代理。请把功能树拆成原子功能，写清触发、反馈、依赖和完成标准，输出 Markdown。",
+        "outputMode": "markdown",
+        "outputSchema": "feature-list"
+      },
+      {
+        "id": "software-factory-plan-solution",
+        "name": "技术方案提示",
+        "description": "生成技术方案文档。",
+        "systemPrompt": "你是技术方案代理。请基于当前需求和功能清单给出可落地技术方案，明确模块、边界、依赖和风险，输出 Markdown。",
+        "outputMode": "markdown",
+        "outputSchema": "technology-solution"
+      },
+      {
+        "id": "software-factory-draft-implementation",
+        "name": "实现方案提示",
+        "description": "生成功能实现方案。",
+        "systemPrompt": "你是实现方案代理。请为当前功能集合写出逐项实现方案、关键流程和工程拆解，输出 Markdown。",
+        "outputMode": "markdown",
+        "outputSchema": "implementation-solution"
+      },
+      {
+        "id": "software-factory-draft-flowchart",
+        "name": "流程图提示",
+        "description": "输出 Mermaid 流程图。",
+        "systemPrompt": "你是流程图代理。请把当前方案整理成 Mermaid 流程图代码块，保证语法正确。",
+        "outputMode": "markdown",
+        "outputSchema": "mermaid-flow"
+      },
+      {
+        "id": "software-factory-draft-auto-test",
+        "name": "自动测试提示",
+        "description": "生成自动测试方案。",
+        "systemPrompt": "你是自动测试代理。请为当前方案给出单元、集成、端到端测试方案和关键断言，输出 Markdown。",
+        "outputMode": "markdown",
+        "outputSchema": "auto-test-plan"
+      },
+      {
+        "id": "software-factory-draft-manual-test",
+        "name": "手动验收提示",
+        "description": "生成手动验收方案。",
+        "systemPrompt": "你是手动验收代理。请给出用户级验收路径、检查点和异常路径，输出 Markdown。",
+        "outputMode": "markdown",
+        "outputSchema": "manual-acceptance"
+      },
+      {
+        "id": "software-factory-review-blue",
+        "name": "蓝军审查提示",
+        "description": "增强文档完整性。",
+        "systemPrompt": "你是蓝军审查员。请强化当前文档的结构、可执行性和表达完整度，输出 Markdown 列表。",
+        "outputMode": "markdown",
+        "outputSchema": "review-issues"
+      },
+      {
+        "id": "software-factory-review-red",
+        "name": "红军审查提示",
+        "description": "识别风险和遗漏。",
+        "systemPrompt": "你是红军审查员。请从遗漏、冲突、失败路径、测试空洞和实现风险角度找问题，输出 Markdown 列表。",
+        "outputMode": "markdown",
+        "outputSchema": "review-issues"
+      },
+      {
+        "id": "software-factory-review-judge",
+        "name": "裁判汇总提示",
+        "description": "汇总红蓝结论。",
+        "systemPrompt": "你是裁判汇总员。请把红蓝双方意见整理为采纳建议、待确认项和结论摘要，输出 Markdown。",
+        "outputMode": "markdown",
+        "outputSchema": "markdown-basic"
+      },
+      {
+        "id": "software-factory-finalize",
+        "name": "交付收口提示",
+        "description": "生成交付摘要。",
+        "systemPrompt": "你是交付总结代理。请汇总当前工程的核心目标、最终文档、遗留风险和交付入口，输出 Markdown。",
+        "outputMode": "markdown",
+        "outputSchema": "delivery-summary"
+      }
+    ],
+    "artifactSchemas": [
+      {
+        "id": "markdown-basic",
+        "title": "Markdown 基础文档",
+        "kind": "markdown",
+        "requiredHeadings": [
+          "#"
+        ]
+      },
+      {
+        "id": "requirements-clarify",
+        "title": "需求澄清",
+        "kind": "markdown",
+        "requiredHeadings": [
+          "# 需求澄清",
+          "## 使用方式",
+          "## 输入与输出",
+          "## 关键约束",
+          "## 风险与边界",
+          "## 待确认问题"
+        ],
+        "minimumLength": 560,
+        "qualityTier": "strict",
+        "minimumQualityScore": 90,
+        "deterministicFallbackContent": "# 需求澄清\n\n## 使用方式\n- 运营负责人在欢迎页创建或打开工程后，先把一句话目标写入 `01-requirements/01-原始需求.md`，再点击生成，在 5 分钟内进入澄清阶段，而不是继续靠口头同步。\n- 编辑者在主工作台、思路地图和流编排之间切换时，必须先保存当前文档；如果左侧 `未保存数量` 高亮，就先处理保存、合并或恢复，再继续后续步骤。\n- 审查负责人在导出前要检查 `阶段`、`任务抽屉`、右侧 AI 侧栏和 `03-openspec/exports/` 目标目录，确认没有阻断项后才允许继续方案拆解与交付。\n\n## 输入与输出\n- 输入包括一句话目标、本地素材目录 `input/notes/`、上游文档 `01-requirements/*.md`、规则目录 `rules/project/` 和流程文件 `flows/main.flow.json`。\n- 输出包括 `01-requirements/02-需求澄清.md`、后续 `02-solution/*.md`、`03-openspec/exports/` 下的 `md + txt + pdf + openspec` 交付物，以及阶段确认所需的证据记录。\n- 输出合同必须写清目录结构、命名规则、责任角色、验收阈值和失败恢复方式，避免下游阶段只拿到抽象说明。\n\n## 关键约束\n- 系统必须本地优先运行，不依赖远程模板市场；联网能力仅允许受控的 `browse_web` 无头浏览器查询公开资料，不能把未经确认的外部内容直接写回核心工件。\n- 任何 AI 写回如果低于 90 分交付线、缺失路径/输入输出合同，或与人工修改冲突，必须进入修复、合并或重跑，而不是直接覆盖。\n- 在 `01-requirements/02-需求澄清.md` 完成前，不允许跳过澄清阶段直接生成 `02-solution/01-技术方案.md` 或导出最终交付包。\n\n## 风险与边界\n- 若模型输出只给抽象描述、缺少目录、异常路径或恢复规则，系统先自动修复 1 次；仍不达标则阻断确认，并把证据写入 `artifacts/post-change-extreme-validation/`。\n- 若文档被外部修改，用户必须先执行差异检查，再决定恢复、合并或局部重跑；不能把旧缓存直接当作最新基线。\n- 当前阶段不覆盖远程多人协作、在线模板市场和移动端编辑，只为这些能力保留后续扩展边界。\n\n## 待确认问题\n- 是否需要在 `rules/project/` 中强制记录审批字段、证据路径和人工确认节点，还是允许项目按场景裁剪？\n- 是否要固定默认导出组合为 `md + txt + pdf + openspec`，还是允许项目模板按流程改写交付包？\n- 是否需要在下一阶段把角色责任表、失败恢复和导出边界同步写入流编排节点说明，避免文档与流程脱节？\n\n## 下一阶段输入\n- 下一阶段直接使用本文件中的操作步骤、输入输出合同、异常恢复策略和 90 分质量门槛，作为方案、测试、编排与交付的共同基线。\n- 进入 `02-solution/01-技术方案.md` 之前，先确认 `input/notes/`、`rules/project/`、`01-requirements/` 与 `03-openspec/exports/` 的使用边界、责任人和验收方式。\n"
+      },
+      {
+        "id": "requirements-discovery",
+        "title": "原始需求",
+        "kind": "markdown",
+        "requiredHeadings": [
+          "# 原始需求",
+          "## 目标用户",
+          "## 核心问题",
+          "## 核心价值",
+          "## 显性限制",
+          "## 待确认问题"
+        ],
+        "minimumLength": 560,
+        "qualityTier": "strict",
+        "minimumQualityScore": 90,
+        "deterministicFallbackContent": "# 原始需求\n\n## 目标用户\n- 内容策划负责人在欢迎页新建工程后，需要把一句话创意先沉淀到 `01-requirements/01-原始需求.md`，并在 10 分钟内形成可评审的基线，而不是继续靠口头补充。\n- 文档协作成员进入主工作台后，需要基于统一的目标用户、边界、输入来源和输出目录，继续补写 `01-requirements/02-需求澄清.md` 与 `02-solution/01-技术方案.md`，避免后续每个人各写一套版本。\n- 审查人与交付负责人需要在导出前，从 `03-openspec/exports/` 中核对工件完整性、人工复核分和证据记录，再决定是否允许进入下一阶段或重新修订。\n\n## 核心问题\n- 当前输入常常只有一句话目标、几条聊天记录或临时想法，没有说明适用场景、责任角色、输入素材目录和交付格式，导致团队每轮都重新猜测需求。\n- 如果没有在发现阶段先写清 `input/notes/`、`01-requirements/`、`02-solution/` 等目录边界，后续方案、编排和导出就会出现路径不一致、命名漂移和返工。\n- 当模型或人工直接跳到方案、编排或导出而没有需求基线时，失败恢复、验收口径和“不做项”会被遗漏，最终影响 `md + txt + pdf + openspec` 交付包的一致性。\n\n## 核心价值\n- 系统把一句话创意沉淀成可继续执行的需求基线，明确用户、场景、输入来源、输出合同和不做范围，减少跨角色误解和重复沟通。\n- 文档中直接写入成功标准、验收方式和下游工件引用，让澄清、方案、测试和编排阶段都能以同一份基线继续推进，而不是重新收集背景信息。\n- 成功标准：1. 发现阶段文档长度不少于 760 字；2. 至少引用 2 个下游路径，例如 `01-requirements/02-需求澄清.md` 与 `02-solution/`；3. 进入下一阶段前人工复核交付评分不低于 90 分。\n- 验收方式：由审查负责人检查 `01-requirements/01-原始需求.md` 是否覆盖目标用户、核心问题、显性限制、待确认问题和下一步动作，再触发澄清阶段生成。\n\n## 显性限制\n- 当前阶段只覆盖桌面端本地工程，不依赖联网市场；允许使用受控的 `browse_web` 无头浏览器查公开资料，但不能依赖远程模板中心才能完成核心闭环。\n- 输出以 Markdown 为主，后续可以派生到 `txt`、`pdf` 与 `openspec`，但发现阶段不能跳过文本基线直接修改编排或导出物。\n- 必须写清输入来源、本地目录、关键约束、失败恢复和不做范围；如果内容低于 90 分交付线或缺少必填标题，系统必须阻断阶段确认并要求修复。\n- 当前不做多实例联网协作、远程市场安装和移动端交付，只为这些能力保留后续扩展边界。\n\n## 待确认问题\n- 是否需要把 `rules/project/` 中的规则文件在发现阶段就绑定到需求基线，还是在 `01-requirements/02-需求澄清.md` 再确认？\n- 是否要固定默认导出组合为 `md + txt + pdf + openspec`，还是允许项目模板按场景裁剪交付包？\n- 是否需要在下一阶段补齐角色责任表、失败恢复策略和审批记录字段，以便后续编排页直接复用？\n- 是否需要把 `artifacts/post-change-extreme-validation/` 的验证证据路径写入最终交付摘要，作为人工复核依据？\n\n## 下一步\n- 下一步进入 `01-requirements/02-需求澄清.md`，补齐操作步骤、输入输出合同、目录结构、异常恢复和验收阈值。\n- 澄清动作：先确认 `input/notes/`、`01-requirements/`、`02-solution/`、`03-openspec/exports/` 的使用边界，再进入方案与编排阶段。\n"
+      },
+      {
+        "id": "review-issues",
+        "title": "审查问题列表",
+        "kind": "review-issues"
+      },
+      {
+        "id": "ui-preview-spec",
+        "title": "UI Preview 规范",
+        "kind": "ui-preview"
+      },
+      {
+        "id": "mermaid-flow",
+        "title": "Mermaid 流程图",
+        "kind": "mermaid"
+      },
+      {
+        "id": "openspec-handoff",
+        "title": "OpenSpec 交付",
+        "kind": "openspec-handoff"
+      },
+      {
+        "id": "delivery-summary",
+        "title": "交付摘要",
+        "kind": "markdown",
+        "requiredHeadings": [
+          "#",
+          "##"
+        ]
+      },
+      {
+        "id": "feature-tree",
+        "title": "功能树",
+        "kind": "markdown",
+        "requiredHeadings": [
+          "#",
+          "##"
+        ]
+      },
+      {
+        "id": "feature-list",
+        "title": "功能清单",
+        "kind": "markdown",
+        "requiredHeadings": [
+          "#",
+          "##"
+        ]
+      },
+      {
+        "id": "technology-solution",
+        "title": "技术方案",
+        "kind": "markdown",
+        "requiredHeadings": [
+          "#",
+          "##"
+        ]
+      },
+      {
+        "id": "implementation-solution",
+        "title": "实现方案",
+        "kind": "markdown",
+        "requiredHeadings": [
+          "#",
+          "##"
+        ]
+      },
+      {
+        "id": "auto-test-plan",
+        "title": "自动测试方案",
+        "kind": "markdown",
+        "requiredHeadings": [
+          "#",
+          "##"
+        ]
+      },
+      {
+        "id": "manual-acceptance",
+        "title": "手动验收方案",
+        "kind": "markdown",
+        "requiredHeadings": [
+          "#",
+          "##"
+        ]
+      }
+    ],
+    "template": {
+      "id": "software-factory",
+      "name": "软件工厂",
+      "description": "软件工厂默认模板，用于从一句话需求推进到 OpenSpec 交付。",
+      "defaultFlowId": "sf-flow-main",
+      "stageRoleIds": {
+        "discover": "sf-role-discover",
+        "clarify": "sf-role-discover",
+        "plan": "sf-role-plan",
+        "draft": "sf-role-plan",
+        "review": "sf-role-judge",
+        "finalize": "sf-role-openspec"
+      },
+      "stageExecutionProfiles": {
+        "discover": { "roleId": "sf-role-discover", "taskTemplateId": "sf-task-discover", "agentProfileId": "sf-agent-discover" },
+        "clarify": { "roleId": "sf-role-discover", "taskTemplateId": "sf-task-clarify", "agentProfileId": "sf-agent-discover" },
+        "plan": { "roleId": "sf-role-plan", "taskTemplateId": "sf-task-plan", "agentProfileId": "sf-agent-plan" },
+        "draft": { "roleId": "sf-role-plan", "taskTemplateId": "sf-task-draft", "agentProfileId": "sf-agent-plan" },
+        "review": { "roleId": "sf-role-judge", "taskTemplateId": "sf-task-review-stage", "agentProfileId": "sf-agent-review-judge" },
+        "finalize": { "roleId": "sf-role-openspec", "taskTemplateId": "sf-task-finalize", "agentProfileId": "sf-agent-openspec" }
+      },
+      "stageDocuments": {
+        "discover": [
+          {
+            "path": "01-requirements/01-原始需求.md",
+            "title": "原始需求",
+            "purpose": "整理一句话目标、用户、痛点和核心价值。",
+            "promptProfileId": "software-factory-discover",
+            "validatorId": "requirements-discovery",
+            "qualityTier": "strict",
+            "minimumQualityScore": 90
+          }
+        ],
+        "clarify": [
+          {
+            "path": "01-requirements/02-需求澄清.md",
+            "title": "需求澄清",
+            "purpose": "补全平台、限制、体验和隐性基础设施需求。",
+            "promptProfileId": "software-factory-clarify",
+            "validatorId": "requirements-clarify",
+            "qualityTier": "strict",
+            "minimumQualityScore": 90
+          }
+        ],
+        "plan": [
+          {
+            "path": "01-requirements/03-功能树.md",
+            "title": "功能树",
+            "purpose": "拆解用户视角和开发视角的功能层级。",
+            "promptProfileId": "software-factory-plan-feature-tree",
+            "validatorId": "feature-tree"
+          },
+          {
+            "path": "01-requirements/04-功能清单.md",
+            "title": "功能清单",
+            "purpose": "列出原子功能、依赖和完成标准。",
+            "promptProfileId": "software-factory-plan-feature-list",
+            "validatorId": "feature-list"
+          },
+          {
+            "path": "02-solution/01-技术方案.md",
+            "title": "技术方案",
+            "purpose": "说明技术基线、模块边界和关键设计。",
+            "promptProfileId": "software-factory-plan-solution",
+            "validatorId": "technology-solution"
+          }
+        ],
+        "draft": [
+          {
+            "path": "02-solution/02-功能实现方案.md",
+            "title": "功能实现方案",
+            "purpose": "给出逐项实现方案和模块拆解。",
+            "promptProfileId": "software-factory-draft-implementation",
+            "validatorId": "implementation-solution"
+          },
+          {
+            "path": "02-solution/03-流程图.md",
+            "title": "流程图",
+            "purpose": "输出 Mermaid 流程图和关键状态流转。",
+            "promptProfileId": "software-factory-draft-flowchart",
+            "validatorId": "mermaid-flow"
+          },
+          {
+            "path": "02-solution/04-自动测试方案.md",
+            "title": "自动测试方案",
+            "purpose": "定义单元、集成和回归测试方案。",
+            "promptProfileId": "software-factory-draft-auto-test",
+            "validatorId": "auto-test-plan"
+          },
+          {
+            "path": "02-solution/05-手动验收方案.md",
+            "title": "手动验收方案",
+            "purpose": "定义用户级验收路径和检查点。",
+            "promptProfileId": "software-factory-draft-manual-test",
+            "validatorId": "manual-acceptance"
+          }
+        ],
+        "review": [
+          {
+            "path": "02-solution/06-审查结论.md",
+            "title": "审查结论",
+            "purpose": "沉淀红蓝审查结论、采纳建议和遗留风险。",
+            "promptProfileId": "software-factory-review-judge",
+            "validatorId": "markdown-basic"
+          }
+        ],
+        "finalize": [
+          {
+            "path": "03-openspec/00-交付摘要.md",
+            "title": "交付摘要",
+            "purpose": "给出最终交付说明和 OpenSpec 入口。",
+            "promptProfileId": "software-factory-finalize",
+            "validatorId": "delivery-summary"
+          }
+        ]
+      },
+      "review": {
+        "bluePromptProfileId": "software-factory-review-blue",
+        "redPromptProfileId": "software-factory-review-red",
+        "judgePromptProfileId": "software-factory-review-judge",
+        "validatorId": "review-issues",
+        "executionProfiles": {
+          "blue": { "roleId": "sf-role-blue", "taskTemplateId": "sf-task-review-blue", "agentProfileId": "sf-agent-review-blue" },
+          "red": { "roleId": "sf-role-red", "taskTemplateId": "sf-task-review-red", "agentProfileId": "sf-agent-review-red" },
+          "judge": { "roleId": "sf-role-judge", "taskTemplateId": "sf-task-review-judge", "agentProfileId": "sf-agent-review-judge" }
+        }
+      },
+      "experienceBindings": [
+        {
+          "id": "discover",
+          "targetKey": "experience.discover",
+          "priority": 90,
+          "keywords": ["discover", "clarify", "澄清", "目标", "用户", "痛点", "一句话"],
+          "preferredNodeTypes": ["agent", "subflow", "artifact"]
+        },
+        {
+          "id": "plan",
+          "targetKey": "experience.plan",
+          "priority": 88,
+          "keywords": ["plan", "方案", "规划", "设计", "依赖", "实施", "solution", "context pack"],
+          "preferredNodeTypes": ["agent", "subflow", "artifact"]
+        },
+        {
+          "id": "review",
+          "targetKey": "experience.review",
+          "priority": 87,
+          "keywords": ["review", "审查", "红蓝", "裁判", "issue", "adoption"],
+          "preferredNodeTypes": ["subflow", "approval", "agent"]
+        },
+        {
+          "id": "openspec",
+          "targetKey": "experience.openspec",
+          "priority": 86,
+          "keywords": ["openspec", "export", "交付", "导出", "handoff"],
+          "preferredNodeTypes": ["artifact", "subflow", "end"]
+        }
+      ],
+      "exportProfile": {
+        "markdown": true,
+        "text": true,
+        "pdf": true,
+        "openspec": true
+      },
+      "exportMapping": {
+        "openspec": {
+          "outputPathPattern": "03-openspec/exports"
+        }
+      }
+    }
+  }
+}
