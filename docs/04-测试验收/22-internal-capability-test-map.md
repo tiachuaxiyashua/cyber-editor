@@ -1,6 +1,6 @@
 # 22 Internal Capability Test Map
 
-Source: detailed feature inventory under docs/06-detail-design-library equivalent. Prefix: INF.
+Source: detailed feature inventory under `docs/06-详细设计库/`. Prefix: INF.
 
 | ID | Description | Logic | Functional | Abuse | Stress | Experience | Scenario | Focus |
 |---|---|---|---|---|---|---|---|---|

@@ -1,6 +1,6 @@
 # 21 User Feature Test Map
 
-Source: detailed feature inventory under docs/06-detail-design-library equivalent. Prefix: F.
+Source: detailed feature inventory under `docs/06-详细设计库/`. Prefix: F.
 
 | ID | Description | Logic | Functional | Abuse | Stress | Experience | Scenario | Focus |
 |---|---|---|---|---|---|---|---|---|

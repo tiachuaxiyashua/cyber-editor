@@ -1,6 +1,6 @@
 # 20 Test Family Catalog
 
-Current executable test family catalog. Detailed feature source lives under docs/06-detail-design-library equivalent.
+Current executable test family catalog. Detailed feature source lives under `docs/06-详细设计库/`.
 
 | ID | Family | Minimal steps | Oracle | Preferred automation |
 |---|---|---|---|---|
