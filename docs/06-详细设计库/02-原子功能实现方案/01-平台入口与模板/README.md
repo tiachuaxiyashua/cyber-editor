@@ -1,4 +1,4 @@
-﻿# 平台入口与模板
+# 平台入口与模板
 
 负责应用启动、欢迎页、新建工程、模板中心、模板导入导出与最近模板路径。
 
@@ -53,6 +53,10 @@
 - [F-012 模板中心搜索筛选](./F-012-模板中心搜索筛选.md) - A / 部分完成
 - [F-013 安装/导入模板](./F-013-安装-导入模板.md) - S / 未完成
 - [F-014 保存当前工程为模板](./F-014-保存当前工程为模板.md) - S / 部分完成
+- [F-122 模板来源、版本、信任与兼容性展示](./F-122-模板来源-版本-信任与兼容性展示.md) - A / 未完成
+- [F-123 模板更新、损坏阻断与状态修复](./F-123-模板更新-损坏阻断与状态修复.md) - A / 未完成
+- [F-124 从模板直接开始编排](./F-124-从模板直接开始编排.md) - S / 未完成
+- [F-129 GStack 软件交付工作流模板](./F-129-GStack软件交付工作流模板.md) - A / 部分完成
 - [INF-004 Recent project/template store](./INF-004-Recentproject-templatestore.md) - A / 已完成
 - [INF-029 Template registry](./INF-029-Templateregistry.md) - S / 部分完成
 - [INF-030 Template scaffold and save service](./INF-030-Templatescaffoldandsaveservice.md) - S / 部分完成

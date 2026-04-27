@@ -35,13 +35,15 @@ const resolveCommand = (input) => {
 const resolvedCommand = resolveCommand(command);
 const isWindowsBatchScript = process.platform === 'win32' && /\.(cmd|bat)$/i.test(resolvedCommand);
 const spawnCommand = isWindowsBatchScript ? env.ComSpec ?? 'cmd.exe' : resolvedCommand;
+const quoteCmdValue = (value) => `"${String(value).replace(/"/g, '""')}"`;
 const spawnArgs = isWindowsBatchScript
-  ? ['/d', '/s', '/c', resolvedCommand, ...args]
+  ? ['/d', '/s', '/c', `"${[quoteCmdValue(resolvedCommand), ...args.map(quoteCmdValue)].join(' ')}"`]
   : args;
 
 const child = spawn(spawnCommand, spawnArgs, {
   stdio: 'inherit',
-  env
+  env,
+  windowsVerbatimArguments: isWindowsBatchScript
 });
 
 child.on('exit', (code, signal) => {

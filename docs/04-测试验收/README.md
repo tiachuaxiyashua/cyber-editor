@@ -10,16 +10,23 @@
 4. `04-用户行为测试总册.md`
 5. `05-代码测试运行证据矩阵.md`
 6. `06-MSA原子追踪矩阵.md`
-7. `20-test-family-catalog.md`
-8. `21-user-feature-test-map.md`
-9. `22-internal-capability-test-map.md`
-10. `24-test-fixture-matrix.md`
-11. `25-execution-lane-evidence-matrix.md`
-12. `generated/`
+7. `07-需求-实现闭环追踪矩阵.md`
+8. `08-测试判定标准.md`
+9. `09-功能域测试Oracle.md`
+10. `10-关键原子功能测试Oracle补充.md`
+11. `11-MSA-test-oracle-matrix.md`
+12. `12-MSA显式测试Oracle补充.md`
+13. `20-test-family-catalog.md`
+14. `21-user-feature-test-map.md`
+15. `22-internal-capability-test-map.md`
+16. `24-test-fixture-matrix.md`
+17. `25-execution-lane-evidence-matrix.md`
+18. `generated/`
 
 ## 口径
 
-1. `01` 和 `02` 定义验收门禁与主旅程。
+1. `01` 和 `02` 定义验收门禁与核心旅程。
 2. `03` 和 `04` 定义自动化与手工验证步骤。
-3. `05` 和 `06` 把代码、测试、证据和 M/S/A 原子能力串成可追踪链。
-4. `20` 到 `25` 是可执行测试编目与辅助矩阵，`generated/` 保存脚本生成产物，不作为第二套真相源。
+3. `05`、`06`、`07` 把代码、测试、证据、原子能力和需求闭环串成可追踪链。
+4. `08` 到 `12` 定义测试判定标准、功能域 Oracle 和高风险 MSA 测试补充。
+5. `20` 到 `25` 是可执行测试编目与辅助矩阵；`generated/` 保存测试用例全集、覆盖率与质量门禁等脚本生成索引产物，不作为第二套真相源。

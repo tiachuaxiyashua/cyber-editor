@@ -7,7 +7,8 @@ export const packagedHandoffContracts: UiContract[] = [
     kind: 'packaged',
     gateIds: ['QG-PKG-003'],
     sourceRefs: [
-      { doc: 'docs/superpowers/specs/2026-04-23-design-conformance-regression-gate-design.md', section: '第五组：文档交付质量与 packaged handoff 契约' },
+      { doc: 'docs/04-测试验收/01-验收门禁与测试策略.md', section: '## 发布门禁' },
+      { doc: 'docs/05-项目规则/02-变更流程与完成定义.md', section: '## 交付说明必须包含' },
       { doc: 'scripts/publish-packaged-verification-entry.mjs', section: 'launcher pointer and readme publication' },
     ],
     precondition: {
@@ -26,7 +27,8 @@ export const packagedHandoffContracts: UiContract[] = [
     kind: 'packaged',
     gateIds: ['QG-PKG-001', 'QG-PKG-002', 'QG-PKG-003'],
     sourceRefs: [
-      { doc: 'docs/superpowers/specs/2026-04-23-design-conformance-regression-gate-design.md', section: '9.2 交付前门禁' },
+      { doc: 'docs/04-测试验收/01-验收门禁与测试策略.md', section: '## 发布门禁' },
+      { doc: 'docs/05-项目规则/02-变更流程与完成定义.md', section: '## 完成定义' },
       { doc: 'scripts/run-packaged-project-validation.mjs', section: 'main packaged validation flow' },
     ],
     precondition: {
@@ -48,7 +50,8 @@ export const packagedHandoffContracts: UiContract[] = [
     kind: 'packaged',
     gateIds: ['QG-PKG-001', 'QG-PKG-002'],
     sourceRefs: [
-      { doc: 'docs/superpowers/specs/2026-04-23-design-conformance-regression-gate-design.md', section: '第五组：文档交付质量与 packaged handoff 契约' },
+      { doc: 'docs/04-测试验收/01-验收门禁与测试策略.md', section: '## 发布门禁' },
+      { doc: 'docs/05-项目规则/02-变更流程与完成定义.md', section: '## 交付说明必须包含' },
       { doc: 'scripts/run-direct-packaged-open-validation.mjs', section: 'direct packaged open summary assertions' },
     ],
     precondition: {

@@ -1,245 +1,300 @@
-# 12 关键 Schema 示例
+# 12. 关键 Schema 示例
 
 ## 1. 目标
-- 给另一套 AI 提供足够明确的结构化样例，减少字段解释偏差。
 
-## 2. bootstrap 示例
+- 为实现、测试、文档维护提供当前代码已有明确 owner 的结构化样例。
+- 本文只收录 `src/shared/types.ts` 中已经存在、且仍被当前代码使用的核心类型。
+- 样例以字段语义为准，新增字段时不得改变已有核心字段含义。
+
+## 2. 权威来源
+
+- 当前权威类型文件：`src/shared/types.ts`
+- 本文仅覆盖以下现行 schema：
+  - `BootstrapData`
+  - `RuntimeEvent`
+  - `StageGuardStatus`
+  - `RolePackageManifest`
+  - `ContextPack`
+
+## 3. BootstrapData 示例
+
+对应类型：`BootstrapData`、`AppSettings`、`SidebarLayout`、`RecentProjectEntry`
+
 ```json
 {
-  "appMode": "workspace",
-  "recentProjects": [
-    {
-      "projectId": "p-workbench-01",
-      "projectName": "客户管理方案",
-      "projectRootPath": "E:/workspace/client-plan",
-      "templateId": "software-factory",
-      "lastOpenedAt": "2026-04-09T10:10:10.000Z",
-      "activeFlowId": "flow-main"
-    }
-  ],
-  "recentTemplates": [
-    {
-      "id": "novel-studio",
-      "name": "小说创作",
-      "version": "1.2.0",
-      "trustState": "trusted"
-    }
-  ],
-  "activeProjectSummary": {
-    "projectId": "p-workbench-01",
-    "projectName": "客户管理方案",
-    "projectRootPath": "E:/workspace/client-plan",
-    "templateId": "software-factory",
-    "lastOpenedAt": "2026-04-09T10:10:10.000Z",
-    "activeFlowId": "flow-main"
-  },
-  "layoutState": {
+  "settings": {
     "theme": "light",
-    "leftSidebarWidth": 268,
-    "rightSidebarWidth": 344,
-    "bottomPanelHeight": 220,
-    "activeActivity": "project"
-  }
-}
-```
-
-## 3. document.save 返回示例
-```json
-{
-  "saveResult": {
-    "docPath": "01-requirements/01-需求.md",
-    "version": 12,
-    "savedAt": "2026-04-09T10:12:10.000Z",
-    "dirty": false
-  },
-  "bootstrapDelta": {
-    "referenceGraphChanged": true,
-    "openDocuments": [
+    "sidebar": {
+      "leftWidth": 268,
+      "rightWidth": 344,
+      "leftCollapsed": false,
+      "rightCollapsed": false,
+      "activityView": "project",
+      "processPanelOpen": true,
+      "processPanelTab": "stage",
+      "documentSplitOpen": false,
+      "documentSplitRatio": 0.5
+    },
+    "debug": {
+      "liveLogConsoleEnabled": false
+    },
+    "provider": "openai-compatible",
+    "baseUrl": "http://127.0.0.1:11434/v1",
+    "model": "qwen3:8b",
+    "apiKeyMasked": "",
+    "hasApiKey": false,
+    "activeProviderProfileId": "provider-local-default",
+    "providerProfiles": [],
+    "recentProjects": [
       {
-        "path": "01-requirements/01-需求.md",
-        "dirty": false,
-        "version": 12
+        "rootPath": "E:/workspace/client-plan",
+        "name": "客户端方案工程",
+        "alias": "client-plan",
+        "lastOpenedAt": "2026-04-27T10:10:10.000Z",
+        "available": true
       }
-    ]
+    ],
+    "recentTemplates": [
+      "software-factory"
+    ],
+    "recentResources": [],
+    "recentDrafts": []
+  },
+  "project": null,
+  "templates": [],
+  "platform": null,
+  "runtimeTemplate": null,
+  "flowHistories": {},
+  "sessions": [],
+  "agentMemory": null,
+  "reviewRounds": [],
+  "installedSkills": [],
+  "installedRolePackages": [],
+  "projectSkillIds": [],
+  "sessionSkillIds": {},
+  "snapshots": [],
+  "consistencyReport": null,
+  "auditEntries": [],
+  "recentDocumentChanges": [],
+  "artifactRevisions": [],
+  "artifactInvalidations": [],
+  "runtimeRuns": [],
+  "runtimeEvents": [],
+  "runtimeCapabilities": [],
+  "contextPacks": [],
+  "knowledgeIndexState": null,
+  "runtimeGovernorStatus": null,
+  "noteReferenceGraph": null,
+  "rulesDistillation": {
+    "scopes": [],
+    "globalRules": [],
+    "projectRules": [],
+    "nodeRules": [],
+    "accumulationEntries": [],
+    "promotionDrafts": [],
+    "knowledgeGraph": {
+      "generatedAt": "2026-04-27T10:10:10.000Z",
+      "nodes": [],
+      "edges": []
+    }
   }
 }
 ```
 
-## 4. runAccepted 示例
-```json
-{
-  "runAccepted": {
-    "runId": "run-20260409-001",
-    "sessionId": "session-discover",
-    "trigger": "stage_draft",
-    "status": "queued"
-  }
-}
-```
+关键语义：
 
-## 5. RuntimeEvent 示例
+- `settings` 是应用级设置入口，不再使用旧的 `appMode`、`layoutState`、`activeProjectSummary`。
+- `recentProjects` 的元素类型是 `RecentProjectEntry`，核心字段为 `rootPath`、`name`、`lastOpenedAt`、`available`。
+- `recentTemplates` 是模板 ID 数组，不是模板对象数组。
+
+## 4. RuntimeEvent 示例
+
+对应类型：`RuntimeEvent`
+
 ```json
 {
   "id": "evt-004",
-  "runId": "run-20260409-001",
-  "type": "model_selected",
-  "timestamp": "2026-04-09T10:13:10.000Z",
-  "payload": {
+  "runId": "run-20260427-001",
+  "createdAt": "2026-04-27T10:13:10.000Z",
+  "type": "model.selected",
+  "message": "已为当前运行选择模型。",
+  "metadata": {
     "providerProfileId": "ollama-local",
-    "resolvedModel": "qwen3:8bm",
-    "roleBindingId": "role-planner"
+    "resolvedModel": "qwen3:8b",
+    "roleId": "sf-role-plan"
   }
 }
 ```
 
-## 6. StageGuardStatus 示例
+关键语义：
+
+- 时间字段统一为 `createdAt`。
+- 事件类型使用点分命名，如 `model.selected`、`run.started`、`tool.completed`。
+- 补充信息写入 `metadata`，不是旧结构中的 `payload`。
+
+## 5. StageGuardStatus 示例
+
+对应类型：`StageGuardStatus`
+
 ```json
 {
-  "stageId": "plan",
-  "ready": false,
-  "blockingReasons": [
-    {
-      "code": "missing_artifact",
-      "message": "缺少功能树文档",
-      "targetRef": "artifact:function-tree"
-    }
+  "ok": false,
+  "stage": "plan",
+  "sessionId": "session-discover",
+  "blockers": [
+    "缺少 `01-requirements/03-功能树.md`，当前阶段不能确认。"
   ],
-  "checkItems": [
+  "warnings": [
+    "`01-requirements/02-需求澄清.md` 已存在，但需要重新校验质量分。"
+  ],
+  "artifacts": [
     {
-      "id": "check-requirement-doc",
-      "status": "pass",
-      "message": "原始需求已存在",
-      "targetRef": "artifact:requirement"
+      "path": "01-requirements/02-需求澄清.md",
+      "title": "需求澄清",
+      "purpose": "补全平台、限制、体验与边界条件。",
+      "exists": true,
+      "nonEmpty": true,
+      "valid": true,
+      "qualityTier": "strict",
+      "qualityVerdict": "accepted",
+      "qualityScore": 92,
+      "qualityReasons": [
+        "标题结构完整",
+        "满足最小长度要求"
+      ],
+      "message": "可作为下游输入。"
     },
     {
-      "id": "check-function-tree",
-      "status": "block",
-      "message": "功能树尚未生成",
-      "targetRef": "artifact:function-tree"
+      "path": "01-requirements/03-功能树.md",
+      "title": "功能树",
+      "purpose": "拆解用户视角与开发视角功能层级。",
+      "exists": false,
+      "nonEmpty": false,
+      "valid": false,
+      "message": "工件缺失。"
     }
+  ],
+  "lastSuccessfulRunId": "run-20260426-009"
+}
+```
+
+关键语义：
+
+- 顶层状态字段是 `ok`，不是 `ready`。
+- 阻断和警告分别归入 `blockers`、`warnings`。
+- 每个工件的检查结果写在 `artifacts` 中，不再使用旧的 `checkItems`、`targetRef` 结构。
+
+## 6. RolePackageManifest 示例
+
+对应类型：`RolePackageManifest`
+
+```json
+{
+  "id": "role-planner",
+  "name": "方案规划角色包",
+  "version": "1.0.0",
+  "description": "负责输出功能树、功能清单与技术方案的角色包。",
+  "source": "project",
+  "icon": "workflow",
+  "domain": "software-factory",
+  "tags": [
+    "planning",
+    "solution"
+  ],
+  "defaultSkillIds": [
+    "product-requirements",
+    "architecture-review"
+  ],
+  "allowedCapabilities": [
+    "read_artifact",
+    "write_artifact",
+    "browse_web"
+  ],
+  "modelPolicy": {
+    "mode": "prefer_list",
+    "preferredProfileIds": [
+      "ollama-local",
+      "deepseek-cloud"
+    ],
+    "fallbackToActive": true
+  },
+  "dependencySpec": []
+}
+```
+
+关键语义：
+
+- manifest 当前只记录元数据和策略字段，不包含 `entryFiles`、`skillsDirectory` 之类目录布局信息。
+- 能力字段名是 `allowedCapabilities`，不是 `allowedCapabilityIds`。
+- 模型策略字段名是 `modelPolicy`，不是 `defaultModelPolicy`。
+
+## 7. ContextPack 示例
+
+对应类型：`ContextPack`、`ContextPackDocumentDigest`
+
+```json
+{
+  "id": "ctx-20260427-001",
+  "createdAt": "2026-04-27T10:20:10.000Z",
+  "runId": "run-20260427-001",
+  "sessionId": "session-discover",
+  "stage": "plan",
+  "roleId": "sf-role-plan",
+  "systemPrompt": "你是方案规划角色，输出结构化 Markdown。",
+  "userPrompt": "基于现有需求澄清，生成功能树与技术方案。",
+  "compacted": true,
+  "sourceMessageCount": 12,
+  "retainedMessageCount": 5,
+  "omittedMessageCount": 7,
+  "anchorPaths": [
+    "01-requirements/02-需求澄清.md",
+    "02-solution/01-技术方案.md"
+  ],
+  "pinnedDocumentPaths": [
+    "01-requirements/02-需求澄清.md"
+  ],
+  "excludedDocumentPaths": [],
+  "changeRecordIds": [
+    "change-20260427-001"
+  ],
+  "documentDigests": [
+    {
+      "path": "01-requirements/02-需求澄清.md",
+      "excerpt": "本阶段需要明确输入输出合同、失败恢复与目录边界。",
+      "modifiedAt": 1777279210000
+    }
+  ],
+  "provenance": [
+    "session:session-discover",
+    "run:run-20260427-001"
+  ],
+  "rollingSummary": "已压缩早期对话，仅保留当前方案规划所需上下文。",
+  "effectiveRuleIds": [
+    "rule-output-contract"
+  ],
+  "knowledgeNodeIds": [
+    "knowledge-export-boundary"
   ]
 }
 ```
 
-## 7. FlowDraft 示例
-```json
-{
-  "id": "flow-main",
-  "name": "软件工厂主流程",
-  "templateId": "software-factory",
-  "inputDirectory": "01-input",
-  "outputDirectory": "02-output",
-  "nodes": [
-    {
-      "id": "node-start",
-      "type": "start",
-      "label": "开始",
-      "position": { "x": 120, "y": 140 },
-      "config": {},
-      "roleBindingId": null,
-      "connectorBindingId": null,
-      "toolBindingId": null,
-      "inputBindings": [],
-      "outputBindings": []
-    },
-    {
-      "id": "node-plan",
-      "type": "agent",
-      "label": "规划角色",
-      "position": { "x": 380, "y": 140 },
-      "config": {
-        "rolePackageId": "role-planner",
-        "stageId": "plan"
-      },
-      "roleBindingId": "role-planner",
-      "connectorBindingId": null,
-      "toolBindingId": null,
-      "inputBindings": [
-        {
-          "kind": "artifact",
-          "ref": "artifact:requirement"
-        }
-      ],
-      "outputBindings": [
-        {
-          "kind": "artifact",
-          "ref": "artifact:function-tree"
-        }
-      ]
-    }
-  ],
-  "edges": [
-    {
-      "id": "edge-start-plan",
-      "sourceNodeId": "node-start",
-      "targetNodeId": "node-plan",
-      "channelType": "control",
-      "mapping": {}
-    }
-  ],
-  "stageContracts": [],
-  "exportMappings": [],
-  "updatedAt": "2026-04-09T10:20:10.000Z",
-  "version": 8
-}
-```
+关键语义：
 
-## 8. RolePackageManifest 示例
-```json
-{
-  "id": "role-planner",
-  "name": "规划角色",
-  "version": "1.0.0",
-  "entryFiles": {
-    "identity": "IDENTITY.md",
-    "soul": "SOUL.md",
-    "agents": "AGENTS.md",
-    "user": "USER.md",
-    "memory": "MEMORY/MEMORY.md"
-  },
-  "skillsDirectory": "Skills",
-  "defaultSkillIds": [
-    "product-requirements",
-    "market-strategy"
-  ],
-  "allowedCapabilityIds": [
-    "document.read",
-    "artifact.write",
-    "knowledge.search"
-  ],
-  "defaultModelPolicy": {
-    "mode": "prefer_list",
-    "preferredProfiles": [
-      "ollama-local",
-      "deepseek-cloud"
-    ]
-  }
-}
-```
+- `ContextPack` 是运行时上下文包，不是旧的“检索结果列表”。
+- 文本入口字段是 `systemPrompt` 和 `userPrompt`。
+- 压缩统计通过 `sourceMessageCount`、`retainedMessageCount`、`omittedMessageCount` 表达。
+- 文档摘要写入 `documentDigests`，排除路径写入 `excludedDocumentPaths`。
 
-## 9. contextPack 示例
-```json
-{
-  "contextPackId": "ctx-20260409-001",
-  "query": "整理软件工厂的导出流程",
-  "items": [
-    {
-      "kind": "document",
-      "path": "01-需求.md",
-      "reason": "关键词命中 + 引用扩展"
-    },
-    {
-      "kind": "artifact",
-      "ref": "artifact:export-mapping",
-      "reason": "阶段必需工件"
-    }
-  ],
-  "estimatedTokens": 5200,
-  "excludedRefs": []
-}
-```
+## 8. 已删除的过时示例
 
-## 10. 唯一性要求
-- 这些示例不是“参考写法”，而是结构基准。
-- 允许新增扩展字段，但不得删改这里的核心字段语义。
+以下旧示例不再保留，因为它们与当前 `src/shared/types.ts` 的现行 owner 不一致，或当前代码中没有同名权威类型：
 
+- `document.save` 返回示例
+- `runAccepted` 示例
+- `FlowDraft` 示例
+
+## 9. 维护要求
+
+- 本文新增或修改 schema 时，必须先以 `src/shared/types.ts` 中的现行类型定义为准。
+- 如果未来字段结构变化，先更新代码 owner，再更新本文样例。
+- 不得把临时 IPC 包装、调试输出或历史对象重新写回本文作为“关键 schema”。

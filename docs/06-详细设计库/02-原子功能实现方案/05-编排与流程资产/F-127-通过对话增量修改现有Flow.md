@@ -3,8 +3,15 @@
 ## 1. 功能定义
 用户在已有 Flow 的前提下，可通过自然语言要求 AI 添加、删除、替换节点和边，或调整工件、角色和目录绑定。
 
-等级：S  
-状态：未完成
+- MSABC 分类：S
+- 当前状态：部分完成
+
+## 1.1 代码反哺状态
+- 已实现：`ConversationFlowService.patchFromPrompt()` 可调用模型生成 patch，失败或 mock provider 时降级到 `buildFlowPatchFromPrompt()`。
+- 已实现：`src/shared/conversation-flow.ts` 支持 `rename_flow`、`add_node`、`update_node`、`delete_node`，并由 `applyFlowPatch()` 生成预览 Flow。
+- 已实现：`App.tsx` 先调用 `conversation-flow:patch` 和 `conversation-flow:apply-patch` 得到预览，只有用户点击“应用修改”才写入 `saveFlow()` 或 `saveDraftFlow()`。
+- 已有证据：`tests/unit/conversation-flow-service.test.ts` 验证 patch 生成和应用；`tests/e2e/real-user-deepseek-solo-company.spec.ts` 验证真实编排聊天生成“GitHub 证据刷新”节点、预览并应用。
+- 仍未完成：当前 UI 展示 patch operations，但不支持逐项勾选；当前 operation 命名为 `add_node/update_node/delete_node/rename_flow`，不是旧文档中的 `addNode/addEdge/patchNode`；运行态结构补丁阻断还缺专门证据。
 
 ## 2. 典型指令
 - “在设计评审后增加红蓝审查子流程”
@@ -25,25 +32,25 @@
 `FlowPatch`
 ```json
 {
-  "mode": "patch",
   "operations": [
-    { "op": "addNode", "node": {} },
-    { "op": "addEdge", "edge": {} },
-    { "op": "patchNode", "nodeId": "qa", "patch": {} }
+    { "op": "add_node", "afterNodeId": "design-review", "node": {} },
+    { "op": "update_node", "nodeId": "qa", "patch": {} },
+    { "op": "delete_node", "nodeId": "obsolete-step" }
   ]
 }
 ```
 
 ### Main
-- `FlowPatchApplicationEngine.applyFlowPatch(input): Promise<FlowDraft>`
+- `ConversationFlowService.patchFromPrompt(input): Promise<FlowPatch>`
+- `ConversationFlowService.applyPatch(flow, patch): PlatformFlowAsset`
 
 ## 5. 动作时序
 1. 用户输入修改要求。
-2. Planner 根据当前 `flowDraft` 生成 `FlowPatch`。
+2. `ConversationFlowService` 根据当前 `flowDraft` 生成 `FlowPatch`。
 3. Renderer 展示补丁清单。
-4. 用户可逐项勾选/取消。
-5. 点击 `应用` 后，IPC 调 `flowPatch.apply`。
-6. Main 校验补丁、应用、返回新草稿。
+4. 用户可取消整次修改，逐项勾选仍是目标能力。
+5. 点击 `应用` 后，Renderer 保存 `conversation-flow:apply-patch` 预览结果。
+6. Main 负责生成和应用 patch，Renderer 负责保存新 Flow。
 
 ## 6. 校验与阻断
 - 不能删掉唯一的开始/结束节点。
@@ -62,59 +69,27 @@
 
 ## 显式测试 Oracle
 ### 最小输入样例
-1. 本节无额外细则时，以对应标题小节本身内容为准，禁止自由补全。
+1. 当前已有 Flow。
+2. 用户输入：`在设计评审后增加红蓝审查子流程`。
 
 ### 主动作
-1. 本节无额外细则时，以对应标题小节本身内容为准，禁止自由补全。
+1. `ConversationFlowService` 根据当前 `flowDraft` 生成 `FlowPatch`。
+2. Renderer 展示补丁清单。
+3. 用户可取消整次修改；逐项勾选仍是目标能力。
+4. 点击 `应用` 后保存 `conversation-flow:apply-patch` 预览结果。
 
 ### 成功判定
-1. 本节无额外细则时，以对应标题小节本身内容为准，禁止自由补全。
+1. AI 返回结构化补丁，而不是直接改写 `flowDraft`。
+2. 补丁清单展示新增、删除、修改节点或重命名流程等结构化操作。
+3. 取消后 `flowDraft` 不变。
+4. 应用后节点和边变化符合补丁。
 
 ### 文件与状态判定
-1. 本节无额外细则时，以对应标题小节本身内容为准，禁止自由补全。
-
-### 错误与边界判定
-1. 本节无额外细则时，以对应标题小节本身内容为准，禁止自由补全。
-
-## Code Uniqueness Links
-- [20-编排层运行语义表](../../06-代码唯一性文档/20-编排层运行语义表.md)
-- [31-并行分支通信冲突规则](../../06-代码唯一性文档/31-并行分支通信冲突规则.md)
-- [36-编排层详细时序图](../../06-代码唯一性文档/36-编排层详细时序图.md)
-
-
-## 显式测试 Oracle
-### 最小输入样例
-1. 本节无额外细则时，以对应标题小节本身内容为准，禁止自由补全。
-
-### 主动作
-1. 本节无额外细则时，以对应标题小节本身内容为准，禁止自由补全。
-
-### 成功判定
-1. 本节无额外细则时，以对应标题小节本身内容为准，禁止自由补全。
-
-### 文件与状态判定
-### Shared
-`FlowPatch`
-```json
-{
-  "mode": "patch",
-  "operations": [
-    { "op": "addNode", "node": {} },
-    { "op": "addEdge", "edge": {} },
-    { "op": "patchNode", "nodeId": "qa", "patch": {} }
-  ]
-}
-```
-
-### Main
-- `FlowPatchApplicationEngine.applyFlowPatch(input): Promise<FlowDraft>`
-
-1. 用户输入修改要求。
-2. Planner 根据当前 `flowDraft` 生成 `FlowPatch`。
-3. Renderer 展示补丁清单。
-4. 用户可逐项勾选/取消。
-5. 点击 `应用` 后，IPC 调 `flowPatch.apply`。
-6. Main 校验补丁、应用、返回新草稿。
+1. Renderer 写入 `flowConversationPreview.mode = "patch"`；`FlowPatch` 本身不包含 `mode` 字段。
+2. `FlowPatch.operations` 当前至少支持 `rename_flow`、`add_node`、`update_node`、`delete_node`。
+3. Main 提供 `ConversationFlowService.patchFromPrompt(input): Promise<FlowPatch>` 与 `ConversationFlowService.applyPatch(flow, patch): PlatformFlowAsset`。
+4. Renderer 先显示预览，只有用户点击“应用修改”才保存新 Flow。
+5. 若要求完整完成，还必须补齐逐项勾选和运行态结构补丁阻断证据。
 
 ### 错误与边界判定
 - 不能删掉唯一的开始/结束节点。
@@ -122,6 +97,7 @@
 - 不能在运行态应用结构补丁。
 
 ## Code Uniqueness Links
-- [20-编排层运行语义表](../../06-代码唯一性文档/20-编排层运行语义表.md)
-- [31-并行分支通信冲突规则](../../06-代码唯一性文档/31-并行分支通信冲突规则.md)
-- [36-编排层详细时序图](../../06-代码唯一性文档/36-编排层详细时序图.md)
+- [20-编排层运行语义表](../../03-代码契约与唯一性/20-编排层运行语义表.md)
+- [31-并行分支通信冲突规则](../../03-代码契约与唯一性/31-并行分支通信冲突规则.md)
+- [36-编排层详细时序图](../../03-代码契约与唯一性/36-编排层详细时序图.md)
+

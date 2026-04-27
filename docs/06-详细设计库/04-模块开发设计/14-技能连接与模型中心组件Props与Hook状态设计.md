@@ -38,8 +38,10 @@
 ## 5. 方法级 I/O
 - `SkillRegistryService.listInstalled(): Promise<SkillPackageManifest[]>`
 - `SkillRegistryService.installFromDirectory(input): Promise<InstallResult>`
-- `SkillRegistryService.installFromRemote(input): Promise<InstallResult>`
-- `RemoteRoleRegistryAdapter.search(input): Promise<RoleRegistrySearchResult>`
+- `SkillRegistryService.loadCatalog(catalogUrl?: string): Promise<RemoteSkillCatalogItem[]>`
+- `SkillRegistryService.installFromUrl(input): Promise<InstallResult>`
+- `RolePackageRegistryService.loadCatalog(catalogUrl?: string): Promise<RemoteRoleCatalogItem[]>`
+- `RolePackageRegistryService.installFromUrl(input): Promise<InstallResult>`
 - `ModelRouter.diagnose(input): Promise<ModelDiagnosticsResult>`
 
 ## 6. 持久化
@@ -54,4 +56,3 @@
 4. IPC
 5. center/dialog renderer
 6. install/download test flows
-

@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest';
 
 const rootDir = process.cwd();
 const docsDir = path.join(rootDir, 'docs', '04-测试验收');
-const detailDocsDir = path.join(rootDir, 'docs', '06-详细设计库');
+const requirementDocsDir = path.join(rootDir, 'docs', '01-需求与PRD');
 
 function readDocByPrefix(prefix: string) {
   const name = fs
@@ -40,7 +40,7 @@ function parseFamilyCells(cells: string[]) {
 }
 
 describe('full test decomposition coverage', () => {
-  const sourceDoc = fs.readFileSync(path.join(detailDocsDir, '03-功能清单.md'), 'utf8');
+  const sourceDoc = fs.readFileSync(path.join(requirementDocsDir, '06-功能清单.md'), 'utf8');
   const familyDoc = readDocByPrefix('20-');
   const userDoc = readDocByPrefix('21-');
   const internalDoc = readDocByPrefix('22-');

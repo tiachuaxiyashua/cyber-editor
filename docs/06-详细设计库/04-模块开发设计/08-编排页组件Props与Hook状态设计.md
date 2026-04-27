@@ -32,18 +32,16 @@ type OrchestrationHeaderProps = {
 };
 ```
 
-### 2.3 `FlowConversationPanel`
-- 责任：自然语言编排对话入口，不直接改写 `flowDraft`。
+### 2.3 `Flow conversation preview`
+- 责任：自然语言编排对话入口与预览状态，不直接改写 `flowDraft`。
 - Props
 ```ts
-type FlowConversationPanelProps = {
-  status: "idle" | "submitting" | "patch_ready" | "error";
-  conversation: FlowConversationMessage[];
-  pendingPatch?: FlowPatch;
+type FlowConversationPreviewProps = {
+  preview: FlowConversationPreviewState | null;
   disabled: boolean;
   onSubmit(message: string): void;
-  onApplyPatch(): void;
-  onRejectPatch(): void;
+  onApplyPreview(): void;
+  onRejectPreview(): void;
 };
 ```
 
@@ -192,10 +190,10 @@ type UsePanelLayoutState = {
 type UseFlowConversationState = {
   status: "idle" | "submitting" | "patch_ready" | "error";
   conversation: FlowConversationMessage[];
-  pendingPatch?: FlowPatch;
+  preview?: FlowConversationPreviewState;
   submit(message: string): Promise<void>;
-  applyPatch(): Promise<void>;
-  rejectPatch(): void;
+  applyPreview(): Promise<void>;
+  rejectPreview(): void;
 };
 ```
 
@@ -206,8 +204,8 @@ type UseFlowConversationState = {
 | `useFlowDraftState.saveFlow` | 保存 | `runtimeAsset.saveFlow` | `RuntimeAssetService.saveFlow` + `FlowValidationEngine.validate` | `FlowSaveResult` |
 | `CanvasViewport.onConnect` | 创建边 | 无直接 IPC，先改 draft | 本地 patch | 新边进入 `flowDraft` |
 | `InspectorPanel.onPatchNode` | Inspector 改节点 | 无直接 IPC，先改 draft | 本地 patch | 节点被 patch，必要时标 stale |
-| `FlowConversationPanel.onSubmit` | 自然语言生成/修改 | `conversationToFlow.plan` | `ConversationToFlowPlanner.planFlowFromConversation` | `FlowPatch` |
-| `FlowConversationPanel.onApplyPatch` | 应用 AI 补丁 | `flowPatch.apply` | `FlowPatchApplicationEngine.applyFlowPatch` | 新 `FlowDraft` |
+| `ContextPane.sendMessage` | 自然语言生成/修改 | `conversation-flow:draft` / `conversation-flow:patch` | `ConversationFlowService.planFromPrompt` / `patchFromPrompt` | `FlowPlan` + draft 或 `FlowPatch` |
+| `flowConversationPreview.onApply` | 应用 AI 预览 | `conversation-flow:apply-patch` 预览已生成；保存走 `platform:save-flow` | `ConversationFlowService.applyPatch` + `PlatformService` | 新 `PlatformFlowAsset` |
 | `RuntimeDrawer.onRerunFromNode` | 局部重跑 | `runtime.runFromNode` | `CapabilityRuntime.rerunFromNode` | `RunAccepted` |
 
 ## 5. Inspector 到 Draft 的 Patch 规则
@@ -243,12 +241,12 @@ type UseFlowConversationState = {
    - 先落 `FlowValidationEngine`
 3. `src/main/services/runtime-asset-service.ts`
    - 打开/保存/快照
-4. `src/main/services/conversation-to-flow-planner.ts`
-   - 自然语言转 `FlowPatch`
-5. `src/main/services/flow-patch-application-engine.ts`
-   - 补丁应用
-6. `src/main/ipc.ts`
-   - 新增 `conversationToFlow.plan` / `flowPatch.apply`
+4. `src/main/services/conversation-flow-service.ts`
+   - 自然语言转 `FlowPlan`、Flow 草稿或 `FlowPatch`
+5. `src/shared/conversation-flow.ts`
+   - 启发式 plan、草稿构造、patch 构造和 patch 应用
+6. `src/main/ipc/register-settings-session-ai-ipc.ts`
+   - 提供 `conversation-flow:plan` / `conversation-flow:draft` / `conversation-flow:patch` / `conversation-flow:apply-patch`
 7. `src/renderer/components/OrchestrationWorkspace.tsx`
    - 只做装配
 8. `src/renderer/components/FlowConversationPanel.tsx`
@@ -259,7 +257,7 @@ type UseFlowConversationState = {
 13. `tests/e2e/*`
 
 ## 8. 验收标准
-1. 程序员只读本页和对应唯一性文档，能确定组件拆分、状态归属、IPC 边界和开发顺序。
+1. 程序员只读本页和对应代码契约与唯一性文档，能确定组件拆分、状态归属、IPC 边界和开发顺序。
 2. 任一复杂交互都能定位到唯一的 hook、IPC 和 service。
 3. 不存在两个组件同时持有 `flowDraft` 真源的情况。
 4. 自然语言编排链路必须经过 `FlowPatchReviewPanel`，不能直接改 draft。

@@ -7,7 +7,8 @@ export const deliveryQualityContracts: UiContract[] = [
     kind: 'delivery',
     gateIds: ['QG-DELIVERY-001', 'QG-PKG-003'],
     sourceRefs: [
-      { doc: 'docs/superpowers/specs/2026-04-23-design-conformance-regression-gate-design.md', section: '8.4 第一批必须完成的体验型 contract' },
+      { doc: 'docs/04-测试验收/01-验收门禁与测试策略.md', section: '## 发布门禁' },
+      { doc: 'docs/05-项目规则/02-变更流程与完成定义.md', section: '## 交付说明必须包含' },
       { doc: 'scripts/run-packaged-project-validation.mjs', section: 'latest export root assertions' },
     ],
     precondition: {
@@ -26,7 +27,8 @@ export const deliveryQualityContracts: UiContract[] = [
     kind: 'delivery',
     gateIds: ['QG-DELIVERY-001'],
     sourceRefs: [
-      { doc: 'docs/superpowers/specs/2026-04-23-design-conformance-regression-gate-design.md', section: '5.3.4 文档质量阈值' },
+      { doc: 'docs/04-测试验收/01-验收门禁与测试策略.md', section: '## 发布门禁' },
+      { doc: 'docs/05-项目规则/02-变更流程与完成定义.md', section: '## 完成定义' },
       { doc: 'scripts/lib/output-quality-review.mjs', section: 'reviewMarkdownArtifact' },
     ],
     precondition: {

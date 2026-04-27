@@ -1,4 +1,4 @@
-# 10 GStack 工程分析与模板提取报告
+# 01 GStack 工程分析与模板提取报告
 
 ## 1. 目标与范围
 本报告基于本地源码和文档，对 `E:\chuan_project\gstack-main` 做实现级分析，回答四个问题：
@@ -353,3 +353,4 @@ Cyber Editor 的核心场景是：
 2. 把 GStack 的 review gate 思想写进阶段 guard。
 3. 把 session intelligence 的持久化思路接到我们自己的知识底座里。
 4. 不要把浏览器 daemon 作为核心能力迁入产品。
+

@@ -10,10 +10,11 @@
 ## 2. 页面与组件树
 - `OrchestrationPage`
   - `OrchestrationHeader`
-  - `FlowConversationPanel`
-    - `FlowConversationInput`
-    - `FlowDraftProposalList`
-    - `FlowPatchReviewPanel`
+  - `ContextPane`
+    - 编排 Flow 目标会话
+  - `flowConversationPreview` 模态框
+    - Flow 草稿预览
+    - Flow patch 预览
   - `AssetSidebar`
     - `FlowAssetList`
     - `RoleAssetList`
@@ -43,7 +44,7 @@
 - `inspectorWidth`
 - `runtimeDrawerState`
 - `flowConversationState`
-- `pendingFlowPatch`
+- `flowConversationPreview: FlowConversationPreviewState | null`
 
 ## 3.1 Renderer hook / state 归属
 - `useFlowDraftState()`
@@ -70,12 +71,10 @@
 ### 4.4 `RolePackageLoader`
 - 角色包加载与实例化
 
-### 4.5 `ConversationToFlowPlanner`
-- 把自然语言请求转换为初始 Flow 草稿或 Flow 补丁
-
-### 4.6 `FlowPatchApplicationEngine`
-- 校验 AI 生成的节点/边/IO/角色绑定补丁
-- 在用户确认后安全应用到当前草稿
+### 4.5 `ConversationFlowService`
+- 把自然语言请求转换为 `FlowPlan`、初始 `PlatformFlowAsset` 草稿或 `FlowPatch`。
+- 模型不可用或返回无效 JSON 时降级到 `src/shared/conversation-flow.ts` 的启发式计划/patch。
+- patch 应用由 `ConversationFlowService.applyPatch()` 调用共享 `applyFlowPatch()` 生成预览；Renderer 在用户确认后负责保存。
 
 ## 4.5 建议文件落点
 - `src/renderer/components/OrchestrationWorkspace.tsx`
@@ -83,8 +82,8 @@
 - `src/main/services/runtime-asset-service.ts`
 - `src/main/services/capability-runtime.ts`
 - `src/main/services/runtime-errors.ts`
-- `src/main/services/conversation-to-flow-planner.ts`
-- `src/main/services/flow-patch-application-engine.ts`
+- `src/main/services/conversation-flow-service.ts`
+- `src/shared/conversation-flow.ts`
 - `src/shared/types.ts`
 
 ## 5. 关键数据对象
@@ -94,7 +93,8 @@
 - `NodeBinding`
 - `RuntimePlan`
 - `SnapshotMeta`
-- `FlowConversationRequest`
+- `FlowPlan`
+- `FlowConversationPreviewState`
 - `FlowPatch`
 
 ## 5.1 关键方法签名
@@ -104,8 +104,9 @@
 - `saveFlowDraft(): Promise<void>`
 - `runFlow(flowId: string): Promise<void>`
 - `rerunFromNode(nodeId: string): Promise<void>`
-- `planFlowFromConversation(message: string): Promise<FlowPatch>`
-- `applyPendingFlowPatch(): Promise<void>`
+- `sendMessage(): Promise<void>`
+- `applyFlowConversationPreview(): Promise<void>`
+- `dismissFlowConversationPreview(): void`
 
 ### Main / Service
 - `RuntimeAssetService.openFlow(flowId: string): Promise<FlowDraft>`
@@ -114,8 +115,10 @@
 - `CapabilityRuntime.runFlow(input: FlowRunInput): Promise<RunAccepted>`
 - `FlowValidationEngine.validate(input: FlowDraft): Promise<FlowValidationResult>`
 - `RolePackageLoader.load(rolePackageId: string): Promise<RolePackageInstance>`
-- `ConversationToFlowPlanner.planFlowFromConversation(input: FlowConversationInput): Promise<FlowPatch>`
-- `FlowPatchApplicationEngine.applyFlowPatch(input: ApplyFlowPatchInput): Promise<FlowDraft>`
+- `ConversationFlowService.planFromPrompt(input): Promise<FlowPlan>`
+- `ConversationFlowService.draftFromPlan(plan, kind): PlatformFlowAsset`
+- `ConversationFlowService.patchFromPrompt(input): Promise<FlowPatch>`
+- `ConversationFlowService.applyPatch(flow, patch): PlatformFlowAsset`
 
 ## 5.2 文件级实现分解
 - `src/renderer/components/OrchestrationWorkspace.tsx`
@@ -126,10 +129,12 @@
   - 节点、边、Flow 级 Inspector。
 - `src/renderer/components/RuntimeDrawer.tsx`
   - 设计态/运行态切换后的运行抽屉。
-- `src/renderer/components/FlowConversationPanel.tsx`
-  - AI 编排对话、补丁预览、应用/拒绝。
-- `src/main/ipc.ts`
-  - `flow.* / runtimeAsset.* / rolePackage.* / artifact.*` 通道。
+- `src/renderer/App.tsx`
+  - 绑定 `orchestration-flow` 会话目标、生成 `flowConversationPreview`、应用/取消预览。
+- `src/main/ipc/register-settings-session-ai-ipc.ts`
+  - `conversation-flow:*`、`workflow:*`、`ai:*` 通道。
+- `src/main/ipc/register-runtime-platform-ipc.ts`
+  - `runtime:*`、`platform:*` 通道。
 - `src/main/services/runtime-asset-service.ts`
   - Flow 草稿、快照、恢复、子流程切换。
 - `src/main/services/capability-runtime.ts`
@@ -180,11 +185,11 @@
 
 ## 8.2 自然语言编排流程
 1. Renderer 收集用户输入与当前 `flowDraft` 摘要。
-2. 调用 `conversationToFlow.plan`。
-3. Main 侧生成 `FlowPatch`。
-4. Renderer 打开 `FlowPatchReviewPanel`。
-5. 用户确认后，调用 `flowPatch.apply`。
-6. Main 校验补丁并回写最新 `flowDraft`。
+2. 若当前 Flow 是 bootstrap minimal flow，调用 `conversation-flow:draft` 生成 `FlowPlan` 和草稿。
+3. 若当前已有实质 Flow，调用 `conversation-flow:patch` 生成 `FlowPatch`，再调用 `conversation-flow:apply-patch` 生成预览 Flow。
+4. Renderer 打开 `flowConversationPreview` 模态框。
+5. 用户确认后，Renderer 调用 `saveFlow()` 或 `saveDraftFlow()` 保存预览结果。
+6. 用户取消时只清空预览，不改写当前 Flow。
 
 ## 9. 错误处理
 - 结构无效：阻止保存/运行
@@ -214,10 +219,11 @@
   - 右键与对象级操作都可用
 
 ## 12. 必读约束
-- [23-编排层细化状态机](../06-代码唯一性文档/23-编排层细化状态机.md)
-- [28-FlowDraft状态机](../06-代码唯一性文档/28-FlowDraft状态机.md)
-- [29-节点运行状态机](../06-代码唯一性文档/29-节点运行状态机.md)
-- [31-并行分支通信冲突规则](../06-代码唯一性文档/31-并行分支通信冲突规则.md)
-- [32-局部重跑规则](../06-代码唯一性文档/32-局部重跑规则.md)
-- [33-快照恢复冲突规则](../06-代码唯一性文档/33-快照恢复冲突规则.md)
-- [36-编排层详细时序图](../06-代码唯一性文档/36-编排层详细时序图.md)
+- [23-编排层细化状态机](../03-代码契约与唯一性/23-编排层细化状态机.md)
+- [28-FlowDraft状态机](../03-代码契约与唯一性/28-FlowDraft状态机.md)
+- [29-节点运行状态机](../03-代码契约与唯一性/29-节点运行状态机.md)
+- [31-并行分支通信冲突规则](../03-代码契约与唯一性/31-并行分支通信冲突规则.md)
+- [32-局部重跑规则](../03-代码契约与唯一性/32-局部重跑规则.md)
+- [33-快照恢复冲突规则](../03-代码契约与唯一性/33-快照恢复冲突规则.md)
+- [36-编排层详细时序图](../03-代码契约与唯一性/36-编排层详细时序图.md)
+
