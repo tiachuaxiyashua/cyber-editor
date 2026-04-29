@@ -20,7 +20,6 @@
     "**/test-results/**": true
   },
   "search.exclude": {
-    "**/.codex/**": true,
     "**/.cursor/**": true,
     "**/.project/**": true,
     "**/.scratch/**": true,
@@ -38,7 +37,6 @@
     "**/test-results/**": true
   },
   "files.exclude": {
-    "**/.codex/**": true,
     "**/.cursor/**": true,
     "**/.project/**": true,
     "**/.scratch/**": true,
