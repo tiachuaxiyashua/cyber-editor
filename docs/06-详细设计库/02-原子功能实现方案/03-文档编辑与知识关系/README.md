@@ -47,17 +47,17 @@
 - [F-036 Mermaid 插入与渲染](./F-036-Mermaid插入与渲染.md) - S / 已完成
 - [F-037 思维导图插入与渲染](./F-037-思维导图插入与渲染.md) - S / 已完成
 - [F-038 图片粘贴与拖拽导入](./F-038-图片粘贴与拖拽导入.md) - A / 已完成
-- [F-111 表格工件浏览与快速编辑](./F-111-表格工件浏览与快速编辑.md) - A / 未完成
-- [F-112 图形/表格工件超链接与嵌入](./F-112-图形-表格工件超链接与嵌入.md) - A / 未完成
+- [F-111 表格工件浏览与快速编辑](./F-111-表格工件浏览与快速编辑.md) - A / 部分完成
+- [F-112 图形/表格工件超链接与嵌入](./F-112-图形-表格工件超链接与嵌入.md) - A / 部分完成
 - [F-039 手动保存、自动保存与脏状态提示](./F-039-手动保存、自动保存与脏状态提示.md) - M / 已完成
 - [F-040 外部变更检测与冲突处理](./F-040-外部变更检测与冲突处理.md) - A / 已完成
 - [F-041 查看笔记正向与反向引用](./F-041-查看笔记正向与反向引用.md) - A / 已完成
 - [F-042 对比两篇笔记的引用关系](./F-042-对比两篇笔记的引用关系.md) - B / 已完成
 - [INF-007 Markdown editor/renderer adapter](./INF-007-Markdowneditor-rendereradapter.md) - M / 部分完成
-- [INF-049 Table artifact adapter](./INF-049-Tableartifactadapter.md) - A / 未完成
+- [INF-049 Table artifact adapter](./INF-049-Tableartifactadapter.md) - A / 已完成
 - [INF-008 Mermaid renderer](./INF-008-Mermaidrenderer.md) - S / 已完成
 - [INF-009 Mindmap renderer](./INF-009-Mindmaprenderer.md) - S / 已完成
-- [INF-050 Diagram/table embed-link resolver](./INF-050-Diagram-tableembed-linkresolver.md) - A / 未完成
+- [INF-050 Diagram/table embed-link resolver](./INF-050-Diagram-tableembed-linkresolver.md) - A / 部分完成
 - [INF-010 Image asset importer](./INF-010-Imageassetimporter.md) - A / 已完成
 - [INF-011 Reference graph indexer](./INF-011-Referencegraphindexer.md) - A / 已完成
 - [INF-012 Reference comparison engine](./INF-012-Referencecomparisonengine.md) - B / 已完成

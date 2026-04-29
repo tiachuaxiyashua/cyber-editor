@@ -43,6 +43,8 @@
 - 预期 UI：技能中心立刻显示已安装
 
 ## 7. F-117 工程知识索引状态查看与手动刷新
-- 输入：修改文档后点击刷新
-- 预期状态：`index_stale -> index_refreshing -> index_ready`
-- 预期 UI：新鲜度提示消失
+- 输入：打开已有工程，修改可索引文档后点击上下文面板的刷新按钮
+- 预期状态：`missing` 或 `stale` 经由主进程刷新后进入 `ready`，失败时进入 `error` 并保留错误信息
+- 预期持久化：`.project/runtime/knowledge/index.json` 由 `KnowledgeIndexService.refresh()` 写入，包含 `version`、`builtAt`、`units[]` 和 `staleDocumentPaths[]`
+- 预期 UI：上下文面板显示索引状态、文档数和过期路径；刷新完成后 stale 提示消失
+- 失败边界：刷新按钮不得只改 Renderer 状态；索引缺失不得伪装成 ready
