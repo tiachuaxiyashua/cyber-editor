@@ -76,6 +76,8 @@
 - [F-085 Flow 保存、另存、导入、导出](./F-085-Flow保存、另存、导入、导出.md) - A / 部分完成
 - [F-086 Flow 历史、快照与恢复](./F-086-Flow历史、快照与恢复.md) - A / 未完成
 - [INF-031 Flow asset persistence](./INF-031-Flowassetpersistence.md) - S / 部分完成
+- [INF-060 Conversation-to-flow planner](./INF-060-Conversation-to-flow-planner.md) - S / 部分完成
+- [INF-061 Flow patch application engine](./INF-061-Flow-patch-application-engine.md) - S / 部分完成
 - [INF-032 Canvas layout state store](./INF-032-Canvaslayoutstatestore.md) - S / 部分完成
 - [INF-033 Flow validation engine](./INF-033-Flowvalidationengine.md) - S / 部分完成
 - [INF-037 Loop runtime](./INF-037-Loopruntime.md) - S / 部分完成
@@ -84,3 +86,4 @@
 - [INF-040 Node debug / partial rerun engine](./INF-040-Nodedebug-partialrerunengine.md) - S / 未完成
 - [INF-041 Flow history/snapshot/restore](./INF-041-Flowhistory-snapshot-restore.md) - A / 未完成
 - [INF-053 Role package loader](./INF-053-Rolepackageloader.md) - S / 未完成
+- [INF-062 Remote role registry adapter](./INF-062-Remote-role-registry-adapter.md) - A / 部分完成

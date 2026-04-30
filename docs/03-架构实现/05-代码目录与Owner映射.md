@@ -15,10 +15,10 @@
 |---|---:|---|
 | `src/main/services/` | 48 | 主进程服务、运行时、治理、导出、索引、日志 |
 | `src/main/ipc/` | 6 | IPC 注册与上下文 |
-| `src/renderer/components/` | 29 | 页面组件、工作台组件、弹窗与独立视图 |
-| `src/shared/` | 28 | 类型、契约、解析器、共享规则与模板包 |
+| `src/renderer/components/` | 28 | 页面组件、工作台组件、弹窗与独立视图 |
+| `src/shared/` | 24 | 类型、契约、解析器、共享规则与模板包 |
 | `tests/unit/` | 105 | 逻辑、边界、治理、契约和回归单测 |
-| `tests/e2e/` | 49 | Electron、打包态、UI 契约与闭环验证 |
+| `tests/e2e/` | 39 | Electron、打包态、UI 契约与闭环验证 |
 
 ## 3. 启动与主链路
 
@@ -132,12 +132,12 @@
 
 | 文件 | 行数 | 风险 |
 |---|---:|---|
-| `src/renderer/styles.css` | 7145 | 全局样式耦合过高，容易引起跨页回归 |
-| `src/renderer/components/OrchestrationWorkspace.tsx` | 5422 | 画布、Inspector、治理、运行控制集中在单文件 |
-| `src/renderer/App.tsx` | 5182 | 壳层、路由、弹窗、状态装配过于集中 |
-| `src/main/services/runtime-service.ts` | 4158 | 运行状态机、审批、重跑、恢复集中 |
-| `src/shared/types.ts` | 2007 | 跨域类型过度聚合 |
-| `src/main/services/project-service.ts` | 1594 | 工程、文档、工件、审计边界混合 |
+| `src/renderer/styles.css` | 7964 | 全局样式耦合过高，容易引起跨页回归 |
+| `src/renderer/components/OrchestrationWorkspace.tsx` | 5634 | 画布、Inspector、治理、运行控制集中在单文件 |
+| `src/renderer/App.tsx` | 5485 | 壳层、路由、弹窗、状态装配过于集中 |
+| `src/main/services/runtime-service.ts` | 4350 | 运行状态机、审批、重跑、恢复集中 |
+| `src/shared/types.ts` | 2217 | 跨域类型过度聚合 |
+| `src/main/services/project-service.ts` | 1764 | 工程、文档、工件、审计边界混合 |
 
 这些热点就是 `03-架构实现/04-代码重构执行计划.md` 的直接依据。
 
