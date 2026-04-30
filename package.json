@@ -50,7 +50,8 @@
     "demo:closed-loop": "npm run build && node scripts/with-clean-electron-env.mjs node scripts/run-closed-loop-demo.mjs",
     "demo:closed-loop:regression": "npm run build && node scripts/with-clean-electron-env.mjs node scripts/run-closed-loop-regression.mjs",
     "test:packaged-closed-loop": "node scripts/with-clean-electron-env.mjs node scripts/run-packaged-closed-loop-regression.mjs",
-    "demo:packaged-closed-loop:regression": "npm run package && npm run test:packaged-closed-loop"
+    "demo:packaged-closed-loop:regression": "npm run package && npm run test:packaged-closed-loop",
+    "diagnose:codex-link": "bash scripts/codex-link-monitor.sh"
   },
   "overrides": {
     "fast-csv": "^5.0.5",
