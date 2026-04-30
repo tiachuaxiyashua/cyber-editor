@@ -123,7 +123,7 @@ type InspectorPanelProps = {
 };
 ```
 
-### 2.9 `RuntimeDrawer`
+### 2.9 `RuntimeDrawer`（计划拆分目标）
 - 责任：显示运行日志、节点状态、上下文变量、重跑入口。
 - Props
 ```ts
@@ -138,7 +138,7 @@ type RuntimeDrawerProps = {
 ```
 
 ## 3. Hook / State 归属
-### 3.1 `useFlowDraftState`
+### 3.1 `useFlowDraftState`（计划拆分目标）
 ```ts
 type UseFlowDraftState = {
   flowDraft?: FlowDraft;
@@ -200,13 +200,13 @@ type UseFlowConversationState = {
 ## 4. 组件到 Service 的逐方法调用关系
 | Renderer 组件/Hook | 调用入口 | IPC | Main/Service | 返回 |
 |---|---|---|---|---|
-| `useFlowDraftState.loadFlow` | 打开 Flow | `runtimeAsset.openFlow` | `RuntimeAssetService.openFlow` | `FlowDraft` |
-| `useFlowDraftState.saveFlow` | 保存 | `runtimeAsset.saveFlow` | `RuntimeAssetService.saveFlow` + `FlowValidationEngine.validate` | `FlowSaveResult` |
+| 当前 `OrchestrationWorkspace` / 计划 `useFlowDraftState.loadFlow` | 打开 Flow | `runtimeAsset.openFlow` | `RuntimeAssetService.openFlow` | `FlowDraft` |
+| 当前 `OrchestrationWorkspace` / 计划 `useFlowDraftState.saveFlow` | 保存 | `runtimeAsset.saveFlow` | `RuntimeAssetService.saveFlow` + `FlowValidationEngine.validate` | `FlowSaveResult` |
 | `CanvasViewport.onConnect` | 创建边 | 无直接 IPC，先改 draft | 本地 patch | 新边进入 `flowDraft` |
 | `InspectorPanel.onPatchNode` | Inspector 改节点 | 无直接 IPC，先改 draft | 本地 patch | 节点被 patch，必要时标 stale |
 | `ContextPane.sendMessage` | 自然语言生成/修改 | `conversation-flow:draft` / `conversation-flow:patch` | `ConversationFlowService.planFromPrompt` / `patchFromPrompt` | `FlowPlan` + draft 或 `FlowPatch` |
 | `flowConversationPreview.onApply` | 应用 AI 预览 | `conversation-flow:apply-patch` 预览已生成；保存走 `platform:save-flow` | `ConversationFlowService.applyPatch` + `PlatformService` | 新 `PlatformFlowAsset` |
-| `RuntimeDrawer.onRerunFromNode` | 局部重跑 | `runtime.runFromNode` | `CapabilityRuntime.rerunFromNode` | `RunAccepted` |
+| 当前运行态面板 / 计划 `RuntimeDrawer.onRerunFromNode` | 局部重跑 | `runtime.runFromNode` | `CapabilityRuntime.rerunFromNode` | `RunAccepted` |
 
 ## 5. Inspector 到 Draft 的 Patch 规则
 1. Inspector 不允许直接修改原始节点对象引用，必须生成 `patch`。
@@ -248,13 +248,13 @@ type UseFlowConversationState = {
 6. `src/main/ipc/register-settings-session-ai-ipc.ts`
    - 提供 `conversation-flow:plan` / `conversation-flow:draft` / `conversation-flow:patch` / `conversation-flow:apply-patch`
 7. `src/renderer/components/OrchestrationWorkspace.tsx`
-   - 只做装配
-8. `src/renderer/components/FlowConversationPanel.tsx`
-9. `src/renderer/components/FlowInspector.tsx`
-10. `src/renderer/components/FlowNodeCard.tsx`
-11. `src/renderer/hooks/useFlowDraftState.ts`
-12. `tests/unit/*`
-13. `tests/e2e/*`
+   - 当前承载画布、节点卡片、Inspector、运行态面板和流程对话入口；后续拆分必须保持单一 flow draft 真源
+8. `src/renderer/App.tsx`
+   - 当前持有无工程草稿、`flowConversationPreview` 和应用/取消预览装配
+9. 计划拆分目标：`FlowConversationPanel`、`FlowInspector`、`FlowNodeCard`、`useFlowDraftState`
+   - 这些名称目前不是当前代码 owner，只有在降低 `OrchestrationWorkspace` 耦合时才允许落地
+10. `tests/unit/*`
+11. `tests/e2e/*`
 
 ## 8. 验收标准
 1. 程序员只读本页和对应代码契约与唯一性文档，能确定组件拆分、状态归属、IPC 边界和开发顺序。

@@ -4,7 +4,9 @@
 把技能中心、角色下载、连接健康、provider profiles 和模型能力诊断压到面板/表单级实现。
 
 ## 2. 页面组件树
-- `SkillCenterPage`
+当前代码中资源安装统一由 `ResourceCenterPage` 承接，连接和 Provider 设置由 `SettingsWorkspacePage` / `ProviderProfilesDialog` 承接；下列更细组件名是计划拆分目标，不是当前文件 owner。
+
+- `ResourceCenterPage`
   - `InstalledSkillList`
   - `AvailableSkillList`
   - `RemoteRegistrySearchBar`

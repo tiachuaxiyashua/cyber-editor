@@ -31,8 +31,8 @@
   - `InspectorPanel`
     - `NodeInspector`
     - `EdgeInspector`
-    - `FlowInspector`
-  - `RuntimeDrawer`
+    - 当前由 `OrchestrationWorkspace` 内部 inspector 区承担，后续若拆分才命名为 `FlowInspector`
+  - 当前运行态由 `OrchestrationWorkspace` 内部面板承担，后续若拆分才命名为 `RuntimeDrawer`
 
 ## 3. Renderer 状态
 - `activeFlowId`
@@ -47,11 +47,11 @@
 - `flowConversationPreview: FlowConversationPreviewState | null`
 
 ## 3.1 Renderer hook / state 归属
-- `useFlowDraftState()`
+- `App.tsx` 与 `OrchestrationWorkspace.tsx` 当前共同持有 flow draft state
 - `useCanvasViewportState()`
 - `useSelectionState()`
 - `useInspectorState()`
-- `useRuntimeDrawerState()`
+- `OrchestrationWorkspace.tsx` 当前持有运行态/调试面板状态
 - `useFlowConversationState()`
 
 ## 4. Main / Service 职责
@@ -123,12 +123,8 @@
 ## 5.2 文件级实现分解
 - `src/renderer/components/OrchestrationWorkspace.tsx`
   - 编排页总装配、面板切换、画布布局。
-- `src/renderer/components/FlowNodeCard.tsx`
-  - 节点卡片、对象级快捷按钮、状态提示。
-- `src/renderer/components/FlowInspector.tsx`
-  - 节点、边、Flow 级 Inspector。
-- `src/renderer/components/RuntimeDrawer.tsx`
-  - 设计态/运行态切换后的运行抽屉。
+- `src/renderer/components/OrchestrationWorkspace.tsx`
+  - 节点卡片、对象级快捷按钮、Inspector、设计态/运行态面板和画布布局当前集中 owner。
 - `src/renderer/App.tsx`
   - 绑定 `orchestration-flow` 会话目标、生成 `flowConversationPreview`、应用/取消预览。
 - `src/main/ipc/register-settings-session-ai-ipc.ts`
@@ -139,8 +135,8 @@
   - Flow 草稿、快照、恢复、子流程切换。
 - `src/main/services/capability-runtime.ts`
   - 节点执行计划、并行/循环/子流程运行。
-- `src/main/services/role-package-loader.ts`
-  - 角色包目录读取和实例化。
+- `src/main/services/role-package-registry-service.ts`
+  - 角色包目录读取、远程审查和安装。
 
 ## 6. 核心交互实现
 ### 6.1 拖拽节点
