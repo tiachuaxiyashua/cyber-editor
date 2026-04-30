@@ -40624,5 +40624,1781 @@
     "preconditions": "Prepare base project context for INF-048.",
     "minimalSteps": "Execute the minimal visible path for Package/test harness.",
     "oracle": "INF-048 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-F-129-LOG-01",
+    "objectId": "F-129",
+    "objectKind": "feature",
+    "objectDomain": "平台入口与模板",
+    "suiteCategory": "LOG",
+    "familyId": "LOG-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for F-129.",
+    "minimalSteps": "Execute the minimal visible path for GStack 软件交付工作流模板.",
+    "oracle": "F-129 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-F-129-FUN-01",
+    "objectId": "F-129",
+    "objectKind": "feature",
+    "objectDomain": "平台入口与模板",
+    "suiteCategory": "FUN",
+    "familyId": "FUN-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for F-129.",
+    "minimalSteps": "Execute the minimal visible path for GStack 软件交付工作流模板.",
+    "oracle": "F-129 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-F-129-ABU-01",
+    "objectId": "F-129",
+    "objectKind": "feature",
+    "objectDomain": "平台入口与模板",
+    "suiteCategory": "ABU",
+    "familyId": "ABU-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for F-129.",
+    "minimalSteps": "Execute the minimal visible path for GStack 软件交付工作流模板.",
+    "oracle": "F-129 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-F-129-STR-01",
+    "objectId": "F-129",
+    "objectKind": "feature",
+    "objectDomain": "平台入口与模板",
+    "suiteCategory": "STR",
+    "familyId": "STR-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for F-129.",
+    "minimalSteps": "Execute the minimal visible path for GStack 软件交付工作流模板.",
+    "oracle": "F-129 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-F-129-EXP-01",
+    "objectId": "F-129",
+    "objectKind": "feature",
+    "objectDomain": "平台入口与模板",
+    "suiteCategory": "EXP",
+    "familyId": "EXP-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for F-129.",
+    "minimalSteps": "Execute the minimal visible path for GStack 软件交付工作流模板.",
+    "oracle": "F-129 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-F-129-SCN-01",
+    "objectId": "F-129",
+    "objectKind": "feature",
+    "objectDomain": "平台入口与模板",
+    "suiteCategory": "SCN",
+    "familyId": "SCN-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for F-129.",
+    "minimalSteps": "Execute the minimal visible path for GStack 软件交付工作流模板.",
+    "oracle": "F-129 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-F-125-LOG-01",
+    "objectId": "F-125",
+    "objectKind": "feature",
+    "objectDomain": "编排与流程资产",
+    "suiteCategory": "LOG",
+    "familyId": "LOG-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for F-125.",
+    "minimalSteps": "Execute the minimal visible path for 编排页自然语言编排对话入口.",
+    "oracle": "F-125 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-F-125-FUN-01",
+    "objectId": "F-125",
+    "objectKind": "feature",
+    "objectDomain": "编排与流程资产",
+    "suiteCategory": "FUN",
+    "familyId": "FUN-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for F-125.",
+    "minimalSteps": "Execute the minimal visible path for 编排页自然语言编排对话入口.",
+    "oracle": "F-125 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-F-125-ABU-01",
+    "objectId": "F-125",
+    "objectKind": "feature",
+    "objectDomain": "编排与流程资产",
+    "suiteCategory": "ABU",
+    "familyId": "ABU-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for F-125.",
+    "minimalSteps": "Execute the minimal visible path for 编排页自然语言编排对话入口.",
+    "oracle": "F-125 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-F-125-STR-01",
+    "objectId": "F-125",
+    "objectKind": "feature",
+    "objectDomain": "编排与流程资产",
+    "suiteCategory": "STR",
+    "familyId": "STR-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for F-125.",
+    "minimalSteps": "Execute the minimal visible path for 编排页自然语言编排对话入口.",
+    "oracle": "F-125 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-F-125-EXP-01",
+    "objectId": "F-125",
+    "objectKind": "feature",
+    "objectDomain": "编排与流程资产",
+    "suiteCategory": "EXP",
+    "familyId": "EXP-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for F-125.",
+    "minimalSteps": "Execute the minimal visible path for 编排页自然语言编排对话入口.",
+    "oracle": "F-125 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-F-125-SCN-01",
+    "objectId": "F-125",
+    "objectKind": "feature",
+    "objectDomain": "编排与流程资产",
+    "suiteCategory": "SCN",
+    "familyId": "SCN-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for F-125.",
+    "minimalSteps": "Execute the minimal visible path for 编排页自然语言编排对话入口.",
+    "oracle": "F-125 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-F-126-LOG-01",
+    "objectId": "F-126",
+    "objectKind": "feature",
+    "objectDomain": "编排与流程资产",
+    "suiteCategory": "LOG",
+    "familyId": "LOG-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for F-126.",
+    "minimalSteps": "Execute the minimal visible path for 根据自然语言生成初始 Flow 草稿.",
+    "oracle": "F-126 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-F-126-FUN-01",
+    "objectId": "F-126",
+    "objectKind": "feature",
+    "objectDomain": "编排与流程资产",
+    "suiteCategory": "FUN",
+    "familyId": "FUN-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for F-126.",
+    "minimalSteps": "Execute the minimal visible path for 根据自然语言生成初始 Flow 草稿.",
+    "oracle": "F-126 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-F-126-ABU-01",
+    "objectId": "F-126",
+    "objectKind": "feature",
+    "objectDomain": "编排与流程资产",
+    "suiteCategory": "ABU",
+    "familyId": "ABU-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for F-126.",
+    "minimalSteps": "Execute the minimal visible path for 根据自然语言生成初始 Flow 草稿.",
+    "oracle": "F-126 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-F-126-STR-01",
+    "objectId": "F-126",
+    "objectKind": "feature",
+    "objectDomain": "编排与流程资产",
+    "suiteCategory": "STR",
+    "familyId": "STR-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for F-126.",
+    "minimalSteps": "Execute the minimal visible path for 根据自然语言生成初始 Flow 草稿.",
+    "oracle": "F-126 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-F-126-EXP-01",
+    "objectId": "F-126",
+    "objectKind": "feature",
+    "objectDomain": "编排与流程资产",
+    "suiteCategory": "EXP",
+    "familyId": "EXP-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for F-126.",
+    "minimalSteps": "Execute the minimal visible path for 根据自然语言生成初始 Flow 草稿.",
+    "oracle": "F-126 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-F-126-SCN-01",
+    "objectId": "F-126",
+    "objectKind": "feature",
+    "objectDomain": "编排与流程资产",
+    "suiteCategory": "SCN",
+    "familyId": "SCN-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for F-126.",
+    "minimalSteps": "Execute the minimal visible path for 根据自然语言生成初始 Flow 草稿.",
+    "oracle": "F-126 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-F-127-LOG-01",
+    "objectId": "F-127",
+    "objectKind": "feature",
+    "objectDomain": "编排与流程资产",
+    "suiteCategory": "LOG",
+    "familyId": "LOG-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for F-127.",
+    "minimalSteps": "Execute the minimal visible path for 通过对话增量修改现有 Flow.",
+    "oracle": "F-127 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-F-127-FUN-01",
+    "objectId": "F-127",
+    "objectKind": "feature",
+    "objectDomain": "编排与流程资产",
+    "suiteCategory": "FUN",
+    "familyId": "FUN-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for F-127.",
+    "minimalSteps": "Execute the minimal visible path for 通过对话增量修改现有 Flow.",
+    "oracle": "F-127 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-F-127-ABU-01",
+    "objectId": "F-127",
+    "objectKind": "feature",
+    "objectDomain": "编排与流程资产",
+    "suiteCategory": "ABU",
+    "familyId": "ABU-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for F-127.",
+    "minimalSteps": "Execute the minimal visible path for 通过对话增量修改现有 Flow.",
+    "oracle": "F-127 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-F-127-STR-01",
+    "objectId": "F-127",
+    "objectKind": "feature",
+    "objectDomain": "编排与流程资产",
+    "suiteCategory": "STR",
+    "familyId": "STR-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for F-127.",
+    "minimalSteps": "Execute the minimal visible path for 通过对话增量修改现有 Flow.",
+    "oracle": "F-127 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-F-127-EXP-01",
+    "objectId": "F-127",
+    "objectKind": "feature",
+    "objectDomain": "编排与流程资产",
+    "suiteCategory": "EXP",
+    "familyId": "EXP-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for F-127.",
+    "minimalSteps": "Execute the minimal visible path for 通过对话增量修改现有 Flow.",
+    "oracle": "F-127 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-F-127-SCN-01",
+    "objectId": "F-127",
+    "objectKind": "feature",
+    "objectDomain": "编排与流程资产",
+    "suiteCategory": "SCN",
+    "familyId": "SCN-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for F-127.",
+    "minimalSteps": "Execute the minimal visible path for 通过对话增量修改现有 Flow.",
+    "oracle": "F-127 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-F-128-LOG-01",
+    "objectId": "F-128",
+    "objectKind": "feature",
+    "objectDomain": "编排与流程资产",
+    "suiteCategory": "LOG",
+    "familyId": "LOG-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for F-128.",
+    "minimalSteps": "Execute the minimal visible path for 从网络下载角色包.",
+    "oracle": "F-128 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-F-128-FUN-01",
+    "objectId": "F-128",
+    "objectKind": "feature",
+    "objectDomain": "编排与流程资产",
+    "suiteCategory": "FUN",
+    "familyId": "FUN-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for F-128.",
+    "minimalSteps": "Execute the minimal visible path for 从网络下载角色包.",
+    "oracle": "F-128 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-F-128-ABU-01",
+    "objectId": "F-128",
+    "objectKind": "feature",
+    "objectDomain": "编排与流程资产",
+    "suiteCategory": "ABU",
+    "familyId": "ABU-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for F-128.",
+    "minimalSteps": "Execute the minimal visible path for 从网络下载角色包.",
+    "oracle": "F-128 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-F-128-STR-01",
+    "objectId": "F-128",
+    "objectKind": "feature",
+    "objectDomain": "编排与流程资产",
+    "suiteCategory": "STR",
+    "familyId": "STR-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for F-128.",
+    "minimalSteps": "Execute the minimal visible path for 从网络下载角色包.",
+    "oracle": "F-128 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-F-128-EXP-01",
+    "objectId": "F-128",
+    "objectKind": "feature",
+    "objectDomain": "编排与流程资产",
+    "suiteCategory": "EXP",
+    "familyId": "EXP-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for F-128.",
+    "minimalSteps": "Execute the minimal visible path for 从网络下载角色包.",
+    "oracle": "F-128 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-F-128-SCN-01",
+    "objectId": "F-128",
+    "objectKind": "feature",
+    "objectDomain": "编排与流程资产",
+    "suiteCategory": "SCN",
+    "familyId": "SCN-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for F-128.",
+    "minimalSteps": "Execute the minimal visible path for 从网络下载角色包.",
+    "oracle": "F-128 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-INF-062-LOG-01",
+    "objectId": "INF-062",
+    "objectKind": "internal",
+    "objectDomain": "连接层",
+    "suiteCategory": "LOG",
+    "familyId": "LOG-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for INF-062.",
+    "minimalSteps": "Execute the minimal visible path for Remote role registry adapter.",
+    "oracle": "INF-062 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-INF-062-FUN-01",
+    "objectId": "INF-062",
+    "objectKind": "internal",
+    "objectDomain": "连接层",
+    "suiteCategory": "FUN",
+    "familyId": "FUN-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for INF-062.",
+    "minimalSteps": "Execute the minimal visible path for Remote role registry adapter.",
+    "oracle": "INF-062 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-INF-062-ABU-01",
+    "objectId": "INF-062",
+    "objectKind": "internal",
+    "objectDomain": "连接层",
+    "suiteCategory": "ABU",
+    "familyId": "ABU-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for INF-062.",
+    "minimalSteps": "Execute the minimal visible path for Remote role registry adapter.",
+    "oracle": "INF-062 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-INF-062-STR-01",
+    "objectId": "INF-062",
+    "objectKind": "internal",
+    "objectDomain": "连接层",
+    "suiteCategory": "STR",
+    "familyId": "STR-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for INF-062.",
+    "minimalSteps": "Execute the minimal visible path for Remote role registry adapter.",
+    "oracle": "INF-062 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-INF-062-EXP-01",
+    "objectId": "INF-062",
+    "objectKind": "internal",
+    "objectDomain": "连接层",
+    "suiteCategory": "EXP",
+    "familyId": "EXP-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for INF-062.",
+    "minimalSteps": "Execute the minimal visible path for Remote role registry adapter.",
+    "oracle": "INF-062 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-INF-062-SCN-01",
+    "objectId": "INF-062",
+    "objectKind": "internal",
+    "objectDomain": "连接层",
+    "suiteCategory": "SCN",
+    "familyId": "SCN-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for INF-062.",
+    "minimalSteps": "Execute the minimal visible path for Remote role registry adapter.",
+    "oracle": "INF-062 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-INF-060-LOG-01",
+    "objectId": "INF-060",
+    "objectKind": "internal",
+    "objectDomain": "编排层",
+    "suiteCategory": "LOG",
+    "familyId": "LOG-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for INF-060.",
+    "minimalSteps": "Execute the minimal visible path for Conversation-to-flow planner.",
+    "oracle": "INF-060 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-INF-060-FUN-01",
+    "objectId": "INF-060",
+    "objectKind": "internal",
+    "objectDomain": "编排层",
+    "suiteCategory": "FUN",
+    "familyId": "FUN-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for INF-060.",
+    "minimalSteps": "Execute the minimal visible path for Conversation-to-flow planner.",
+    "oracle": "INF-060 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-INF-060-ABU-01",
+    "objectId": "INF-060",
+    "objectKind": "internal",
+    "objectDomain": "编排层",
+    "suiteCategory": "ABU",
+    "familyId": "ABU-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for INF-060.",
+    "minimalSteps": "Execute the minimal visible path for Conversation-to-flow planner.",
+    "oracle": "INF-060 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-INF-060-STR-01",
+    "objectId": "INF-060",
+    "objectKind": "internal",
+    "objectDomain": "编排层",
+    "suiteCategory": "STR",
+    "familyId": "STR-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for INF-060.",
+    "minimalSteps": "Execute the minimal visible path for Conversation-to-flow planner.",
+    "oracle": "INF-060 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-INF-060-EXP-01",
+    "objectId": "INF-060",
+    "objectKind": "internal",
+    "objectDomain": "编排层",
+    "suiteCategory": "EXP",
+    "familyId": "EXP-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for INF-060.",
+    "minimalSteps": "Execute the minimal visible path for Conversation-to-flow planner.",
+    "oracle": "INF-060 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-INF-060-SCN-01",
+    "objectId": "INF-060",
+    "objectKind": "internal",
+    "objectDomain": "编排层",
+    "suiteCategory": "SCN",
+    "familyId": "SCN-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for INF-060.",
+    "minimalSteps": "Execute the minimal visible path for Conversation-to-flow planner.",
+    "oracle": "INF-060 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-INF-061-LOG-01",
+    "objectId": "INF-061",
+    "objectKind": "internal",
+    "objectDomain": "编排层",
+    "suiteCategory": "LOG",
+    "familyId": "LOG-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for INF-061.",
+    "minimalSteps": "Execute the minimal visible path for Flow patch application engine.",
+    "oracle": "INF-061 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-INF-061-FUN-01",
+    "objectId": "INF-061",
+    "objectKind": "internal",
+    "objectDomain": "编排层",
+    "suiteCategory": "FUN",
+    "familyId": "FUN-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for INF-061.",
+    "minimalSteps": "Execute the minimal visible path for Flow patch application engine.",
+    "oracle": "INF-061 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-INF-061-ABU-01",
+    "objectId": "INF-061",
+    "objectKind": "internal",
+    "objectDomain": "编排层",
+    "suiteCategory": "ABU",
+    "familyId": "ABU-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for INF-061.",
+    "minimalSteps": "Execute the minimal visible path for Flow patch application engine.",
+    "oracle": "INF-061 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-INF-061-STR-01",
+    "objectId": "INF-061",
+    "objectKind": "internal",
+    "objectDomain": "编排层",
+    "suiteCategory": "STR",
+    "familyId": "STR-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for INF-061.",
+    "minimalSteps": "Execute the minimal visible path for Flow patch application engine.",
+    "oracle": "INF-061 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-INF-061-EXP-01",
+    "objectId": "INF-061",
+    "objectKind": "internal",
+    "objectDomain": "编排层",
+    "suiteCategory": "EXP",
+    "familyId": "EXP-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for INF-061.",
+    "minimalSteps": "Execute the minimal visible path for Flow patch application engine.",
+    "oracle": "INF-061 visible result, persisted state, and evidence chain match current PRD."
+  },
+  {
+    "caseId": "TC-INF-061-SCN-01",
+    "objectId": "INF-061",
+    "objectKind": "internal",
+    "objectDomain": "编排层",
+    "suiteCategory": "SCN",
+    "familyId": "SCN-01",
+    "primaryLaneId": "LANE-UNIT",
+    "laneIds": [
+      "LANE-UNIT"
+    ],
+    "fixtureIds": [
+      "FIX-01"
+    ],
+    "evidenceIds": [
+      "EVD-ASSERT"
+    ],
+    "qualityGateIds": [
+      "QG-FUNC-001",
+      "QG-FUNC-002",
+      "QG-UX-001",
+      "QG-UX-002",
+      "QG-UX-003",
+      "QG-UX-004",
+      "QG-UX-005",
+      "QG-UX-006",
+      "QG-PKG-001",
+      "QG-PKG-002",
+      "QG-PKG-003",
+      "QG-STRESS-001",
+      "QG-STRESS-002",
+      "QG-DELIVERY-001"
+    ],
+    "preconditions": "Prepare base project context for INF-061.",
+    "minimalSteps": "Execute the minimal visible path for Flow patch application engine.",
+    "oracle": "INF-061 visible result, persisted state, and evidence chain match current PRD."
   }
 ]

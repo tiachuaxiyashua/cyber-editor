@@ -21,6 +21,7 @@ Source: detailed feature inventory under `docs/06-详细设计库/`. Prefix: F.
 | F-122 | 模板来源、版本、信任与兼容性展示 | LOG-01 | FUN-01 | ABU-01 | STR-01 | EXP-01 | SCN-01 | 平台入口与模板: 模板来源、版本、信任与兼容性展示 |
 | F-123 | 模板更新、损坏阻断与状态修复 | LOG-01 | FUN-01 | ABU-01 | STR-01 | EXP-01 | SCN-01 | 平台入口与模板: 模板更新、损坏阻断与状态修复 |
 | F-124 | 从模板直接开始编排 | LOG-01 | FUN-01 | ABU-01 | STR-01 | EXP-01 | SCN-01 | 平台入口与模板: 从模板直接开始编排 |
+| F-129 | GStack 软件交付工作流模板 | LOG-01 | FUN-01 | ABU-01 | STR-01 | EXP-01 | SCN-01 | 平台入口与模板: GStack 软件交付工作流模板 |
 | F-015 | 最近工程快速重开 | LOG-01 | FUN-01 | ABU-01 | STR-01 | EXP-01 | SCN-01 | 工程与文件工作台: 最近工程快速重开 |
 | F-016 | 关闭工程与切换工程 | LOG-01 | FUN-01 | ABU-01 | STR-01 | EXP-01 | SCN-01 | 工程与文件工作台: 关闭工程与切换工程 |
 | F-017 | 打开工程所在目录与导出工程 | LOG-01 | FUN-01 | ABU-01 | STR-01 | EXP-01 | SCN-01 | 工程与文件工作台: 打开工程所在目录与导出工程 |
@@ -102,6 +103,10 @@ Source: detailed feature inventory under `docs/06-详细设计库/`. Prefix: F.
 | F-084 | 节点级调试与从此继续 | LOG-01 | FUN-01 | ABU-01 | STR-01 | EXP-01 | SCN-01 | 编排与流程资产: 节点级调试与从此继续 |
 | F-085 | Flow 保存、另存、导入、导出 | LOG-01 | FUN-01 | ABU-01 | STR-01 | EXP-01 | SCN-01 | 编排与流程资产: Flow 保存、另存、导入、导出 |
 | F-086 | Flow 历史、快照与恢复 | LOG-01 | FUN-01 | ABU-01 | STR-01 | EXP-01 | SCN-01 | 编排与流程资产: Flow 历史、快照与恢复 |
+| F-125 | 编排页自然语言编排对话入口 | LOG-01 | FUN-01 | ABU-01 | STR-01 | EXP-01 | SCN-01 | 编排与流程资产: 编排页自然语言编排对话入口 |
+| F-126 | 根据自然语言生成初始 Flow 草稿 | LOG-01 | FUN-01 | ABU-01 | STR-01 | EXP-01 | SCN-01 | 编排与流程资产: 根据自然语言生成初始 Flow 草稿 |
+| F-127 | 通过对话增量修改现有 Flow | LOG-01 | FUN-01 | ABU-01 | STR-01 | EXP-01 | SCN-01 | 编排与流程资产: 通过对话增量修改现有 Flow |
+| F-128 | 从网络下载角色包 | LOG-01 | FUN-01 | ABU-01 | STR-01 | EXP-01 | SCN-01 | 编排与流程资产: 从网络下载角色包 |
 | F-087 | 模板工件目录查看 | LOG-01 | FUN-01 | ABU-01 | STR-01 | EXP-01 | SCN-01 | 模板工件与导出: 模板工件目录查看 |
 | F-114 | Flow 输入文档目录配置 | LOG-01 | FUN-01 | ABU-01 | STR-01 | EXP-01 | SCN-01 | 模板工件与导出: Flow 输入文档目录配置 |
 | F-115 | Flow 输出文档目录配置 | LOG-01 | FUN-01 | ABU-01 | STR-01 | EXP-01 | SCN-01 | 模板工件与导出: Flow 输出文档目录配置 |

@@ -36,10 +36,13 @@ Source: detailed feature inventory under `docs/06-详细设计库/`. Prefix: INF
 | INF-027 | Connector registry and MCP-ready adapter | LOG-01 | FUN-01 | ABU-01 | STR-01 | EXP-01 | SCN-01 | 连接层: Connector registry and MCP-ready adapter |
 | INF-028 | Script tool adapter | LOG-01 | FUN-01 | ABU-01 | STR-01 | EXP-01 | SCN-01 | 连接层: Script tool adapter |
 | INF-053 | Role package loader | LOG-01 | FUN-01 | ABU-01 | STR-01 | EXP-01 | SCN-01 | 连接层: Role package loader |
+| INF-062 | Remote role registry adapter | LOG-01 | FUN-01 | ABU-01 | STR-01 | EXP-01 | SCN-01 | 连接层: Remote role registry adapter |
 | INF-029 | Template registry | LOG-01 | FUN-01 | ABU-01 | STR-01 | EXP-01 | SCN-01 | 编排层: Template registry |
 | INF-059 | Template metadata / trust resolver | LOG-01 | FUN-01 | ABU-01 | STR-01 | EXP-01 | SCN-01 | 编排层: Template metadata / trust resolver |
 | INF-030 | Template scaffold and save service | LOG-01 | FUN-01 | ABU-01 | STR-01 | EXP-01 | SCN-01 | 能力层: Template scaffold and save service |
 | INF-031 | Flow asset persistence | LOG-01 | FUN-01 | ABU-01 | STR-01 | EXP-01 | SCN-01 | 编排层: Flow asset persistence |
+| INF-060 | Conversation-to-flow planner | LOG-01 | FUN-01 | ABU-01 | STR-01 | EXP-01 | SCN-01 | 编排层: Conversation-to-flow planner |
+| INF-061 | Flow patch application engine | LOG-01 | FUN-01 | ABU-01 | STR-01 | EXP-01 | SCN-01 | 编排层: Flow patch application engine |
 | INF-032 | Canvas layout state store | LOG-01 | FUN-01 | ABU-01 | STR-01 | EXP-01 | SCN-01 | 编排层: Canvas layout state store |
 | INF-033 | Flow validation engine | LOG-01 | FUN-01 | ABU-01 | STR-01 | EXP-01 | SCN-01 | 编排层: Flow validation engine |
 | INF-034 | Artifact catalog service | LOG-01 | FUN-01 | ABU-01 | STR-01 | EXP-01 | SCN-01 | 编排层: Artifact catalog service |

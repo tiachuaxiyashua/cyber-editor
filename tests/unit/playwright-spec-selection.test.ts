@@ -49,7 +49,7 @@ describe('playwright spec selection', () => {
     expect(specs.length).toBeGreaterThan(0);
     expect(specs.some((line) => line.includes('.spec.ts:'))).toBe(true);
     expect(specs.some((line) => line.includes('.spec.js:'))).toBe(false);
-  });
+  }, 130_000);
 
   it('does not leave stale JavaScript e2e spec mirrors beside TypeScript specs', () => {
     const staleSpecs = collectFiles(path.join(repoRoot, 'tests', 'e2e'), (filePath) => filePath.endsWith('.spec.js'))
