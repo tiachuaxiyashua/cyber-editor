@@ -51,7 +51,11 @@
     "demo:closed-loop:regression": "npm run build && node scripts/with-clean-electron-env.mjs node scripts/run-closed-loop-regression.mjs",
     "test:packaged-closed-loop": "node scripts/with-clean-electron-env.mjs node scripts/run-packaged-closed-loop-regression.mjs",
     "demo:packaged-closed-loop:regression": "npm run package && npm run test:packaged-closed-loop",
-    "diagnose:codex-link": "bash scripts/codex-link-monitor.sh"
+    "diagnose:codex-link": "bash scripts/codex-link-monitor.sh",
+    "diagnose:codex-context-pressure": "bash scripts/codex-context-pressure-test.sh",
+    "diagnose:codex-context-pressure:no-compression": "CODEX_DISABLE_REQUEST_COMPRESSION=1 bash scripts/codex-context-pressure-test.sh",
+    "diagnose:codex-context-pressure:tui": "CODEX_DRIVER=tui bash scripts/codex-context-pressure-test.sh",
+    "diagnose:codex-context-pressure:monitor": "bash scripts/codex-link-monitor.sh --interval 1 --high-frequency 0.25 --tail-codex-home --tls-keylog --endpoint https://chatgpt.com/ --endpoint https://chatgpt.com/backend-api/codex/responses/compact --endpoint https://api.openai.com/v1/models -- bash scripts/codex-context-pressure-test.sh"
   },
   "overrides": {
     "fast-csv": "^5.0.5",

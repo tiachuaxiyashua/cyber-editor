@@ -17,6 +17,8 @@ INTERVAL="$DEFAULT_INTERVAL"
 TRANSCRIPT=1
 PCAP=0
 TAIL_CODEX_HOME=0
+HIGH_FREQ_INTERVAL="${CODEX_LINK_MONITOR_HIGH_FREQUENCY:-0}"
+TLS_KEYLOG=0
 declare -a ENDPOINTS=()
 declare -a EXTRA_PIDS=()
 declare -a COMMAND=()
@@ -25,8 +27,10 @@ SESSION_DIR=""
 EVENTS_FILE=""
 PROBES_FILE=""
 SAMPLES_FILE=""
+HIGH_FREQ_FILE=""
 SNAPSHOT_FILE=""
 TRANSCRIPT_FILE=""
+TLS_KEYLOG_FILE=""
 PCAP_LOG_FILE=""
 SUMMARY_FILE=""
 STOPPING=0
@@ -51,6 +55,9 @@ Options:
       --pid PID          Also monitor an existing process id. Can be repeated.
       --pcap             Try to start tcpdump and save an encrypted packet capture.
       --tail-codex-home  Tail existing Codex home logs if found. This may include sensitive text.
+      --high-frequency S Also record lightweight process/socket samples every S seconds.
+      --tls-keylog       Set SSLKEYLOGFILE for the wrapped command. Sensitive; use with pcap to
+                         decrypt HTTPS in Wireshark/tshark and recover full HTTP headers/bodies.
       --no-transcript    Do not capture wrapped command terminal output.
   -h, --help             Show this help.
 
@@ -63,6 +70,7 @@ What is collected:
 
 Limits:
   - HTTPS request/response bodies are encrypted and are not captured.
+  - --tls-keylog writes TLS session secrets, not plaintext. Treat it as sensitive.
   - tcpdump usually needs elevated permissions. If it cannot run, the failure is logged.
 USAGE
 }
@@ -220,7 +228,7 @@ collect_static_snapshot() {
   run_capture "$SNAPSHOT_FILE" "OS release" bash -lc 'test -r /etc/os-release && cat /etc/os-release || true'
   run_capture "$SNAPSHOT_FILE" "Resource limits" bash -lc 'ulimit -a'
   run_capture "$SNAPSHOT_FILE" "Environment redacted" redacted_env
-  run_capture "$SNAPSHOT_FILE" "Command availability" bash -lc 'for c in codex node npm git curl openssl dig nslookup getent ip ss tracepath traceroute tcpdump script powershell.exe; do printf "%-16s " "$c"; command -v "$c" || true; done'
+  run_capture "$SNAPSHOT_FILE" "Command availability" bash -lc 'for c in codex node npm git curl openssl dig nslookup getent ip ss tracepath traceroute tcpdump tshark script powershell.exe; do printf "%-16s " "$c"; command -v "$c" || true; done'
   run_capture "$SNAPSHOT_FILE" "Tool versions" bash -lc 'codex --version 2>/dev/null || true; node --version 2>/dev/null || true; npm --version 2>/dev/null || true; git --version 2>/dev/null || true; curl --version 2>/dev/null | head -n 5 || true; openssl version 2>/dev/null || true'
   run_capture "$SNAPSHOT_FILE" "Git state" bash -lc 'git rev-parse --show-toplevel 2>/dev/null || true; git branch --show-current 2>/dev/null || true; git status --short 2>/dev/null || true'
   run_capture "$SNAPSHOT_FILE" "Resolver config" bash -lc 'test -r /etc/resolv.conf && cat /etc/resolv.conf || true; test -r /etc/hosts && sed -n "1,120p" /etc/hosts || true'
@@ -334,6 +342,21 @@ snapshot_resources() {
   } >> "$SAMPLES_FILE" 2>&1
 }
 
+high_frequency_loop() {
+  local iteration=0
+  while true; do
+    iteration=$((iteration + 1))
+    {
+      printf '\n==== [%s] high-frequency sample %s ====\n' "$(utc_ts)" "$iteration"
+      ps -eo pid,ppid,pgid,sid,stat,etimes,%cpu,%mem,comm,args 2>/dev/null |
+        awk 'NR == 1 || /(^|[ /])(codex|node|npm|electron|chatgpt)([ ]|$)/'
+      printf '\n-- tcp 443 sockets --\n'
+      ss -tanpi 2>/dev/null | awk 'NR == 1 || /:443|:https/'
+    } >> "$HIGH_FREQ_FILE" 2>&1
+    sleep "$HIGH_FREQ_INTERVAL" || break
+  done
+}
+
 sampler_loop() {
   event "sampler_start" "interval=${INTERVAL}s"
   local iteration=0
@@ -405,10 +428,12 @@ Files:
   events.ndjson       Structured monitor lifecycle events.
   snapshot.log        One-time environment, route, DNS, TLS, and Codex metadata snapshot.
   samples.log         Repeated process, TCP/socket, route, and system resource samples.
+  high-frequency.log  Lightweight process/socket samples when --high-frequency is enabled.
   probes.log          Repeated curl timing/status probes to configured endpoints.
   transcript.log      Wrapped command terminal transcript, if enabled.
   command-exit.txt    Wrapped command exit code and timestamps.
   traffic-443.pcap    Optional encrypted TCP/443 packet capture, if --pcap succeeded.
+  tls-keylog.log      Optional TLS session key log when --tls-keylog is enabled.
 
 Start investigation after a failure by searching these strings:
   stream disconnected
@@ -422,9 +447,10 @@ Start investigation after a failure by searching these strings:
   reset
   timeout
 
-Important privacy note:
+  Important privacy note:
   snapshot.log stores Codex config/log metadata only, not file contents.
   transcript.log records terminal output from the wrapped command.
+  tls-keylog.log can decrypt matching packet captures and must be treated as sensitive.
   codex-home-tail.log exists only when --tail-codex-home is used and may include sensitive text.
 EOF
 }
@@ -434,6 +460,10 @@ write_summary() {
     printf 'session_dir=%s\n' "$SESSION_DIR"
     printf 'ended_at=%s\n' "$(utc_ts)"
     printf 'command_rc=%s\n' "$COMMAND_RC"
+    if [[ -n "$TLS_KEYLOG_FILE" ]]; then
+      printf 'tls_keylog_file=%s\n' "$TLS_KEYLOG_FILE"
+      [[ -s "$TLS_KEYLOG_FILE" ]] && wc -c "$TLS_KEYLOG_FILE" || true
+    fi
     printf 'endpoints=\n'
     printf '  %s\n' "${ENDPOINTS[@]}"
     printf '\nrecent monitor events:\n'
@@ -499,6 +529,14 @@ parse_args() {
       --tail-codex-home)
         TAIL_CODEX_HOME=1
         ;;
+      --high-frequency)
+        shift
+        [[ $# -gt 0 ]] || die "--high-frequency requires seconds"
+        HIGH_FREQ_INTERVAL="$1"
+        ;;
+      --tls-keylog)
+        TLS_KEYLOG=1
+        ;;
       --no-transcript)
         TRANSCRIPT=0
         ;;
@@ -536,14 +574,22 @@ init_session() {
   EVENTS_FILE="$SESSION_DIR/events.ndjson"
   PROBES_FILE="$SESSION_DIR/probes.log"
   SAMPLES_FILE="$SESSION_DIR/samples.log"
+  HIGH_FREQ_FILE="$SESSION_DIR/high-frequency.log"
   SNAPSHOT_FILE="$SESSION_DIR/snapshot.log"
   TRANSCRIPT_FILE="$SESSION_DIR/transcript.log"
+  TLS_KEYLOG_FILE="$SESSION_DIR/tls-keylog.log"
   SUMMARY_FILE="$SESSION_DIR/summary.txt"
   : > "$EVENTS_FILE"
   : > "$PROBES_FILE"
   : > "$SAMPLES_FILE"
+  : > "$HIGH_FREQ_FILE"
   : > "$SNAPSHOT_FILE"
   : > "$TRANSCRIPT_FILE"
+  if [[ "$TLS_KEYLOG" == "1" ]]; then
+    : > "$TLS_KEYLOG_FILE"
+  else
+    TLS_KEYLOG_FILE=""
+  fi
   : > "$SUMMARY_FILE"
 
   ln -sfn "$(basename "$SESSION_DIR")" "${OUTPUT_ROOT%/}/latest" 2>/dev/null || true
@@ -568,6 +614,11 @@ run_wrapped_command() {
     printf 'started_at=%s\n' "$(utc_ts)"
     printf 'command=%s\n' "$command_text"
   } > "$SESSION_DIR/command-exit.txt"
+
+  if [[ "$TLS_KEYLOG" == "1" ]]; then
+    export SSLKEYLOGFILE="$TLS_KEYLOG_FILE"
+    event "tls_keylog_enabled" "file=$TLS_KEYLOG_FILE"
+  fi
 
   if [[ "$TRANSCRIPT" == "1" ]] && command_exists script; then
     if script --help 2>&1 | grep -q -- ' -e,'; then
@@ -618,6 +669,12 @@ main() {
 
   sampler_loop &
   BG_PIDS+=("$!")
+
+  if [[ "$HIGH_FREQ_INTERVAL" != "0" ]]; then
+    high_frequency_loop &
+    BG_PIDS+=("$!")
+    event "high_frequency_start" "pid=${BG_PIDS[-1]} interval=${HIGH_FREQ_INTERVAL}s"
+  fi
 
   run_wrapped_command
   exit "$COMMAND_RC"
