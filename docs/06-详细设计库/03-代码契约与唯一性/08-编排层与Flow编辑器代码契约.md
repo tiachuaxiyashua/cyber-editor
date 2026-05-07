@@ -15,7 +15,7 @@
 - 画布草稿是唯一状态源，不能让组件局部状态和持久化草稿并存竞争。
 
 ## 3. 节点与边
-- 节点类型最少包含：
+- 当前代码中的 `FlowNodeType` 固定为：
   - start
   - end
   - agent
@@ -25,14 +25,21 @@
   - parallel_split
   - parallel_join
   - subflow
-  - artifact_read
-  - artifact_write
-  - manual_confirm
-- 边的 `channelType` 只能是：
-  - control
   - artifact
-  - message
-  - signal
+- 当前代码中的边对象是 `PlatformFlowEdge`，包含 `source`、`target`、`label`、`branch`、`description`。
+- 当前代码中的边分支 `branch` 只能表达：
+  - default
+  - true
+  - false
+  - loop
+  - exit
+- 当前代码中的消息、信号和工件通道不由 `channelType` 字段表达，而由节点数据表达：
+  - `inputArtifactPaths`
+  - `outputArtifactPaths`
+  - `inputMessageKeys`
+  - `outputMessageKeys`
+  - `outputSignalKeys`
+- 不允许在实现中重新引入一套与 `PlatformFlowNodeData` 并行的边通道真相源；若未来需要边级通道，必须先扩展共享契约并迁移 validator。
 
 ## 4. 位置持久化
 - 节点位置属于 `FlowDraft` 一部分。
@@ -88,4 +95,3 @@
 - 子流程可从卡片直接打开。
 - 并行/循环配置必须能保存并重开恢复。
 - 画布缩放、面板拉伸、紧凑宽度下仍可操作。
-
