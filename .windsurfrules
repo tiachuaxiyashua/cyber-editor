@@ -1,11 +1,14 @@
-## Docs Single Source
+## Truth And Docs Sources
 
-- `docs/` is the only current documentation system for Cyber Editor. Do not create parallel documentation or archive-style truth sources.
-- Before any product, UI, architecture, runtime, safety, or test change, read `docs/README.md`, then the relevant files under `docs/01-需求与PRD/`, `docs/02-产品设计/`, `docs/03-架构实现/`, `docs/04-测试验收/`, and task-relevant details under `docs/06-详细设计库/`.
-- For broad system reviews, global refactors, feature-state claims, or release decisions, read the whole `docs/` tree first.
+- `truth/` is the emerging source of truth for the future refactor and new architecture direction.
+- `docs/` is the legacy documentation system for the current Cyber Editor implementation. Keep it as migration evidence and current-state reference.
+- When working on future product direction, object model, file protocol, AI orchestration philosophy, or broad refactor strategy, read `truth/README.md` first, then the relevant files under `truth/`.
+- When working on current implementation maintenance, bug fixes, UI behavior, tests, or code-to-doc parity for the existing app, read `docs/README.md`, then the relevant legacy docs.
+- If `truth/` conflicts with `docs/`, treat `truth/` as the new target and `docs/` as old state unless the user explicitly asks to preserve the old design.
+- Do not create additional parallel truth roots beyond `truth/` and `docs/` without explicit user approval.
 - Do not treat a UI shell, callable API, or old status label as completion. Mature completion means: document consistency, code owner, user-visible path, tests/evidence, and packaged-app proof where user-facing.
-- If code conflicts with `docs/`, update or propose a documentation change first. Do not silently implement from conflicting assumptions.
-- Do not delete detailed design content merely to simplify docs. First migrate the detail into the current source file or `docs/06-详细设计库/`, then remove only duplicated or obsolete wording.
+- If code conflicts with `truth/` on future refactor work, update or propose a truth change first. If current-maintenance code conflicts with `docs/`, update or propose a legacy doc change first.
+- Do not delete detailed design content merely to simplify docs. First migrate still-useful detail into `truth/` or the current legacy source file, then remove only duplicated or obsolete wording.
 
 ## GitHub Synchronization
 

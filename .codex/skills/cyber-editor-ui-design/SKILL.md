@@ -9,7 +9,9 @@ Project-specific UI skill for Cyber Editor. Use this when the task changes how t
 
 ## Source of Truth
 
-Read these docs first, depending on the page:
+For future refactor UI, read `truth/README.md` and the relevant `truth/` files first.
+
+For current legacy Cyber Editor UI maintenance, read these docs depending on the page:
 
 - `docs/README.md`
 - `docs/01-需求与PRD/02-用户旅程与信息架构.md`
@@ -18,7 +20,7 @@ Read these docs first, depending on the page:
 - `docs/02-产品设计/03-关键交互裁决.md`
 - `docs/04-测试验收/02-核心旅程测试矩阵.md`
 
-Treat `docs/` as the primary source of truth. Use `openspec/` only as a secondary cross-check.
+Treat `truth/` as the primary source for future-facing UI direction. Treat `docs/` as the legacy current-state source for maintaining the existing app. Use `openspec/` only as a secondary cross-check.
 
 For page-level layout rules, read `references/core-screens.md`.
 
