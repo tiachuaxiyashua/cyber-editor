@@ -61,5 +61,8 @@
   "jake.autoDetect": "off",
   "typescript.disableAutomaticTypeAcquisition": true,
   "typescript.tsserver.maxTsServerMemory": 2048,
-  "python.analysis.indexing": false
+  "python.analysis.indexing": false,
+  "workbench.editorAssociations": {
+    "*.md": "vscode.markdown.preview.editor"
+  }
 }
